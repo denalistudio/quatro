@@ -1,0 +1,120 @@
+body {   
+font-family:verdana,arial,sans-serif;
+margin: 0px;
+padding: 0px;
+background: url(img/background.jpg);
+}
+h1 {
+font-size: 120%;
+margin: 0px;
+font-weight: normal;
+text-align: left;
+padding: 10px;
+}
+h2{
+font-size: 100%;
+margin: 3px 0 5px;
+}
+h3{
+font-size: 160%;
+}
+#web{
+width: 950px;
+overflow: hidden;
+margin: 10px auto;
+}
+#form{
+overflow: hidden;
+float: left;
+width: 700px;
+border: solid 3px rgb(42,90,138);
+}
+.form{
+margin: 0 0 10px 0;
+width: 700px;
+float: left;
+overflow: hidden;
+}
+#pricetab{
+	width: 200px;
+	padding: 10px;
+	text-align: center;
+	border: solid 3px rgb(42,90,138);
+	float: right;
+	/*margin: 0 0 0 30px;*/
+
+	overflow: hidden;
+}
+table{
+width: 100%;
+padding: 10px 0;
+
+}
+table th{
+font-size: 70%;
+text-align: right;
+padding-left: 10px;
+}  
+table td{
+font-size: 70%;
+padding-right: 10px;
+}  
+table tr.border th, table tr.border td{
+border-bottom: solid 10px white;
+}
+input.text{
+width: 250px;
+height: 20px;
+padding: 2px;
+}
+input.place{
+width: 300px;
+}
+select{
+width: 258px;
+height: 30px;
+padding: 3px;
+}
+table span.form-error-message{
+	font-size: 100%;
+	color: white;
+	margin: 0px 0 0 5px;
+	font-weight: bold;
+    line-height: 20px;
+}
+tr.required th{
+width: 270px;
+}
+.fileinfo2, .fileinfo3, .fileinfo4, .fileinfo5, .file2, .file3, .file4, .file5{
+    display: none;
+}
+th, td{
+        height: 20px;
+    }
+.help{
+overflow: hidden;
+}
+    .help .icon{
+        width: 20px;
+        height: 20px;
+        background: url(img/help.png);
+        display: block;
+        float: left;
+        margin-left: 5px;
+    }
+    .help .text{
+        display: none;
+        position: absolute;
+        width: 240px;
+        background: #e8eff4 url(img/helpText.jpg) no-repeat left top;
+        border-bottom: solid 1px #666666;
+        padding: 30px 10px 10px;
+        margin-top: 23px;
+    }
+    .help:hover .text{
+        display: block;
+    }
+    
+    textarea, input[type="text"], input[type="file"], select, label{
+        float: left;
+    }

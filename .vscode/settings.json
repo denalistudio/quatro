@@ -1,0 +1,11 @@
+{
+    "liveServer.settings.port": 1234,
+    "liveServer.settings.donotShowInfoMessage": true,
+    "liveSassCompile.settings.formats": [
+        {
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "./docs/"
+    }
+    ]
+}
