@@ -36,7 +36,8 @@ a {
     text-decoration: none;
 }
 
-p a, td a {
+p a,
+td a {
     color: $orange;
     font-weight: 600;
     text-decoration: underline;
@@ -57,7 +58,9 @@ section {
     margin: 2em 0;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     font-size: 1rem;
 }
 
@@ -401,7 +404,7 @@ input, select, textarea {
         transition: background-color 0.3s ease-in-out;
 
         &.open {
-            background-color: $blue !important;
+            background-color: $blue  !important;
         }
 
         @media only screen and (min-width: 62em) {
