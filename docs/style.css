@@ -18,7 +18,7 @@ body {
   overflow-x: hidden;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .contain {
     overflow-x: visible;
   }
@@ -29,14 +29,16 @@ a {
   text-decoration: none;
 }
 
-p a, td a {
+p a,
+td a {
   color: #ef7c00;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.1em;
 }
 
-p a:hover, td a:hover {
+p a:hover,
+td a:hover {
   text-decoration: none;
 }
 
@@ -50,7 +52,9 @@ section {
   margin: 2em 0;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 1rem;
 }
 
@@ -117,7 +121,7 @@ input, select, textarea {
   transform: translateY(0.5em);
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #navbar header #menu-btn {
     display: none;
   }
@@ -136,7 +140,7 @@ input, select, textarea {
   transform: rotate(-45deg) translate(1.4em, 1.4em);
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #navbar header #menu-btn {
     display: none;
   }
@@ -163,38 +167,38 @@ input, select, textarea {
   transition: 0.2s background-color ease-in-out;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #navbar header nav {
     display: inline-flex;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   #navbar header {
     width: 90%;
     margin: auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #navbar header {
     width: 85%;
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   #navbar header {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   #navbar header {
     width: 70%;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #navbar {
     position: fixed;
   }
@@ -210,7 +214,7 @@ input, select, textarea {
   background-color: #264796;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   #nav-mobile {
     width: 40%;
     left: -40%;
@@ -306,19 +310,19 @@ input, select, textarea {
   pointer-events: none;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   #container.open {
     margin-left: 40%;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #container.open {
     margin-left: 0;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #container {
     transition: none;
   }
@@ -363,19 +367,19 @@ input, select, textarea {
   margin-top: 1em;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .obrazky {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .obrazky {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .obrazky {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -393,10 +397,18 @@ input, select, textarea {
   margin: 0 !important;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .images-row {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.nowebp .hero {
+  background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+}
+
+.webp .hero {
+  background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
 }
 
 .front-page #navbar {
@@ -408,7 +420,7 @@ input, select, textarea {
   background-color: #264796 !important;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page #navbar {
     transition: background-color 0.1s linear;
   }
@@ -425,7 +437,6 @@ input, select, textarea {
   min-height: 60vh;
   display: flex;
   align-items: center;
-  background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-position: center;
@@ -444,7 +455,7 @@ input, select, textarea {
   background-color: #264796;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page .hero::before {
     display: none;
   }
@@ -468,7 +479,7 @@ input, select, textarea {
   margin: 1em 0 2em 0;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page .hero .hero__content #hero__text {
     width: 50%;
   }
@@ -494,38 +505,38 @@ input, select, textarea {
   transition: 0.2s background-color ease-in-out;
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page .hero .hero__content {
     width: 90%;
     margin: auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page .hero .hero__content {
     width: 85%;
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .front-page .hero .hero__content {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   .front-page .hero .hero__content {
     width: 70%;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page .hero {
     min-height: 40vh;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page .hero {
     min-height: 60vh;
     position: static;
@@ -550,7 +561,7 @@ input, select, textarea {
   margin-bottom: 0.5em;
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page main section .section__text {
     flex-basis: 60%;
   }
@@ -565,13 +576,13 @@ input, select, textarea {
   border-radius: 1em;
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page main section .section__img {
     flex-basis: 40%;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page main section {
     gap: 2em;
     flex-wrap: nowrap;
@@ -602,39 +613,39 @@ input, select, textarea {
   margin: 0.5em 0;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .front-page main .kontakt .kontakt__akce {
     flex-wrap: nowrap;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page main .kontakt {
     margin-top: 4em;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .front-page main {
     width: 90%;
     margin: 4em auto 4em auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .front-page main {
     width: 85%;
     margin: 4em auto;
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .front-page main {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   .front-page main {
     width: 70%;
   }
@@ -689,19 +700,19 @@ input, select, textarea {
   border-radius: 1em;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .page main.kontakt #mapa iframe {
     height: 15em;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .page main.kontakt #mapa iframe {
     height: 20em;
   }
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .page main.kontakt {
     row-gap: 4em;
     column-gap: 2em;
@@ -710,32 +721,32 @@ input, select, textarea {
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .page main {
     width: 90%;
     margin: 4em auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .page main {
     width: 85%;
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .page main {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   .page main {
     width: 70%;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .page {
     margin: 6em 0 0 0;
   }
@@ -761,32 +772,32 @@ input, select, textarea {
   margin: 0.5em 0;
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .single main {
     width: 90%;
     margin: 4em auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .single main {
     width: 85%;
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .single main {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   .single main {
     width: 70%;
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .single {
     margin: 6em 0 0 0;
   }
@@ -824,19 +835,19 @@ input, select, textarea {
   left: 70%;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby #vypocet_ceny-mobile.open {
     left: 40%;
   }
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby #vypocet_ceny-mobile.open {
     left: 0;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .sluzby #vypocet_ceny-mobile {
     display: none;
   }
@@ -941,7 +952,7 @@ input, select, textarea {
   margin-bottom: 0 !important;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .sluzby #sidebar {
     flex-basis: calc(35% - 2em);
     display: block;
@@ -950,7 +961,7 @@ input, select, textarea {
   }
 }
 
-@media (min-width: 90em) {
+@media only screen and (min-width: 90em) {
   .sluzby #sidebar {
     flex-basis: calc(30% - 2em);
   }
@@ -1015,7 +1026,7 @@ input, select, textarea {
   margin: 0.5em 0 !important;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main #heading-diplomky {
     grid-template-rows: auto;
     grid-template-columns: auto 6.4365em;
@@ -1092,7 +1103,7 @@ input, select, textarea {
   margin: 0;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main.diplomky table tr {
     gap: 2em;
     grid-template-rows: auto;
@@ -1183,7 +1194,7 @@ input, select, textarea {
   padding: 0.5em 0;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main .plocha table tr th {
     padding: 0.5em 2em 0.5em 0;
   }
@@ -1213,7 +1224,7 @@ input, select, textarea {
   margin: 0 1em 0 0.1em;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main .plocha table tr td {
     padding: 0.5em 0 0.5em 2em;
   }
@@ -1237,7 +1248,7 @@ input, select, textarea {
   padding-bottom: 0;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main .plocha table tr {
     grid-template-rows: auto;
     grid-template-columns: 4fr 6fr;
@@ -1267,7 +1278,7 @@ input, select, textarea {
   border-radius: 1em;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main .plocha .plocha__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1289,13 +1300,13 @@ input, select, textarea {
   grid-template-columns: repeat(2, 1fr);
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   .sluzby main #fonts {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .sluzby main #fonts {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -1342,26 +1353,26 @@ input, select, textarea {
   margin-bottom: 0;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .sluzby main {
     flex-basis: calc(65% - 2em);
   }
 }
 
-@media (min-width: 90em) {
+@media only screen and (min-width: 90em) {
   .sluzby main {
     flex-basis: calc(60% - 2em);
   }
 }
 
-@media (min-width: 48em) {
+@media only screen and (min-width: 48em) {
   .sluzby {
     width: 90%;
     margin: 6em auto 0 auto;
   }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .sluzby {
     width: 85%;
     gap: 4em;
@@ -1369,13 +1380,13 @@ input, select, textarea {
   }
 }
 
-@media (min-width: 75em) {
+@media only screen and (min-width: 75em) {
   .sluzby {
     width: 80%;
   }
 }
 
-@media (min-width: 100em) {
+@media only screen and (min-width: 100em) {
   .sluzby {
     width: 70%;
   }
@@ -1386,7 +1397,7 @@ input, select, textarea {
   top: 13em;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   .sluzby-cena #sidebar {
     flex-basis: calc(35% - 2em);
     display: block;
@@ -1406,7 +1417,7 @@ footer#footer-diplomky {
   padding-bottom: var(--vypocet_ceny-mobile-height);
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   footer#footer-diplomky {
     padding-bottom: 0;
   }
@@ -1433,7 +1444,7 @@ footer #footer-links {
   justify-content: center;
 }
 
-@media (min-width: 36em) {
+@media only screen and (min-width: 36em) {
   footer #footer-links {
     flex-wrap: nowrap;
   }
@@ -1462,7 +1473,7 @@ footer #footer-links {
   text-decoration: none;
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 62em) {
   #vypocet_ceny-desktop {
     display: block;
   }

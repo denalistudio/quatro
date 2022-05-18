@@ -26,7 +26,7 @@ body {
 .contain {
     overflow-x: hidden;
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         overflow-x: visible;
     }
 }
@@ -36,7 +36,8 @@ a {
     text-decoration: none;
 }
 
-p a, td a {
+p a,
+td a {
     color: $orange;
     font-weight: 600;
     text-decoration: underline;
@@ -57,7 +58,9 @@ section {
     margin: 2em 0;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     font-size: 1rem;
 }
 
@@ -124,7 +127,7 @@ input, select, textarea {
                 }
             }
 
-            @media (min-width: 62em) {
+            @media only screen and (min-width: 62em) {
                 display: none;
             }
 
@@ -142,7 +145,7 @@ input, select, textarea {
                 }
             }
 
-            @media (min-width: 62em) {
+            @media only screen and (min-width: 62em) {
                 display: none;
             }
         }
@@ -167,30 +170,30 @@ input, select, textarea {
                 }
             }
 
-            @media (min-width: 62em) {
+            @media only screen and (min-width: 62em) {
                 display: inline-flex;
             }
         }
 
-        @media (min-width: 48em) {
+        @media only screen and (min-width: 48em) {
             width: 90%;
             margin: auto;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             width: 85%;
         }
 
-        @media (min-width: 75em) {
+        @media only screen and (min-width: 75em) {
             width: 80%;
         }
 
-        @media (min-width: 100em) {
+        @media only screen and (min-width: 100em) {
             width: 70%;
         }
     }
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         position: fixed;
     }
 }
@@ -206,7 +209,7 @@ input, select, textarea {
     transition: all 0.3s ease-in-out;
     background-color: $blue;
 
-    @media (min-width: 36em) {
+    @media only screen and (min-width: 36em) {
         width: 40%;
         left: -40%;
     }
@@ -304,16 +307,16 @@ input, select, textarea {
             pointer-events: none;
         }
 
-        @media (min-width: 36em) {
+        @media only screen and (min-width: 36em) {
             margin-left: 40%;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             margin-left: 0;
         }
     }
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         transition: none;
     }
 }
@@ -363,15 +366,15 @@ input, select, textarea {
         }
     }
 
-    @media (min-width: 36em) {
+    @media only screen and (min-width: 36em) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (min-width: 75em) {
+    @media only screen and (min-width: 75em) {
         grid-template-columns: repeat(4, 1fr);
     }
 }
@@ -387,12 +390,20 @@ input, select, textarea {
         margin: 0 !important;
     }
 
-    @media (min-width: 36em) {
+    @media only screen and (min-width: 36em) {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 // Front page
+
+.nowebp .hero {
+    background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+}
+
+.webp .hero {
+    background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
+}
 
 .front-page {
 
@@ -401,10 +412,10 @@ input, select, textarea {
         transition: background-color 0.3s ease-in-out;
 
         &.open {
-            background-color: $blue !important;
+            background-color: $blue  !important;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             transition: background-color 0.1s linear;
         }
     }
@@ -420,7 +431,6 @@ input, select, textarea {
         min-height: 60vh;
         display: flex;
         align-items: center;
-        background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
         background-blend-mode: overlay;
         background-repeat: no-repeat;
         background-position: center;
@@ -437,7 +447,7 @@ input, select, textarea {
             z-index: -1;
             background-color: $blue;
 
-            @media (min-width: 62em) {
+            @media only screen and (min-width: 62em) {
                 display: none;
             }
         }
@@ -458,7 +468,7 @@ input, select, textarea {
             #hero__text {
                 margin: 1em 0 2em 0;
 
-                @media (min-width: 62em) {
+                @media only screen and (min-width: 62em) {
                     width: 50%;
                 }
             }
@@ -483,29 +493,29 @@ input, select, textarea {
                 }
             }
 
-            @media (min-width: 48em) {
+            @media only screen and (min-width: 48em) {
                 width: 90%;
                 margin: auto;
             }
 
-            @media (min-width: 62em) {
+            @media only screen and (min-width: 62em) {
                 width: 85%;
             }
 
-            @media (min-width: 75em) {
+            @media only screen and (min-width: 75em) {
                 width: 80%;
             }
 
-            @media (min-width: 100em) {
+            @media only screen and (min-width: 100em) {
                 width: 70%;
             }
         }
 
-        @media (min-width: 48em) {
+        @media only screen and (min-width: 48em) {
             min-height: 40vh;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             min-height: 60vh;
             position: static;
         }
@@ -526,7 +536,7 @@ input, select, textarea {
                     margin-bottom: 0.5em;
                 }
 
-                @media (min-width: 48em) {
+                @media only screen and (min-width: 48em) {
                     flex-basis: 60%;
                 }
             }
@@ -539,12 +549,12 @@ input, select, textarea {
                     border-radius: 1em;
                 }
 
-                @media (min-width: 48em) {
+                @media only screen and (min-width: 48em) {
                     flex-basis: 40%;
                 }
             }
 
-            @media (min-width: 48em) {
+            @media only screen and (min-width: 48em) {
                 gap: 2em;
                 flex-wrap: nowrap;
 
@@ -573,31 +583,31 @@ input, select, textarea {
                     margin: 0.5em 0;
                 }
 
-                @media (min-width: 36em) {
+                @media only screen and (min-width: 36em) {
                     flex-wrap: nowrap;
                 }
             }
 
-            @media (min-width: 48em) {
+            @media only screen and (min-width: 48em) {
                 margin-top: 4em;
             }
         }
 
-        @media (min-width: 48em) {
+        @media only screen and (min-width: 48em) {
             width: 90%;
             margin: 4em auto 4em auto;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             width: 85%;
             margin: 4em auto;
         }
 
-        @media (min-width: 75em) {
+        @media only screen and (min-width: 75em) {
             width: 80%;
         }
 
-        @media (min-width: 100em) {
+        @media only screen and (min-width: 100em) {
             width: 70%;
         }
     }
@@ -654,17 +664,17 @@ input, select, textarea {
                     border: 0;
                     border-radius: 1em;
 
-                    @media (min-width: 36em) {
+                    @media only screen and (min-width: 36em) {
                         height: 15em;
                     }
 
-                    @media (min-width: 62em) {
+                    @media only screen and (min-width: 62em) {
                         height: 20em;
                     }
                 }
             }
 
-            @media (min-width: 36em) {
+            @media only screen and (min-width: 36em) {
                 row-gap: 4em;
                 column-gap: 2em;
                 grid-template-rows: auto auto;
@@ -672,25 +682,25 @@ input, select, textarea {
             }
         }
 
-        @media (min-width: 48em) {
+        @media only screen and (min-width: 48em) {
             width: 90%;
             margin: 4em auto;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             width: 85%;
         }
 
-        @media (min-width: 75em) {
+        @media only screen and (min-width: 75em) {
             width: 80%;
         }
 
-        @media (min-width: 100em) {
+        @media only screen and (min-width: 100em) {
             width: 70%;
         }
     }
 
-    @media (min-width: 48em) {
+    @media only screen and (min-width: 48em) {
         margin: 6em 0 0 0;
     }
 }
@@ -718,25 +728,25 @@ input, select, textarea {
             }
         }
 
-        @media (min-width: 48em) {
+        @media only screen and (min-width: 48em) {
             width: 90%;
             margin: 4em auto;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             width: 85%;
         }
 
-        @media (min-width: 75em) {
+        @media only screen and (min-width: 75em) {
             width: 80%;
         }
 
-        @media (min-width: 100em) {
+        @media only screen and (min-width: 100em) {
             width: 70%;
         }
     }
 
-    @media (min-width: 48em) {
+    @media only screen and (min-width: 48em) {
         margin: 6em 0 0 0;
     }
 }
@@ -772,16 +782,16 @@ input, select, textarea {
         &.open {
             left: 70%;
 
-            @media (min-width: 36em) {
+            @media only screen and (min-width: 36em) {
                 left: 40%;
             }
 
-            @media (min-width: 36em) {
+            @media only screen and (min-width: 36em) {
                 left: 0;
             }
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             display: none;
         }
     }
@@ -889,14 +899,14 @@ input, select, textarea {
             }
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             flex-basis: calc(35% - 2em);
             display: block;
             position: sticky;
             top: 6em;
         }
 
-        @media (min-width: 90em) {
+        @media only screen and (min-width: 90em) {
             flex-basis: calc(30% - 2em);
         }
     }
@@ -962,7 +972,7 @@ input, select, textarea {
                 margin: 0.5em 0 !important;
             }
 
-            @media (min-width: 36em) {
+            @media only screen and (min-width: 36em) {
                 grid-template-rows: auto;
                 grid-template-columns: auto 6.4365em;
             }
@@ -1039,7 +1049,7 @@ input, select, textarea {
                         }
                     }
 
-                    @media (min-width: 36em) {
+                    @media only screen and (min-width: 36em) {
                         gap: 2em;
                         grid-template-rows: auto;
                         grid-template-columns: 4fr 6fr;
@@ -1127,7 +1137,7 @@ input, select, textarea {
                         text-align: left;
                         padding: 0.5em 0;
 
-                        @media (min-width: 36em) {
+                        @media only screen and (min-width: 36em) {
                             padding: 0.5em 2em 0.5em 0;
                         }
                     }
@@ -1155,7 +1165,7 @@ input, select, textarea {
                             margin: 0 1em 0 0.1em;
                         }
 
-                        @media (min-width: 36em) {
+                        @media only screen and (min-width: 36em) {
                             padding: 0.5em 0 0.5em 2em;
                         }
                     }
@@ -1178,7 +1188,7 @@ input, select, textarea {
                         }
                     }
 
-                    @media (min-width: 36em) {
+                    @media only screen and (min-width: 36em) {
                         grid-template-rows: auto;
                         grid-template-columns: 4fr 6fr;
                         margin: 0;
@@ -1208,7 +1218,7 @@ input, select, textarea {
                     border-radius: 1em;
                 }
 
-                @media (min-width: 36em) {
+                @media only screen and (min-width: 36em) {
                     grid-template-columns: repeat(2, 1fr);
                 }
             }
@@ -1230,11 +1240,11 @@ input, select, textarea {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
 
-            @media (min-width: 36em) {
+            @media only screen and (min-width: 36em) {
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            @media (min-width: 48em) {
+            @media only screen and (min-width: 48em) {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
@@ -1287,31 +1297,31 @@ input, select, textarea {
             }
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             flex-basis: calc(65% - 2em);
         }
 
-        @media (min-width: 90em) {
+        @media only screen and (min-width: 90em) {
             flex-basis: calc(60% - 2em);
         }
     }
 
-    @media (min-width: 48em) {
+    @media only screen and (min-width: 48em) {
         width: 90%;
         margin: 6em auto 0 auto;
     }
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         width: 85%;
         gap: 4em;
         display: flex;
     }
 
-    @media (min-width: 75em) {
+    @media only screen and (min-width: 75em) {
         width: 80%;
     }
 
-    @media (min-width: 100em) {
+    @media only screen and (min-width: 100em) {
         width: 70%;
     }
 }
@@ -1323,7 +1333,7 @@ input, select, textarea {
             top: 13em;
         }
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             flex-basis: calc(35% - 2em);
             display: block;
         }
@@ -1344,7 +1354,7 @@ footer {
     &#footer-diplomky {
         padding-bottom: var(--vypocet_ceny-mobile-height);
 
-        @media (min-width: 62em) {
+        @media only screen and (min-width: 62em) {
             padding-bottom: 0;
         }
     }
@@ -1369,7 +1379,7 @@ footer {
         flex-wrap: wrap;
         justify-content: center;
 
-        @media (min-width: 36em) {
+        @media only screen and (min-width: 36em) {
             flex-wrap: nowrap;
         }
     }
@@ -1399,7 +1409,7 @@ footer {
         text-decoration: none;
     }
 
-    @media (min-width: 62em) {
+    @media only screen and (min-width: 62em) {
         display: block;
     }
 }
