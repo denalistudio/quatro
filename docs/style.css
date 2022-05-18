@@ -29,14 +29,16 @@ a {
   text-decoration: none;
 }
 
-p a, td a {
+p a,
+td a {
   color: #ef7c00;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.1em;
 }
 
-p a:hover, td a:hover {
+p a:hover,
+td a:hover {
   text-decoration: none;
 }
 
@@ -50,7 +52,9 @@ section {
   margin: 2em 0;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 1rem;
 }
 
@@ -399,6 +403,14 @@ input, select, textarea {
   }
 }
 
+.nowebp .hero {
+  background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+}
+
+.webp .hero {
+  background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
+}
+
 .front-page #navbar {
   background-color: transparent;
   transition: background-color 0.3s ease-in-out;
@@ -425,7 +437,6 @@ input, select, textarea {
   min-height: 60vh;
   display: flex;
   align-items: center;
-  background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-position: center;

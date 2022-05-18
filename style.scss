@@ -397,6 +397,14 @@ textarea {
 
 // Front page
 
+.nowebp .hero {
+    background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+}
+
+.webp .hero {
+    background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
+}
+
 .front-page {
 
     #navbar {
@@ -511,14 +519,6 @@ textarea {
             min-height: 60vh;
             position: static;
         }
-    }
-
-    .nowebp .hero {
-        background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
-    }
-
-    .webp .hero {
-        background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
     }
 
     main {
