@@ -420,7 +420,6 @@ input, select, textarea {
         min-height: 60vh;
         display: flex;
         align-items: center;
-        background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
         background-blend-mode: overlay;
         background-repeat: no-repeat;
         background-position: center;
@@ -509,6 +508,14 @@ input, select, textarea {
             min-height: 60vh;
             position: static;
         }
+    }
+
+    .nowebp .hero {
+        background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+    }
+
+    .webp .hero {
+        background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
     }
 
     main {
