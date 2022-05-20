@@ -2,28 +2,30 @@
 <html lang="cs">
 
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-39022857-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39022857-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'UA-39022857-1');
-</script>
+        gtag('config', 'UA-39022857-1');
+    </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="QUATRO - živel v reklamě">
-<meta name="description" content="Reklamní firma s širokým záběrem a bohatými zkušenostmi, profesionálním přístupem a příznivými cenami.">
-<meta name="keywords" content="reklama, karviná, reklamka, levná, akce, sleva, quatro">
+    <meta name="author" content="Studio Denali">
+    <meta name="description"
+        content="Reklamní firma s širokým záběrem a bohatými zkušenostmi, profesionálním přístupem a příznivými cenami.">
+    <meta name="keywords" content="reklama, karviná, reklamka, levná, akce, sleva, quatro">
     <title>Počítadlo obsahu</title>
 </head>
 
 <body>
     <h1>Počítadlo obsahu</h1>
     <input type="number" id="1" placeholder="Strana 1 v cm" onkeyup="count()">
-    <input type="number" id="2" placeholder="Strana 2 v cm" onkeyup="count()"> <!-- Nechal jsem tady jen dvě pole, může jich ovšem být více, vždy s unikátním ID co pak dáme do vzorce -->
+    <input type="number" id="2" placeholder="Strana 2 v cm" onkeyup="count()">
+    <!-- Nechal jsem tady jen dvě pole, může jich ovšem být více, vždy s unikátním ID co pak dáme do vzorce -->
     <p id="result">Výsledek v cm&#178;</p> <!-- Zde se vypisuje výsledek -->
 </body>
 
