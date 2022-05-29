@@ -398,11 +398,11 @@ textarea {
 // Front page
 
 .nowebp .hero {
-    background-image: url("./images/hero.jpg"), linear-gradient(#00000099, #00000099);
+    background-image: url("./images/orange.jpg");
 }
 
 .webp .hero {
-    background-image: url("./images/hero.webp"), linear-gradient(#00000099, #00000099);
+    background-image: url("./images/orange.webp");
 }
 
 .front-page {
@@ -480,14 +480,15 @@ textarea {
                     color: $white;
                     font-weight: 700;
                     padding: 0.5em 1em;
-                    border: 2px solid $orange;
+                    border: 2px solid $white;
                     border-radius: 2em;
                     transition: 0.2s background-color ease-in-out;
 
                     &:hover {
                         padding: 0.5em 1em;
-                        border: 2px solid $orange-hover;
-                        background-color: $orange-hover;
+                        color: $orange;
+                        border: 2px solid $white;
+                        background-color: $white;
                         transition: 0.2s background-color ease-in-out;
                     }
                 }
