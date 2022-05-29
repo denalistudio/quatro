@@ -502,22 +502,6 @@ textarea {
   background-color: #264796 !important;
 }
 
-.front-page #navbar header .open nav a {
-  color: #ffffff;
-  font-weight: 600;
-  padding: 0.5em 1em;
-  border-radius: 2em;
-  background-color: transparent;
-  -webkit-transition: 0.2s background-color ease-in-out;
-  transition: 0.2s background-color ease-in-out;
-}
-
-.front-page #navbar header .open nav a:hover {
-  background-color: #ef7c00;
-  -webkit-transition: 0.2s background-color ease-in-out;
-  transition: 0.2s background-color ease-in-out;
-}
-
 @media only screen and (min-width: 62em) {
   .front-page #navbar {
     -webkit-transition: background-color 0.1s linear;
@@ -1702,4 +1686,20 @@ footer #footer-links {
   #vypocet_ceny-desktop {
     display: block;
   }
+}
+
+.tvojemama header nav a {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: 2em;
+  background-color: transparent;
+  -webkit-transition: 0.2s background-color ease-in-out;
+  transition: 0.2s background-color ease-in-out;
+}
+
+.tvojemama header nav a:hover {
+  background-color: #ef7c00;
+  -webkit-transition: 0.2s background-color ease-in-out;
+  transition: 0.2s background-color ease-in-out;
 }
