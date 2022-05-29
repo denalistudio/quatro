@@ -412,9 +412,42 @@ textarea {
     #navbar {
         background-color: transparent;
         transition: background-color 0.3s ease-in-out;
+        
+        a {
+            color: $white;
+            font-weight: 600;
+            padding: 0.5em 1em;
+            border-radius: 2em;
+            background-color: transparent;
+            transition: 0.2s background-color ease-in-out;
+
+            &:hover {
+                color: $orange;
+                background-color: $white;
+                transition: 0.2s background-color ease-in-out;
+            }
+        }
 
         &.open {
             background-color: $blue  !important;
+        }
+
+        & header .open {
+            & nav {
+                a {
+                    color: $white;
+                    font-weight: 600;
+                    padding: 0.5em 1em;
+                    border-radius: 2em;
+                    background-color: transparent;
+                    transition: 0.2s background-color ease-in-out;
+    
+                    &:hover {
+                        background-color: $orange;
+                        transition: 0.2s background-color ease-in-out;
+                    }
+                }
+            }
         }
 
         @media only screen and (min-width: 62em) {
