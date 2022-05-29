@@ -397,12 +397,14 @@ textarea {
 
 // Front page
 
-.nowebp .hero {
-    background-image: url("./images/orange.jpg");
-}
-
-.webp .hero {
-    background-image: url("./images/orange.jpg");
+@media only screen and (min-width: 36em) {
+    .nowebp .hero {
+        background-image: url("./images/orange.jpg");
+    }
+    
+    .webp .hero {
+        background-image: url("./images/orange.jpg");
+    }
 }
 
 .front-page {
@@ -431,10 +433,7 @@ textarea {
         min-height: 60vh;
         display: flex;
         align-items: center;
-        background-blend-mode: overlay;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        background-color: #e96117;
 
         &::before {
             content: "";
@@ -469,6 +468,10 @@ textarea {
                 margin: 1em 0 2em 0;
 
                 @media only screen and (min-width: 36em) {
+                    width: 60%;
+                }
+
+                @media only screen and (min-width: 62em) {
                     width: 50%;
                 }
             }
@@ -512,7 +515,11 @@ textarea {
             }
         }
 
-        @media only screen and (min-width: 48em) {
+        @media only screen and (min-width: 36em) {
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             min-height: 40vh;
         }
 
