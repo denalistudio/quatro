@@ -162,11 +162,10 @@ textarea {
                 padding: 0.5em 1em;
                 border-radius: 2em;
                 background-color: transparent;
-                transition: 0.2s background-color ease-in-out;
+                transition: 0.2s all ease-in-out;
 
                 &:hover {
                     background-color: $orange;
-                    transition: 0.2s background-color ease-in-out;
                 }
             }
 
@@ -408,32 +407,22 @@ textarea {
 }
 
 .front-page {
-
     #navbar {
         background-color: transparent;
         transition: background-color 0.3s ease-in-out;
-        
-        a {
-            color: $white;
-            font-weight: 600;
-            padding: 0.5em 1em;
-            border-radius: 2em;
-            background-color: transparent;
-            transition: 0.2s background-color ease-in-out;
 
-            &:hover {
-                color: $orange;
-                background-color: $white;
-                transition: 0.2s background-color ease-in-out;
+        header nav a:hover {
+            color: $orange;
+            background-color: $white;
+        }
+
+        &.scroll {
+            background-color: $blue;
+
+            header nav a:hover {
+                color: $white;
+                background-color: $orange;
             }
-        }
-
-        &.open {
-            background-color: $blue  !important;
-        }
-
-        @media only screen and (min-width: 62em) {
-            transition: background-color 0.1s linear;
         }
     }
 
@@ -1434,25 +1423,5 @@ footer {
 
     @media only screen and (min-width: 62em) {
         display: block;
-    }
-}
-
-.tvojemama {
-    header {
-        nav {
-            a {
-                color: $white;
-                font-weight: 600;
-                padding: 0.5em 1em;
-                border-radius: 2em;
-                background-color: transparent;
-                transition: 0.2s background-color ease-in-out;
-
-                &:hover {
-                    background-color: $orange;
-                    transition: 0.2s background-color ease-in-out;
-                }
-            }
-        }
     }
 }

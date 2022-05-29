@@ -131,11 +131,9 @@
     <script>
         $(window).on("scroll", function () {
             if ($(window).scrollTop() > 32 / fontSize) {
-                $("#navbar").css("background-color", "#264796");
-                $("#navbar").addClass("tvojemama");
+                $("#navbar").addClass("scroll");
             } else {
-                $("#navbar").css("background-color", "transparent");
-                $("#navbar").removeClass("tvojemama");
+                $("#navbar").removeClass("scroll");
             }
         })
     </script>
