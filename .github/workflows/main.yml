@@ -1,7 +1,8 @@
 name: Deploy to FTP
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 jobs:
   deploy:
     name: Deploy
