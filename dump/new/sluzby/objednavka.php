@@ -48,7 +48,7 @@ include "dp/php/defineForm.php";
     <link rel="shortcut icon" href="../favicon/favicon.ico">
     <meta name="msapplication-TileColor" content="#ef7c00">
     <meta name="msapplication-config" content="../favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#264796">
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
 </head>
