@@ -1219,16 +1219,17 @@ textarea {
                 iframe {
                     width: 100% !important;
                     height: auto !important;
-                    aspect-ratio: 16 / 9;
                     border: 0 !important;
                     border-radius: 1em;
+                    aspect-ratio: 16 / 9;
                 }
 
                 a img {
                     width: 100%;
-                    aspect-ratio: 16 / 9;
                     margin: 0;
                     border-radius: 1em;
+                    object-fit: cover;
+                    aspect-ratio: 16 / 9;
                 }
 
                 @media only screen and (min-width: 36em) {
