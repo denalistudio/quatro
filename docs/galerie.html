@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="QUATRO - živel v reklamě">
+    <meta name="author" content="Studio Denali">
     <meta name="description"
         content="Reklamní firma s širokým záběrem a bohatými zkušenostmi, profesionálním přístupem a příznivými cenami.">
     <meta name="keywords" content="reklama, karviná, reklamka, levná, akce, sleva, quatro">
@@ -24,6 +24,626 @@
     <meta name="theme-color" content="#ffffff">
     <!-- jQuery -->
     <script src="./js/jquery.min.js"></script>
+    <!-- Gallery styles -->
+    <style>
+        /* Small reset */
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            color: #34495e;
+            padding-bottom: 100px;
+        }
+
+        figure {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a,
+        a:visited {
+            color: #3498db;
+        }
+
+        a:active {
+            color: #2ecc71;
+        }
+
+        p {
+            margin: 1em 0;
+            line-height: 1.4;
+        }
+
+        /*
+  Shuffle needs either relative or absolute positioning on the container
+  It will set it for you, but it'll cause another style recalculation and layout.
+  AKA worse performance - so just set it here
+ */
+        .my-shuffle-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .my-sizer-element {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .picture-item {
+            height: 220px;
+            margin-top: 24px;
+        }
+
+        .picture-item img {
+            display: block;
+            width: 100%;
+        }
+
+        @supports ((-o-object-fit: cover) or (object-fit: cover)) {
+            .picture-item img {
+                max-width: none;
+                height: 100%;
+                -o-object-fit: cover;
+                object-fit: cover;
+            }
+        }
+
+        .picture-item--h2 {
+            height: 464px;
+            /* 2x the height + 1 gutter */
+        }
+
+        .picture-item__inner {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            background: #ecf0f1;
+        }
+
+        .picture-item__details {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1em;
+        }
+
+        .picture-item__description {
+            width: 100%;
+            padding: 0 2em 1em 1em;
+            margin: 0;
+        }
+
+        .picture-item__title {
+            flex-shrink: 0;
+            margin-right: 4px;
+        }
+
+        .picture-item__tags {
+            flex-shrink: 1;
+            text-align: right;
+            margin: 0;
+        }
+
+        @media screen and (min-width: 768px) {
+            .picture-item--overlay .picture-item__details {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                -webkit-backdrop-filter: blur(7px);
+                backdrop-filter: blur(7px);
+                color: white;
+                overflow: hidden;
+            }
+
+            .picture-item--overlay .picture-item__description {
+                display: none;
+            }
+
+            .picture-item--overlay a {
+                color: white;
+                text-shadow: 0 0 1px black;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .picture-item {
+                height: auto;
+                margin-top: 20px;
+            }
+
+            .picture-item__details,
+            .picture-item__description {
+                font-size: 0.875em;
+                padding: 0.625em;
+            }
+
+            .picture-item__description {
+                padding-right: 0.875em;
+                padding-bottom: 1.25em;
+            }
+
+            .picture-item--h2 {
+                height: auto;
+            }
+        }
+
+        .filter-label {
+            display: block;
+            padding: 0;
+            margin-top: 0;
+            margin-bottom: 4px;
+            color: #95a5a6;
+        }
+
+        .filters-group {
+            padding: 0;
+            margin: 0 0 4px;
+            border: 0;
+        }
+
+        @media screen and (min-width: 768px) {
+            .filters-group-wrap {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        .btn-group:after,
+        .btn-group:before {
+            content: " ";
+            display: table;
+        }
+
+        .btn-group:after {
+            clear: both;
+        }
+
+        .btn-group .btn {
+            float: left;
+            border-radius: 0;
+        }
+
+        .btn-group .btn:first-child {
+            border-radius: 3px 0 0 3px;
+        }
+
+        .btn-group .btn:not(:first-child) {
+            margin-left: -1px;
+        }
+
+        .btn-group .btn:last-child {
+            border-radius: 0 3px 3px 0;
+        }
+
+        .btn-group label.btn input[type=radio] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            pointer-events: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75em 0.8em;
+            text-align: center;
+            border-radius: 3px;
+            border: 1px solid #34495e;
+            color: #34495e;
+            font-size: 1rem;
+            background-color: rgba(52, 73, 94, 0);
+            transition: 0.2s ease-out;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        @media (-moz-touch-enabled: 0),
+        (pointer: fine) {
+            .btn:hover {
+                color: #fff;
+                text-decoration: none;
+                background-color: #ef7c00;
+            }
+        }
+
+        .btn.active,
+        .btn:active {
+            outline: none;
+            color: #fff;
+            background-color: #ef7c00;
+        }
+
+        .btn.active:hover,
+        .btn:active:hover {
+            color: #fff;
+            background-color: #dd6b08;
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+            color: #34495e;
+            background-color: rgba(52, 73, 94, 0);
+        }
+
+        .btn--primary {
+            color: #ef7c00;
+            border-color: #ef7c00;
+            background-color: rgba(52, 152, 219, 0);
+        }
+
+        @media (-moz-touch-enabled: 0),
+        (pointer: fine) {
+            .btn--primary:hover {
+                background-color: #ef7c00;
+            }
+        }
+
+        .btn--primary.active,
+        .btn--primary:active {
+            background-color: #ef7c00;
+        }
+
+        .btn--primary:disabled {
+            color: #3498db;
+            background-color: rgba(52, 152, 219, 0);
+        }
+
+        @media screen and (max-width: 767px) {
+            .btn {
+                font-size: 0.875rem;
+            }
+        }
+
+        .textfield {
+            -webkit-appearance: none;
+            box-sizing: border-box;
+            width: 100%;
+            border: 2px solid #95a5a6;
+            border-radius: 4px;
+            padding: 0.5em;
+            font-size: 1rem;
+            color: #34495e;
+            transition: 0.15s;
+        }
+
+        .textfield:-ms-input-placeholder {
+            color: #95a5a6;
+            -ms-transition: 0.15s;
+            transition: 0.15s;
+        }
+
+        .textfield::-moz-placeholder {
+            color: #95a5a6;
+            -moz-transition: 0.15s;
+            transition: 0.15s;
+        }
+
+        .textfield::placeholder {
+            color: #95a5a6;
+            transition: 0.15s;
+        }
+
+        .textfield:hover {
+            outline-width: 0;
+            color: #5d6d77;
+            border-color: #5d6d77;
+        }
+
+        .textfield:hover:-ms-input-placeholder {
+            color: #5d6d77;
+        }
+
+        .textfield:hover::-moz-placeholder {
+            color: #5d6d77;
+        }
+
+        .textfield:hover::placeholder {
+            color: #5d6d77;
+        }
+
+        .textfield:focus {
+            outline-width: 0;
+            border-color: #34495e;
+        }
+
+        .textfield:focus:-ms-input-placeholder {
+            color: #34495e;
+        }
+
+        .textfield:focus::-moz-placeholder {
+            color: #34495e;
+        }
+
+        .textfield:focus::placeholder {
+            color: #34495e;
+        }
+
+        .container {
+            padding-left: 3.5%;
+            padding-right: 3.5%;
+        }
+
+        .container:after,
+        .container:before {
+            content: " ";
+            display: table;
+        }
+
+        .container:after {
+            clear: both;
+        }
+
+        .picture-item__title {
+            display: none;
+        }
+
+        .row {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .row:after,
+        .row:before {
+            content: " ";
+            display: table;
+        }
+
+        .row:after {
+            clear: both;
+        }
+
+        .row .row {
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        /* Ensure images take up the same space when they load */
+        /* https://vestride.github.io/Shuffle/images */
+        .aspect {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            overflow: hidden;
+        }
+
+        .aspect__inner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .aspect--16x9 {
+            padding-bottom: 56.25%;
+        }
+
+        .col-1\@xs,
+        .col-2\@xs,
+        .col-3\@xs,
+        .col-4\@xs,
+        .col-5\@xs,
+        .col-6\@xs,
+        .col-1\@sm,
+        .col-2\@sm,
+        .col-3\@sm,
+        .col-4\@sm,
+        .col-5\@sm,
+        .col-6\@sm,
+        .col-7\@sm,
+        .col-8\@sm,
+        .col-9\@sm,
+        .col-10\@sm,
+        .col-11\@sm,
+        .col-12\@sm,
+        .col-1\@md,
+        .col-2\@md,
+        .col-3\@md,
+        .col-4\@md,
+        .col-5\@md,
+        .col-6\@md,
+        .col-7\@md,
+        .col-8\@md,
+        .col-9\@md,
+        .col-10\@md,
+        .col-11\@md,
+        .col-12\@md {
+            position: relative;
+            box-sizing: border-box;
+            min-height: 1px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .col-1\@xs,
+        .col-2\@xs,
+        .col-3\@xs,
+        .col-4\@xs,
+        .col-5\@xs,
+        .col-6\@xs {
+            float: left;
+        }
+
+        .col-1\@xs {
+            width: 16.66667%;
+        }
+
+        .col-2\@xs {
+            width: 33.33333%;
+        }
+
+        .col-3\@xs {
+            width: 50%;
+        }
+
+        .col-4\@xs {
+            width: 66.66667%;
+        }
+
+        .col-5\@xs {
+            width: 83.33333%;
+        }
+
+        .col-6\@xs {
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .col-1\@sm,
+            .col-2\@sm,
+            .col-3\@sm,
+            .col-4\@sm,
+            .col-5\@sm,
+            .col-6\@sm,
+            .col-7\@sm,
+            .col-8\@sm,
+            .col-9\@sm,
+            .col-10\@sm,
+            .col-11\@sm,
+            .col-12\@sm {
+                float: left;
+            }
+
+            .col-1\@sm {
+                width: 8.33333%;
+            }
+
+            .col-2\@sm {
+                width: 16.66667%;
+            }
+
+            .col-3\@sm {
+                width: 25%;
+            }
+
+            .col-4\@sm {
+                width: 33.33333%;
+            }
+
+            .col-5\@sm {
+                width: 41.66667%;
+            }
+
+            .col-6\@sm {
+                width: 50%;
+            }
+
+            .col-7\@sm {
+                width: 58.33333%;
+            }
+
+            .col-8\@sm {
+                width: 66.66667%;
+            }
+
+            .col-9\@sm {
+                width: 75%;
+            }
+
+            .col-10\@sm {
+                width: 83.33333%;
+            }
+
+            .col-11\@sm {
+                width: 91.66667%;
+            }
+
+            .col-12\@sm {
+                width: 100%;
+            }
+
+            .container {
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+
+            .row {
+                max-width: 1200px;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+
+            .col-1\@md,
+            .col-2\@md,
+            .col-3\@md,
+            .col-4\@md,
+            .col-5\@md,
+            .col-6\@md,
+            .col-7\@md,
+            .col-8\@md,
+            .col-9\@md,
+            .col-10\@md,
+            .col-11\@md,
+            .col-12\@md {
+                float: left;
+            }
+
+            .col-1\@md {
+                width: 8.33333%;
+            }
+
+            .col-2\@md {
+                width: 16.66667%;
+            }
+
+            .col-3\@md {
+                width: 25%;
+            }
+
+            .col-4\@md {
+                width: 33.33333%;
+            }
+
+            .col-5\@md {
+                width: 41.66667%;
+            }
+
+            .col-6\@md {
+                width: 50%;
+            }
+
+            .col-7\@md {
+                width: 58.33333%;
+            }
+
+            .col-8\@md {
+                width: 66.66667%;
+            }
+
+            .col-9\@md {
+                width: 75%;
+            }
+
+            .col-10\@md {
+                width: 83.33333%;
+            }
+
+            .col-11\@md {
+                width: 91.66667%;
+            }
+
+            .col-12\@md {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -32,772 +652,1119 @@
         <nav id="nav-mobile"></nav>
         <div id="container">
             <div id="content" class="page">
-                <main>
-                    <section>
-                        <h2>Reklamní plachty, banery, mesh a billboardy</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_mm_biilboard_m.jpg" data-lightbox="galerie">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12@sm">
+                            <h1>Galerie</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4@sm col-3@md">
+                            <div class="filters-group">
+                                <label for="filters-search-input" class="filter-label">Vyhledat</label>
+                                <input class="textfield filter__search js-shuffle-search" type="search"
+                                    id="filters-search-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12@sm filters-group-wrap">
+                            <div class="filters-group">
+                                <p class="filter-label">Filtry</p>
+                                <div class="btn-group filter-options">
+                                    <button class="btn btn--primary" data-group="bannery">Bannery</button>
+                                    <button class="btn btn--primary" data-group="acka">Áčka</button>
+                                    <button class="btn btn--primary" data-group="auta">Auta</button>
+                                    <button class="btn btn--primary" data-group="vylohy">Výlohy</button>
+                                    <button class="btn btn--primary" data-group="tiskoviny">Tiskoviny</button>
+                                    <button class="btn btn--primary" data-group="napisy">Nápisy</button>
+                                    <button class="btn btn--primary" data-group="jine">Jiné</button>
+                                </div>
+                            </div>
+                            <!--
+                            <fieldset class="filters-group">
+                                <legend class="filter-label">Sort</legend>
+                                <div class="btn-group sort-options">
+                                    <label class="btn active">
+                                        <input type="radio" name="sort-value" value="dom" checked /> Default
+                                    </label>
+                                    <label class="btn">
+                                        <input type="radio" name="sort-value" value="title" /> Title
+                                    </label>
+                                    <label class="btn">
+                                        <input type="radio" name="sort-value" value="date-created" /> Date Created
+                                    </label>
+                                </div>
+                            </fieldset>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div id="grid" class="row my-shuffle-container">
+                        <!-- Bannery -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_mm_biilboard_m.jpg" data-lightbox="galerie"
+                                    data-title="Billboard 7x3,8m M&amp;M reality v Českém Těšíně">
                                     <picture>
                                         <source srcset="./images/galerie/baner_mm_biilboard_m.webp" type="image/webp">
                                         <source srcset="./images/galerie/baner_mm_biilboard_m.jpg" type="image/jpeg">
                                         <img src="./images/galerie/baner_mm_biilboard_m.jpg"
-                                            title="Billboard 7x3,8m M&amp;M reality v Českém Těšíně">
+                                            title="Billboard 7x3,8m M&amp;M reality v Českém Těšíně"
+                                            alt="Billboard 7x3,8m M&amp;M reality v Českém Těšíně">
                                     </picture>
+                                    <p class="picture-item__title">Billboard 7x3,8m M&amp;M reality v Českém Těšíně</p>
                                 </a>
-                                <p>Billboard 7x3,8m M&amp;M reality v Českém Těšíně</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_mm_billboard_prerov_m.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_mm_billboard_prerov_m.jpg" data-lightbox="galerie"
+                                    data-title="Billboard M&amp;M reality v Přerově">
                                     <picture>
                                         <source srcset="./images/galerie/baner_mm_billboard_prerov_m.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/baner_mm_billboard_prerov_m.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/baner_mm_billboard_prerov_m.jpg"
-                                            title="Billboard M&amp;M reality v Přerově">
+                                            title="Billboard M&amp;M reality v Přerově"
+                                            alt="Billboard M&amp;M reality v Přerově">
                                     </picture>
+                                    <p class="picture-item__title">Billboard M&amp;M reality v Přerově</p>
                                 </a>
-                                <p>Billboard M&amp;M reality v Přerově</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_mm_opava_m.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_mm_opava_m.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní baner M&amp;M reality v Opavě">
                                     <picture>
                                         <source srcset="./images/galerie/baner_mm_opava_m.webp" type="image/webp">
                                         <source srcset="./images/galerie/baner_mm_opava_m.jpg" type="image/jpeg">
                                         <img src="./images/galerie/baner_mm_opava_m.jpg"
-                                            title="Reklamní baner M&amp;M reality v Opavě">
+                                            title="Reklamní baner M&amp;M reality v Opavě"
+                                            alt="Reklamní baner M&amp;M reality v Opavě">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní baner M&amp;M reality v Opavě</p>
                                 </a>
-                                <p>Reklamní baner M&amp;M reality v Opavě</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_mm_stars.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_mm_stars.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní plachta M&amp;M reality do tenisové haly">
                                     <picture>
                                         <source srcset="./images/galerie/baner_mm_stars.webp" type="image/webp">
                                         <source srcset="./images/galerie/baner_mm_stars.jpg" type="image/jpeg">
                                         <img src="./images/galerie/baner_mm_stars.jpg"
-                                            title="Reklamní plachta M&amp;M reality do tenisové haly">
+                                            title="Reklamní plachta M&amp;M reality do tenisové haly"
+                                            alt="Reklamní plachta M&amp;M reality do tenisové haly">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní plachta M&amp;M reality do tenisové haly</p>
                                 </a>
-                                <p>Reklamní plachta M&amp;M reality do tenisové haly</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_mm_zidka.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--h2"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_tango.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní baner Tango">
+                                    <picture>
+                                        <source srcset="./images/galerie/baner_tango.webp" type="image/webp">
+                                        <source srcset="./images/galerie/baner_tango.jpg" type="image/jpeg">
+                                        <img src="./images/galerie/baner_tango.jpg" title="Reklamní baner Tango"
+                                            alt="Reklamní baner Tango">
+                                    </picture>
+                                    <p class="picture-item__title">Reklamní baner Tango</p>
+                                </a>
+                            </div>
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/baner_mm_zidka.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní plachta 6x1,3m M&amp;M reality na ochoz">
                                     <picture>
                                         <source srcset="./images/galerie/baner_mm_zidka.webp" type="image/webp">
                                         <source srcset="./images/galerie/baner_mm_zidka.jpg" type="image/jpeg">
                                         <img src="./images/galerie/baner_mm_zidka.jpg"
-                                            title="Reklamní plachta 6x1,3m M&amp;M reality na ochoz">
+                                            title="Reklamní plachta 6x1,3m M&amp;M reality na ochoz"
+                                            alt="Reklamní plachta 6x1,3m M&amp;M reality na ochoz">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní plachta 6x1,3m M&amp;M reality na ochoz</p>
                                 </a>
-                                <p>Reklamní plachta 6x1,3m M&amp;M reality na ochoz</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_tango.jpg" data-lightbox="galerie">
-                                    <picture>
-                                        <source srcset="./images/galerie/baner_tango.webp" type="image/webp">
-                                        <source srcset="./images/galerie/baner_tango.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/baner_tango.jpg" title="Reklamní baner Tango">
-                                    </picture>
-                                </a>
-                                <p>Reklamní baner Tango</p>
-                            </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/banery_billboardy_ostravska.webp" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/banery_billboardy_ostravska.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní plachty 4ks 5x3,5m na Ostravské">
                                     <picture>
                                         <source srcset="./images/galerie/banery_billboardy_ostravska.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/banery_billboardy_ostravska.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/banery_billboardy_ostravska.jpg"
-                                            title="Reklamní plachty 4ks 5x3,5m na Ostravské">
+                                            title="Reklamní plachty 4ks 5x3,5m na Ostravské"
+                                            alt="Reklamní plachty 4ks 5x3,5m na Ostravské">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní plachty 4ks 5x3,5m na Ostravské</p>
                                 </a>
-                                <p>Reklamní plachty 4ks 5x3,5m na Ostravské</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/banery_billboardy_ostravska_2.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/banery_billboardy_ostravska_2.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní plachty na Ostravské">
                                     <picture>
                                         <source srcset="./images/galerie/banery_billboardy_ostravska_2.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/banery_billboardy_ostravska_2.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/banery_billboardy_ostravska_2.jpg"
-                                            title="Reklamní plachty na Ostravské">
+                                            title="Reklamní plachty na Ostravské" alt="Reklamní plachty na Ostravské">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní plachty na Ostravské</p>
                                 </a>
-                                <p>Reklamní plachty na Ostravské</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/mesh_sit_proti_hmyzu.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/mesh_sit_proti_hmyzu.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní mesh místo síta proti hmyzu">
                                     <picture>
                                         <source srcset="./images/galerie/mesh_sit_proti_hmyzu.webp" type="image/webp">
                                         <source srcset="./images/galerie/mesh_sit_proti_hmyzu.jpg" type="image/jpeg">
                                         <img src="./images/galerie/mesh_sit_proti_hmyzu.jpg"
-                                            title="Reklamní mesh místo síta proti hmyzu">
+                                            title="Reklamní mesh místo síta proti hmyzu"
+                                            alt="Reklamní mesh místo síta proti hmyzu">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní mesh místo síta proti hmyzu</p>
                                 </a>
-                                <p>Reklamní mesh místo síta proti hmyzu</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/baner_quatro.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="../images/galerie/baner_quatro.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní billboard na kraji Karviné">
                                     <picture>
                                         <source srcset="./images/galerie/baner_quatro.webp" type="image/webp">
                                         <source srcset="./images/galerie/baner_quatro.jpg" type="image/jpeg">
                                         <img src="./images/galerie/baner_quatro.jpg"
-                                            title="Reklamní billboard na kraji Karviné">
+                                            title="Reklamní billboard na kraji Karviné"
+                                            alt="Reklamní billboard na kraji Karviné">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní billboard na kraji Karviné</p>
                                 </a>
-                                <p>Reklamní billboard na kraji Karviné</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/banner_nábytek_falco_prior.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/banner_nábytek_falco_prior.jpeg" data-lightbox="galerie"
+                                    data-title="Banner pro nábytek Falco na karvinském Prioru">
                                     <picture>
                                         <source srcset="./images/galerie/banner_nábytek_falco_prior.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/banner_nábytek_falco_prior.jpeg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/banner_nábytek_falco_prior.jpeg"
-                                            title="Banner pro nábytek Falco na karvinském Prioru">
+                                            title="Banner pro nábytek Falco na karvinském Prioru"
+                                            alt="Banner pro nábytek Falco na karvinském Prioru">
                                     </picture>
+                                    <p class="picture-item__title">Banner pro nábytek Falco na karvinském Prioru</p>
                                 </a>
-                                <p>Banner pro nábytek Falco na karvinském Prioru</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/banner_orlova_prus.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["bannery"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/banner_orlova_prus.jpeg" data-lightbox="galerie"
+                                    data-title="Banner Radomír Prus v Orlové">
                                     <picture>
                                         <source srcset="./images/galerie/banner_orlova_prus.webp" type="image/webp">
                                         <source srcset="./images/galerie/banner_orlova_prus.jpeg" type="image/jpeg">
                                         <img src="./images/galerie/banner_orlova_prus.jpeg"
-                                            title="Banner Radomír Prus v Orlové">
+                                            title="Banner Radomír Prus v Orlové" alt="Banner Radomír Prus v Orlové">
                                     </picture>
+                                    <p class="picture-item__title">Banner Radomír Prus v Orlové</p>
                                 </a>
-                                <p>Banner Radomír Prus v Orlové</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Reklamní poutače - áčka</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_atyp.jpg" data-lightbox="galerie">
+                        </figure>
+                        <!-- Áčka -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_atyp.jpg" data-lightbox="galerie"
+                                    data-title="Atypické reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_atyp.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_atyp.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_atyp.jpg" title="Atypické reklamní áčko">
+                                        <img src="./images/galerie/acko_atyp.jpg" title="Atypické reklamní áčko"
+                                            alt="Atypické reklamní áčko">
                                     </picture>
+                                    <p class="picture-item__title">Atypické reklamní áčko</p>
                                 </a>
-                                <p>Atypické reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_hlinik.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_hlinik.jpg" data-lightbox="galerie"
+                                    data-title="Hliníkové reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_hlinik.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_hlinik.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_hlinik.jpg" title="Hliníkové reklamní áčko">
+                                        <img src="./images/galerie/acko_hlinik.jpg" title="Hliníkové reklamní áčko"
+                                            alt="Hliníkové reklamní áčko">
                                     </picture>
+                                    <p class="picture-item__title">Hliníkové reklamní áčko</p>
                                 </a>
-                                <p>Hliníkové reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_kov.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_kov.jpg" data-lightbox="galerie"
+                                    data-title="Kovové reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_kov.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_kov.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_kov.jpg" title="Kovové reklamní áčko">
+                                        <img src="./images/galerie/acko_kov.jpg" title="Kovové reklamní áčko"
+                                            alt="Kovové reklamní áčko">
                                     </picture>
-
+                                    <p class="picture-item__title">Kovové reklamní áčko</p>
                                 </a>
-                                <p>Kovové reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_realitni.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_realitni.jpg" data-lightbox="galerie"
+                                    data-title="Realitní reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_realitni.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_realitni.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_realitni.jpg" title="Realitní reklamní áčko">
+                                        <img src="./images/galerie/acko_realitni.jpg" title="Realitní reklamní áčko"
+                                            alt="Realitní reklamní áčko">
                                     </picture>
+                                    <p class="picture-item__title">Realitní reklamní áčko</p>
                                 </a>
-                                <p>Realitní reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_trubkove.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_trubkove.jpg" data-lightbox="galerie"
+                                    data-title="Trubkové reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_trubkove.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_trubkove.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_trubkove.jpg" title="Trubkové reklamní áčko">
+                                        <img src="./images/galerie/acko_trubkove.jpg" title="Trubkové reklamní áčko"
+                                            alt="Trubkové reklamní áčko">
                                     </picture>
+                                    <p class="picture-item__title">Trubkové reklamní áčko</p>
                                 </a>
-                                <p>Trubkové reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/acko_tvar.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/acko_tvar.jpg" data-lightbox="galerie"
+                                    data-title="Tvarové reklamní áčko">
                                     <picture>
                                         <source srcset="./images/galerie/acko_tvar.webp" type="image/webp">
                                         <source srcset="./images/galerie/acko_tvar.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/acko_tvar.jpg" title="Tvarové reklamní áčko">
+                                        <img src="./images/galerie/acko_tvar.jpg" title="Tvarové reklamní áčko"
+                                            alt="Tvarové reklamní áčko">
                                     </picture>
+                                    <p class="picture-item__title">Tvarové reklamní áčko</p>
                                 </a>
-                                <p>Tvarové reklamní áčko</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/kadernictvi_andrea.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--h2" data-groups='["acka"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/kadernictvi_andrea.jpeg" data-lightbox="galerie"
+                                    data-title="Kadeřnictví Andrea">
                                     <picture>
                                         <source srcset="./images/galerie/kadernictvi_andrea.webp" type="image/webp">
                                         <source srcset="./images/galerie/kadernictvi_andrea.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/kadernictvi_andrea.jpeg" title="Kadeřnictví Andrea">
+                                        <img src="./images/galerie/kadernictvi_andrea.jpeg" title="Kadeřnictví Andrea"
+                                            alt="Kadeřnictví Andrea">
                                     </picture>
+                                    <p class="picture-item__title">Kadeřnictví Andrea</p>
                                 </a>
-                                <p>Kadeřnictví Andrea</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Reklamní polepy aut</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_damia.jpg" data-lightbox="galerie">
+                        </figure>
+                        <!-- Auta -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_damia.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu pro firmu Damia">
                                     <picture>
                                         <source srcset="./images/galerie/auto_damia.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_damia.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_damia.jpg"
-                                            title="Reklamní polep vozu pro firmu Damia">
+                                            title="Reklamní polep vozu pro firmu Damia"
+                                            alt="Reklamní polep vozu pro firmu Damia">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu pro firmu Damia</p>
                                 </a>
-                                <p>Reklamní polep vozu pro firmu Damia</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_flasarova.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_flasarova.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu pro volební kampaň">
                                     <picture>
                                         <source srcset="./images/galerie/auto_flasarova.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_flasarova.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_flasarova.jpg"
-                                            title="Reklamní polep vozu pro volební kampaň">
+                                            title="Reklamní polep vozu pro volební kampaň"
+                                            alt="Reklamní polep vozu pro volební kampaň">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu pro volební kampaň</p>
                                 </a>
-                                <p>Reklamní polep vozu pro volební kampaň</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_hopa.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_hopa.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu pro firmu Hopa">
                                     <picture>
                                         <source srcset="./images/galerie/auto_hopa.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_hopa.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_hopa.jpg"
-                                            title="Reklamní polep vozu pro firmu Hopa">
+                                            title="Reklamní polep vozu pro firmu Hopa"
+                                            alt="Reklamní polep vozu pro firmu Hopa">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu pro firmu Hopa</p>
                                 </a>
-                                <p>Reklamní polep vozu pro firmu Hopa</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_jinpo.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_jinpo.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Jimpo">
                                     <picture>
                                         <source srcset="./images/galerie/auto_jinpo.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_jinpo.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/auto_jinpo.jpg" title="Reklamní polep vozu Jimpo">
+                                        <img src="./images/galerie/auto_jinpo.jpg" title="Reklamní polep vozu Jimpo"
+                                            alt="Reklamní polep vozu Jimpo">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Jimpo</p>
                                 </a>
-                                <p>Reklamní polep vozu Jimpo</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_malnat.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_malnat.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Malnat">
                                     <picture>
                                         <source srcset="./images/galerie/auto_malnat.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_malnat.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/auto_malnat.jpg" title="Reklamní polep vozu Malnat">
+                                        <img src="./images/galerie/auto_malnat.jpg" title="Reklamní polep vozu Malnat"
+                                            alt="Reklamní polep vozu Malnat">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Malnat</p>
                                 </a>
-                                <p>Reklamní polep vozu Malnat</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_morys.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_morys.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Morys">
                                     <picture>
                                         <source srcset="./images/galerie/auto_morys.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_morys.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/auto_morys.jpg" title="Reklamní polep vozu Morys">
+                                        <img src="./images/galerie/auto_morys.jpg" title="Reklamní polep vozu Morys"
+                                            alt="Reklamní polep vozu Morys">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Morys</p>
                                 </a>
-                                <p>Reklamní polep vozu Morys</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_mm_fabia.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_mm_fabia.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu M&amp;M reality">
                                     <picture>
                                         <source srcset="./images/galerie/auto_mm_fabia.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_mm_fabia.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_mm_fabia.jpg"
-                                            title="Reklamní polep vozu M&amp;M reality">
+                                            title="Reklamní polep vozu M&amp;M reality"
+                                            alt="Reklamní polep vozu M&amp;M reality">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu M&amp;M reality</p>
                                 </a>
-                                <p>Reklamní polep vozu M&amp;M reality</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_mm_vw.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_mm_vw.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu M&amp;M reality">
                                     <picture>
                                         <source srcset="./images/galerie/auto_mm_vw.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_mm_vw.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_mm_vw.jpg"
-                                            title="Reklamní polep vozu M&amp;M reality">
+                                            title="Reklamní polep vozu M&amp;M reality"
+                                            alt="Reklamní polep vozu M&amp;M reality">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu M&amp;M reality</p>
                                 </a>
-                                <p>Reklamní polep vozu M&amp;M reality</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_mm_audi.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_mm_audi.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu M&amp;M reality">
                                     <picture>
                                         <source srcset="./images/galerie/auto_mm_audi.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_mm_audi.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_mm_audi.jpg"
-                                            title="Reklamní polep vozu M&amp;M reality">
+                                            title="Reklamní polep vozu M&amp;M reality"
+                                            alt="Reklamní polep vozu M&amp;M reality">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu M&amp;M reality</p>
                                 </a>
-                                <p>Reklamní polep vozu M&amp;M reality</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_mr_pizza.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_mr_pizza.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Mr. Pizza">
                                     <picture>
                                         <source srcset="./images/galerie/auto_mr_pizza.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_mr_pizza.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_mr_pizza.jpg"
-                                            title="Reklamní polep vozu Mr. Pizza">
+                                            title="Reklamní polep vozu Mr. Pizza" alt="Reklamní polep vozu Mr. Pizza">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Mr. Pizza</p>
                                 </a>
-                                <p>Reklamní polep vozu Mr. Pizza</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_panter.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_panter.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Panther mobil">
                                     <picture>
                                         <source srcset="./images/galerie/auto_panter.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_panter.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_panter.jpg"
-                                            title="Reklamní polep vozu Panther mobil">
+                                            title="Reklamní polep vozu Panther mobil"
+                                            alt="Reklamní polep vozu Panther mobil">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Panther mobil</p>
                                 </a>
-                                <p>Reklamní polep vozu Panther mobil</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_panther_fabia.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_panther_fabia.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Panther mobil">
                                     <picture>
                                         <source srcset="./images/galerie/auto_panther_fabia.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_panther_fabia.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_panther_fabia.jpg"
-                                            title="Reklamní polep vozu Panther mobil">
+                                            title="Reklamní polep vozu Panther mobil"
+                                            alt="Reklamní polep vozu Panther mobil">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Panther mobil</p>
                                 </a>
-                                <p>Reklamní polep vozu Panther mobil</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_ron.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_ron.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Ron software">
                                     <picture>
                                         <source srcset="./images/galerie/auto_ron.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_ron.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_ron.jpg"
-                                            title="Reklamní polep vozu Ron software">
+                                            title="Reklamní polep vozu Ron software"
+                                            alt="Reklamní polep vozu Ron software">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Ron software</p>
                                 </a>
-                                <p>Reklamní polep vozu Ron software</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_ron_2.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-6@xs col-8@sm col-6@md picture-item picture-item--h2" data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_ron_2.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Ron software">
                                     <picture>
                                         <source srcset="./images/galerie/auto_ron_2.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_ron_2.jpg" type="image/jpeg">
                                         <img src="./images/galerie/auto_ron_2.jpg"
-                                            title="Reklamní polep vozu Ron software">
+                                            title="Reklamní polep vozu Ron software"
+                                            alt="Reklamní polep vozu Ron software">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Ron software</p>
                                 </a>
-                                <p>Reklamní polep vozu Ron software</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_steel.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_steel.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Steel">
                                     <picture>
                                         <source srcset="./images/galerie/auto_steel.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_steel.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/auto_steel.jpg" title="Reklamní polep vozu Steel">
+                                        <img src="./images/galerie/auto_steel.jpg" title="Reklamní polep vozu Steel"
+                                            alt="Reklamní polep vozu Steel">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Steel</p>
                                 </a>
-                                <p>Reklamní polep vozu Steel</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/auto_steel_2.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/auto_steel_2.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polep vozu Steel">
                                     <picture>
                                         <source srcset="./images/galerie/auto_steel_2.webp" type="image/webp">
                                         <source srcset="./images/galerie/auto_steel_2.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/auto_steel_2.jpg" title="Reklamní polep vozu Steel">
+                                        <img src="./images/galerie/auto_steel_2.jpg" title="Reklamní polep vozu Steel"
+                                            alt="Reklamní polep vozu Steel">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polep vozu Steel</p>
                                 </a>
-                                <p>Reklamní polep vozu Steel</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/okenni_folie_pohled_z_auta.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/okenni_folie_pohled_z_auta.jpg" data-lightbox="galerie"
+                                    data-title="Okenní folie - pohled z auta">
                                     <picture>
                                         <source srcset="./images/galerie/okenni_folie_pohled_z_auta.jpg"
                                             type="image/webp">
                                         <source srcset="./images/galerie/okenni_folie_pohled_z_auta.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/okenni_folie_pohled_z_auta.jpg"
-                                            title="Okenní folie - pohled z auta">
+                                            title="Okenní folie - pohled z auta" alt="Okenní folie - pohled z auta">
                                     </picture>
+                                    <p class="picture-item__title">Okenní folie - pohled z auta</p>
                                 </a>
-                                <p>Okenní folie - pohled z auta</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/okenni_folie_na_zadni_sklo.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["auta"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/okenni_folie_na_zadni_sklo.jpg" data-lightbox="galerie"
+                                    data-title="Okenní folie - pohled na zadní sklo">
                                     <picture>
                                         <source srcset="./images/galerie/okenni_folie_na_zadni_sklo.jpg"
                                             type="image/webp">
                                         <source srcset="./images/galerie/okenni_folie_na_zadni_sklo.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/okenni_folie_na_zadni_sklo.jpg"
-                                            title="Okenní folie - pohled na zadní sklo">
+                                            title="Okenní folie - pohled na zadní sklo"
+                                            alt="Okenní folie - pohled na zadní sklo">
                                     </picture>
+                                    <p class="picture-item__title">Okenní folie - pohled na zadní sklo</p>
                                 </a>
-                                <p>Okenní folie - pohled na zadní sklo</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Polepy výloh, firemní štíty</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/vyloha_dedek.jpg" data-lightbox="galerie">
+                        </figure>
+                        <!-- Výlohy -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["vylohy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/vyloha_dedek.jpg" data-lightbox="galerie"
+                                    data-title="Označení provozovny Dedek Ostrava - řezaná grafika">
                                     <picture>
                                         <source srcset="./images/galerie/vyloha_dedek.webp" type="image/webp">
                                         <source srcset="./images/galerie/vyloha_dedek.jpg" type="image/jpeg">
                                         <img src="./images/galerie/vyloha_dedek.jpg"
-                                            title="Označení provozovny Dedek Ostrava - řezaná grafika">
+                                            title="Označení provozovny Dedek Ostrava - řezaná grafika"
+                                            alt="Označení provozovny Dedek Ostrava - řezaná grafika">
                                     </picture>
+                                    <p class="picture-item__title">Označení provozovny Dedek Ostrava - řezaná grafika
+                                    </p>
                                 </a>
-                                <p>Označení provozovny Dedek Ostrava - řezaná grafika</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/vyloha_euro.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["vylohy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/vyloha_euro.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní polepy Euro sport baru v Karviné - řezaná grafika">
                                     <picture>
                                         <source srcset="./images/galerie/vyloha_euro.webp" type="image/webp">
                                         <source srcset="./images/galerie/vyloha_euro.jpg" type="image/jpeg">
                                         <img src="./images/galerie/vyloha_euro.jpg"
-                                            title="Reklamní polepy Euro sport baru v Karviné - řezaná grafika">
+                                            title="Reklamní polepy Euro sport baru v Karviné - řezaná grafika"
+                                            alt="Reklamní polepy Euro sport baru v Karviné - řezaná grafika">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní polepy Euro sport baru v Karviné - řezaná
+                                        grafika</p>
                                 </a>
-                                <p>Reklamní polepy Euro sport baru v Karviné - řezaná grafika</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/vyloha_solarium.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["vylohy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/vyloha_solarium.jpg" data-lightbox="galerie"
+                                    data-title="Výloha Solárium v Ostravě - lepeno z vnitřní strany">
                                     <picture>
                                         <source srcset="./images/galerie/vyloha_solarium.webp" type="image/webp">
                                         <source srcset="./images/galerie/vyloha_solarium.jpg" type="image/jpeg">
                                         <img src="./images/galerie/vyloha_solarium.jpg"
-                                            title="Výloha Solárium v Ostravě - lepeno z vnitřní strany">
+                                            title="Výloha Solárium v Ostravě - lepeno z vnitřní strany"
+                                            alt="Výloha Solárium v Ostravě - lepeno z vnitřní strany">
                                     </picture>
+                                    <p class="picture-item__title">Výloha Solárium v Ostravě - lepeno z vnitřní strany
+                                    </p>
                                 </a>
-                                <p>Výloha Solárium v Ostravě - lepeno z vnitřní strany</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/vyloha_samson.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["vylohy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/vyloha_samson.jpg" data-lightbox="galerie"
+                                    data-title="Firemní štít - Trafika Samson">
                                     <picture>
                                         <source srcset="./images/galerie/vyloha_samson.webp" type="image/webp">
                                         <source srcset="./images/galerie/vyloha_samson.jpg" type="image/jpeg">
                                         <img src="./images/galerie/vyloha_samson.jpg"
-                                            title="Firemní štít - Trafika Samson">
+                                            title="Firemní štít - Trafika Samson" alt="Firemní štít - Trafika Samson">
                                     </picture>
+                                    <p class="picture-item__title">Firemní štít - Trafika Samson</p>
                                 </a>
-                                <p>Firemní štít - Trafika Samson</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/vyloha_mkp.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["vylohy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/vyloha_mkp.jpeg" data-lightbox="galerie"
+                                    data-title="Výloha MKP">
                                     <picture>
                                         <source srcset="./images/galerie/vyloha_mkp.webp" type="image/webp">
                                         <source srcset="./images/galerie/vyloha_mkp.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/vyloha_mkp.jpeg" title="Výloha MKP">
+                                        <img src="./images/galerie/vyloha_mkp.jpeg" title="Výloha MKP" alt="Výloha MKP">
                                     </picture>
+                                    <p class="picture-item__title">Výloha MKP</p>
                                 </a>
-                                <p>Výloha MKP</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Tiskoviny - letáky, plakáty, jídelní lístky, brožury, katalogy, složky</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/jidelni_listek.jpg" data-lightbox="galerie">
+                        </figure>
+                        <!-- Tiskoviny -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/jidelni_listek.jpg" data-lightbox="galerie"
+                                    data-title="Jídelní lístek La Gondola">
                                     <picture>
                                         <source srcset="./images/galerie/jidelni_listek.webp" type="image/webp">
                                         <source srcset="./images/galerie/jidelni_listek.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/jidelni_listek.jpg"
-                                            title="Jídelní lístek La Gondola">
+                                        <img src="./images/galerie/jidelni_listek.jpg" title="Jídelní lístek La Gondola"
+                                            alt="Jídelní lístek La Gondola">
                                     </picture>
+                                    <p class="picture-item__title">Jídelní lístek La Gondola</p>
                                 </a>
-                                <p>Jídelní lístek La Gondola</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_ajak_osetrovatel.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_ajak_osetrovatel.jpg" data-lightbox="galerie"
+                                    data-title="Leták Akademie J. A. K. - ošetřovatel">
                                     <picture>
                                         <source srcset="./images/galerie/letak_ajak_osetrovatel.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_ajak_osetrovatel.jpg" type="image/jpeg">
                                         <img src="./images/galerie/letak_ajak_osetrovatel.jpg"
-                                            title="Leták Akademie J. A. K. - ošetřovatel">
+                                            title="Leták Akademie J. A. K. - ošetřovatel"
+                                            alt="Leták Akademie J. A. K. - ošetřovatel">
                                     </picture>
+                                    <p class="picture-item__title">Leták Akademie J. A. K. - ošetřovatel</p>
                                 </a>
-                                <p>Leták Akademie J. A. K. - ošetřovatel</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_ajak_soc_prac.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_ajak_soc_prac.jpg" data-lightbox="galerie"
+                                    data-title="Leták Akademie J. A. K. - sociální pracovník">
                                     <picture>
                                         <source srcset="./images/galerie/letak_ajak_soc_prac.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_ajak_soc_prac.jpg" type="image/jpeg">
                                         <img src="./images/galerie/letak_ajak_soc_prac.jpg"
-                                            title="Leták Akademie J. A. K. - sociální pracovník">
+                                            title="Leták Akademie J. A. K. - sociální pracovník"
+                                            alt="Leták Akademie J. A. K. - sociální pracovník">
                                     </picture>
+                                    <p class="picture-item__title">Leták Akademie J. A. K. - sociální pracovník</p>
                                 </a>
-                                <p>Leták Akademie J. A. K. - sociální pracovník</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_barevny_podzim.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_barevny_podzim.jpg" data-lightbox="galerie"
+                                    data-title="Leták A3 město Karviná Barevný podzim">
                                     <picture>
                                         <source srcset="./images/galerie/letak_barevny_podzim.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_barevny_podzim.jpg" type="image/jpeg">
                                         <img src="./images/galerie/letak_barevny_podzim.jpg"
-                                            title="Leták A3 město Karviná Barevný podzim">
+                                            title="Leták A3 město Karviná Barevný podzim"
+                                            alt="Leták A3 město Karviná Barevný podzim">
                                     </picture>
+                                    <p class="picture-item__title">Leták A3 město Karviná Barevný podzim</p>
                                 </a>
-                                <p>Leták A3 město Karviná Barevný podzim</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_ded.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_ded.jpg" data-lightbox="galerie"
+                                    data-title="Leták A3 město Karviná Dny evropského dědictví">
                                     <picture>
                                         <source srcset="./images/galerie/letak_ded.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_ded.jpg" type="image/jpeg">
                                         <img src="./images/galerie/letak_ded.jpg"
-                                            title="Leták A3 město Karviná Dny evropského dědictví">
+                                            title="Leták A3 město Karviná Dny evropského dědictví"
+                                            alt="Leták A3 město Karviná Dny evropského dědictví">
                                     </picture>
+                                    <p class="picture-item__title">Leták A3 město Karviná Dny evropského dědictví</p>
                                 </a>
-                                <p>Leták A3 město Karviná Dny evropského dědictví</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_havirov_se_bavi.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_havirov_se_bavi.jpg" data-lightbox="galerie"
+                                    data-title="Plakát A2 Havířov se baví">
                                     <picture>
                                         <source srcset="./images/galerie/letak_havirov_se_bavi.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_havirov_se_bavi.jpg" type="image/jpeg">
                                         <img src="./images/galerie/letak_havirov_se_bavi.jpg"
-                                            title="Plakát A2 Havířov se baví">
+                                            title="Plakát A2 Havířov se baví" alt="Plakát A2 Havířov se baví">
                                     </picture>
+                                    <p class="picture-item__title">Plakát A2 Havířov se baví</p>
                                 </a>
-                                <p>Plakát A2 Havířov se baví</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_chybik_07.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_chybik_07.jpg" data-lightbox="galerie"
+                                    data-title="Leták A5 AD Chybík 2007">
                                     <picture>
                                         <source srcset="./images/galerie/letak_chybik_07.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_chybik_07.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_chybik_07.jpg" title="Leták A5 AD Chybík 2007">
+                                        <img src="./images/galerie/letak_chybik_07.jpg" title="Leták A5 AD Chybík 2007"
+                                            alt="Leták A5 AD Chybík 2007">
                                     </picture>
+                                    <p class="picture-item__title">Leták A5 AD Chybík 2007</p>
                                 </a>
-                                <p>Leták A5 AD Chybík 2007</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_chybik_10.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_chybik_10.jpg" data-lightbox="galerie"
+                                    data-title="Leták A5 AD Chybík 2010">
                                     <picture>
                                         <source srcset="./images/galerie/letak_chybik_10.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_chybik_10.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_chybik_10.jpg" title="Leták A5 AD Chybík 2010">
+                                        <img src="./images/galerie/letak_chybik_10.jpg" title="Leták A5 AD Chybík 2010"
+                                            alt="Leták A5 AD Chybík 2010">
                                     </picture>
+                                    <p class="picture-item__title">Leták A5 AD Chybík 2010</p>
                                 </a>
-                                <p>Leták A5 AD Chybík 2010</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_chybik_11.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_chybik_11.jpg" data-lightbox="galerie"
+                                    data-title="Leták A5 AD Chybík 2011">
                                     <picture>
                                         <source srcset="./images/galerie/letak_chybik_11.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_chybik_11.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_chybik_11.jpg" title="Leták A5 AD Chybík 2011">
+                                        <img src="./images/galerie/letak_chybik_11.jpg" title="Leták A5 AD Chybík 2011"
+                                            alt="Leták A5 AD Chybík 2011">
                                     </picture>
+                                    <p class="picture-item__title">Leták A5 AD Chybík 2011</p>
                                 </a>
-                                <p>Leták A5 AD Chybík 2011</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_hopa.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_hopa.jpg" data-lightbox="galerie"
+                                    data-title="Leták A5 Ho-Pa">
                                     <picture>
                                         <source srcset="./images/galerie/letak_hopa.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_hopa.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_hopa.jpg" title="Leták A5 Ho-Pa">
+                                        <img src="./images/galerie/letak_hopa.jpg" title="Leták A5 Ho-Pa"
+                                            alt="Leták A5 Ho-Pa">
                                     </picture>
+                                    <p class="picture-item__title">Leták A5 Ho-Pa</p>
                                 </a>
-                                <p>Leták A5 Ho-Pa</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_jk_rimex.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_jk_rimex.jpg" data-lightbox="galerie"
+                                    data-title="Leták A5 JK Rimex odpady">
                                     <picture>
                                         <source srcset="./images/galerie/letak_jk_rimex.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_jk_rimex.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_jk_rimex.jpg" title="Leták A5 JK Rimex odpady">
+                                        <img src="./images/galerie/letak_jk_rimex.jpg" title="Leták A5 JK Rimex odpady"
+                                            alt="Leták A5 JK Rimex odpady">
                                     </picture>
+                                    <p class="picture-item__title">Leták A5 JK Rimex odpady</p>
                                 </a>
-                                <p>Leták A5 JK Rimex odpady</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/letak_karimpex.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["tiskoviny"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/letak_karimpex.jpg" data-lightbox="galerie"
+                                    data-title="Leták A4 Karimpex">
                                     <picture>
                                         <source srcset="./images/galerie/letak_karimpex.webp" type="image/webp">
                                         <source srcset="./images/galerie/letak_karimpex.jpg" type="image/jpeg">
-                                        <img src="./images/galerie/letak_karimpex.jpg" title="Leták A4 Karimpex">
+                                        <img src="./images/galerie/letak_karimpex.jpg" title="Leták A4 Karimpex"
+                                            alt="Leták A4 Karimpex">
                                     </picture>
+                                    <p class="picture-item__title">Leták A4 Karimpex</p>
                                 </a>
-                                <p>Leták A4 Karimpex</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Polystyrénové a 3D nápisy na fasádu</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/napis_mestsky_stadion.jpg" data-lightbox="galerie">
+                        </figure>
+                        <!-- Nápisy -->
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["napisy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/napis_mestsky_stadion.jpg" data-lightbox="galerie"
+                                    data-title="Reklamní nápis z PVC - Městský stadion v Karviné">
                                     <picture>
                                         <source srcset="./images/galerie/napis_mestsky_stadion.webp" type="image/webp">
                                         <source srcset="./images/galerie/napis_mestsky_stadion.jpg" type="image/jpeg">
                                         <img src="./images/galerie/napis_mestsky_stadion.jpg"
-                                            title="Reklamní nápis z PVC - Městský stadion v Karviné">
+                                            title="Reklamní nápis z PVC - Městský stadion v Karviné"
+                                            alt="Reklamní nápis z PVC - Městský stadion v Karviné">
                                     </picture>
+                                    <p class="picture-item__title">Reklamní nápis z PVC - Městský stadion v Karviné</p>
                                 </a>
-                                <p>Reklamní nápis z PVC - Městský stadion v Karviné</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/polystyren_ajak.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["napisy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/polystyren_ajak.jpg" data-lightbox="galerie"
+                                    data-title="Polystyrenový nápis - Akademie Jana Amose Komenského v Karviné">
                                     <picture>
                                         <source srcset="./images/galerie/polystyren_ajak.webp" type="image/webp">
                                         <source srcset="./images/galerie/polystyren_ajak.jpg" type="image/jpeg">
                                         <img src="./images/galerie/polystyren_ajak.jpg"
-                                            title="Polystyrenový nápis - Akademie Jana Amose Komenského v Karviné">
+                                            title="Polystyrenový nápis - Akademie Jana Amose Komenského v Karviné"
+                                            alt="Polystyrenový nápis - Akademie Jana Amose Komenského v Karviné">
                                     </picture>
+                                    <p class="picture-item__title">Polystyrenový nápis - Akademie Jana Amose Komenského
+                                        v Karviné</p>
                                 </a>
-                                <p>Polystyrenový nápis - Akademie Jana Amose Komenského v Karviné</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/polystyren_mm_bez_pozadi.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["napisy"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/polystyren_mm_bez_pozadi.jpg" data-lightbox="galerie"
+                                    data-title="Polystyrenový nápis - M&amp;M Reality v Opavě">
                                     <picture>
                                         <source srcset="./images/galerie/polystyren_mm_bez_pozadi.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/polystyren_mm_bez_pozadi.jpg"
                                             type="image/jpeg">
                                         <img src="./images/galerie/polystyren_mm_bez_pozadi.jpg"
-                                            title="Polystyrenový nápis - M&amp;M Reality v Opavě">
+                                            title="Polystyrenový nápis - M&amp;M Reality v Opavě"
+                                            alt="Polystyrenový nápis - M&amp;M Reality v Opavě">
                                     </picture>
+                                    <p class="picture-item__title">Polystyrenový nápis - M&amp;M Reality v Opavě</p>
                                 </a>
-                                <p>Polystyrenový nápis - M&amp;M Reality v Opavě</p>
                             </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Různé</h2>
-                        <div class="obrazky">
-                            <div class="obrazek">
-                                <a href="./images/galerie/preklizka_nosic_priboru.JPG" data-lightbox="galerie">
+                        </figure>
+                        <!-- Jiné -->
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/preklizka_nosic_priboru.JPG" data-lightbox="galerie"
+                                    data-title="Překližka - nosič příborů a omáček">
                                     <picture>
                                         <source srcset="./images/galerie/preklizka_nosic_priboru.webp"
                                             type="image/webp">
                                         <source srcset="./images/galerie/preklizka_nosic_priboru.JPG" type="image/jpeg">
                                         <img src="./images/galerie/preklizka_nosic_priboru.JPG"
-                                            title="Překližka - nosič příborů a omáček">
+                                            title="Překližka - nosič příborů a omáček"
+                                            alt="Překližka - nosič příborů a omáček">
                                     </picture>
+                                    <p class="picture-item__title">Překližka - nosič příborů a omáček</p>
                                 </a>
-                                <p>Překližka - nosič příborů a omáček</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/podtácek_HBK.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/podtácek_HBK.jpeg" data-lightbox="galerie"
+                                    data-title="Korkový podtácek HBK Karviná">
                                     <picture>
                                         <source srcset="./images/galerie/podtácek_HBK.webp" type="image/webp">
                                         <source srcset="./images/galerie/podtácek_HBK.jpeg" type="image/jpeg">
                                         <img src="./images/galerie/podtácek_HBK.jpeg"
-                                            title="Korkový podtácek HBK Karviná">
+                                            title="Korkový podtácek HBK Karviná" alt="Korkový podtácek HBK Karviná">
                                     </picture>
+                                    <p class="picture-item__title">Korkový podtácek HBK Karviná</p>
                                 </a>
-                                <p>Korkový podtácek HBK Karviná</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/citaty_stena.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/citaty_stena.jpeg" data-lightbox="galerie"
+                                    data-title="Slavné citáty na stěně">
                                     <picture>
                                         <source srcset="./images/galerie/citaty_stena.webp" type="image/webp">
                                         <source srcset="./images/galerie/citaty_stena.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/citaty_stena.jpeg" title="Slavné citáty na stěně">
+                                        <img src="./images/galerie/citaty_stena.jpeg" title="Slavné citáty na stěně"
+                                            alt="Slavné citáty na stěně">
                                     </picture>
+                                    <p class="picture-item__title">Slavné citáty na stěně</p>
                                 </a>
-                                <p>Slavné citáty na stěně</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/laserovy_popis_nerez.jpg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--h2" data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/laserovy_popis_nerez.jpg" data-lightbox="galerie"
+                                    data-title="Laserový popis na nerezi">
                                     <picture>
                                         <source srcset="./images/galerie/laserovy_popis_nerez.webp" type="image/webp">
                                         <source srcset="./images/galerie/laserovy_popis_nerez.jpg" type="image/jpeg">
                                         <img src="./images/galerie/laserovy_popis_nerez.jpg"
-                                            title="Laserový popis na nerezi">
+                                            title="Laserový popis na nerezi" alt="Laserový popis na nerezi">
                                     </picture>
+                                    <p class="picture-item__title">Laserový popis na nerezi</p>
                                 </a>
-                                <p>Laserový popis na nerezi</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/preklizka_napis_matej.jpeg" data-lightbox="galerie">
-                                        <picture>
-                                            <source srcset="./images/galerie/preklizka_napis_matej.webp" type="image/webp">
-                                            <source srcset="./images/galerie/preklizka_napis_matej.jpeg" type="image/jpeg">
-                                            <img src="./images/galerie/preklizka_napis_matej.jpeg"
-                                        title="Nápis Matěj z překližky">
-                                        </picture>
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/preklizka_napis_matej.jpeg" data-lightbox="galerie"
+                                    data-title="Nápis Matěj z překližky">
+                                    <picture>
+                                        <source srcset="./images/galerie/preklizka_napis_matej.webp" type="image/webp">
+                                        <source srcset="./images/galerie/preklizka_napis_matej.jpeg" type="image/jpeg">
+                                        <img src="./images/galerie/preklizka_napis_matej.jpeg"
+                                            title="Nápis Matěj z překližky" alt="Nápis Matěj z překližky">
+                                    </picture>
+                                    <p class="picture-item__title">Nápis Matěj z překližky</p>
                                 </a>
-                                <p>Nápis Matěj z překližky</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/preklizka_medaile.JPG" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/preklizka_medaile.JPG" data-lightbox="galerie"
+                                    data-title="Medaile z překližky">
                                     <picture>
                                         <source srcset="./images/galerie/preklizka_medaile.webp" type="image/webp">
                                         <source srcset="./images/galerie/preklizka_medaile.JPG" type="image/jpeg">
-                                        <img src="./images/galerie/preklizka_medaile.JPG" title="Medaile z překližky">
+                                        <img src="./images/galerie/preklizka_medaile.JPG" title="Medaile z překližky"
+                                            alt="Medaile z překližky">
                                     </picture>
+                                    <p class="picture-item__title">Medaile z překližky</p>
                                 </a>
-                                <p>Medaile z překližky</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/slozka_karvina_a3.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/slozka_karvina_a3.jpeg" data-lightbox="galerie"
+                                    data-title="Složka A3 Karviná">
                                     <picture>
                                         <source srcset="./images/galerie/slozka_karvina_a3.webp" type="image/webp">
                                         <source srcset="./images/galerie/slozka_karvina_a3.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/slozka_karvina_a3.jpeg" title="Složka A3 Karviná">
+                                        <img src="./images/galerie/slozka_karvina_a3.jpeg" title="Složka A3 Karviná"
+                                            alt="Složka A3 Karviná">
                                     </picture>
+                                    <p class="picture-item__title">Složka A3 Karviná</p>
                                 </a>
-                                <p>Složka A3 Karviná</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/pecetidlo_mosaz.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/pecetidlo_mosaz.jpeg" data-lightbox="galerie"
+                                    data-title="Mosazné pečetidlo">
                                     <picture>
                                         <source srcset="./images/galerie/pecetidlo_mosaz.webp" type="image/webp">
                                         <source srcset="./images/galerie/pecetidlo_mosaz.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/pecetidlo_mosaz.jpeg" title="Mosazné pečetidlo">
+                                        <img src="./images/galerie/pecetidlo_mosaz.jpeg" title="Mosazné pečetidlo"
+                                            alt="Mosazné pečetidlo">
                                     </picture>
+                                    <p class="picture-item__title">Mosazné pečetidlo</p>
                                 </a>
-                                <p>Mosazné pečetidlo</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/kamen.JPEG" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-4@sm col-3@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/kamen.JPEG" data-lightbox="galerie" data-title="Kámen">
                                     <picture>
                                         <source srcset="./images/galerie/kamen.webp" type="image/webp">
                                         <source srcset="./images/galerie/kamen.JPEG" type="image/jpeg">
-                                        <img src="./images/galerie/kamen.JPEG" title="Kámen">
+                                        <img src="./images/galerie/kamen.JPEG" title="Kámen" alt="Kámen">
                                     </picture>
+                                    <p class="picture-item__title">Kámen</p>
                                 </a>
-                                <p>Kámen</p>
                             </div>
-                            <div class="obrazek">
-                                <a href="./images/galerie/lunchtime_polep.jpeg" data-lightbox="galerie">
+                        </figure>
+                        <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay"
+                            data-groups='["jine"]'>
+                            <div class="picture-item__inner">
+                                <a href="./images/galerie/lunchtime_polep.jpeg" data-lightbox="galerie"
+                                    data-title="Polep Lunchtime">
                                     <picture>
                                         <source srcset="./images/galerie/lunchtime_polep.webp" type="image/webp">
                                         <source srcset="./images/galerie/lunchtime_polep.jpeg" type="image/jpeg">
-                                        <img src="./images/galerie/lunchtime_polep.jpeg" title="Polep Lunchtime">
+                                        <img src="./images/galerie/lunchtime_polep.jpeg" title="Polep Lunchtime"
+                                            alt="Polep Lunchtime">
                                     </picture>
+                                    <p class="picture-item__title">Polep Lunchtime</p>
                                 </a>
-                                <p>Polep Lunchtime</p>
                             </div>
-                        </div>
-                    </section>
-                </main>
-                <footer>
-                </footer>
+                        </figure>
+                        <div class="col-1@sm col-1@xs my-sizer-element"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -820,4 +1787,173 @@
     </script>
     <script src="./js/script.js"></script>
     <script src="./js/lightbox.js"></script>
+    <script src="https://unpkg.com/shufflejs@5"></script>
+    <script>
+        var Shuffle = window.Shuffle;
+
+        class Demo {
+            constructor(element) {
+                this.element = element;
+                this.shuffle = new Shuffle(element, {
+                    itemSelector: '.picture-item',
+                    sizer: element.querySelector('.my-sizer-element')
+                }); // Log events.
+
+                this.addShuffleEventListeners();
+                this._activeFilters = [];
+                this.addFilterButtons();
+                this.addSorting();
+                this.addSearchFilter();
+            }
+            /**
+             * Shuffle uses the CustomEvent constructor to dispatch events. You can listen
+             * for them like you normally would (with jQuery for example).
+             */
+
+
+            addShuffleEventListeners() {
+                this.shuffle.on(Shuffle.EventType.LAYOUT, data => {
+                    console.log('layout. data:', data);
+                });
+                this.shuffle.on(Shuffle.EventType.REMOVED, data => {
+                    console.log('removed. data:', data);
+                });
+            }
+
+            addFilterButtons() {
+                const options = document.querySelector('.filter-options');
+
+                if (!options) {
+                    return;
+                }
+
+                const filterButtons = Array.from(options.children);
+
+                const onClick = this._handleFilterClick.bind(this);
+
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', onClick, false);
+                });
+            }
+
+            _handleFilterClick(evt) {
+                const btn = evt.currentTarget;
+                const isActive = btn.classList.contains('active');
+                const btnGroup = btn.getAttribute('data-group');
+
+                this._removeActiveClassFromChildren(btn.parentNode);
+
+                let filterGroup;
+
+                if (isActive) {
+                    btn.classList.remove('active');
+                    filterGroup = Shuffle.ALL_ITEMS;
+                } else {
+                    btn.classList.add('active');
+                    filterGroup = btnGroup;
+                }
+
+                this.shuffle.filter(filterGroup);
+            }
+
+            _removeActiveClassFromChildren(parent) {
+                const {
+                    children
+                } = parent;
+
+                for (let i = children.length - 1; i >= 0; i--) {
+                    children[i].classList.remove('active');
+                }
+            }
+
+            addSorting() {
+                const buttonGroup = document.querySelector('.sort-options');
+
+                if (!buttonGroup) {
+                    return;
+                }
+
+                buttonGroup.addEventListener('change', this._handleSortChange.bind(this));
+            }
+
+            _handleSortChange(evt) {
+                // Add and remove `active` class from buttons.
+                const buttons = Array.from(evt.currentTarget.children);
+                buttons.forEach(button => {
+                    if (button.querySelector('input').value === evt.target.value) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                }); // Create the sort options to give to Shuffle.
+
+                const {
+                    value
+                } = evt.target;
+                let options = {};
+
+                function sortByDate(element) {
+                    return element.getAttribute('data-created');
+                }
+
+                function sortByTitle(element) {
+                    return element.getAttribute('data-title').toLowerCase();
+                }
+
+                if (value === 'date-created') {
+                    options = {
+                        reverse: true,
+                        by: sortByDate
+                    };
+                } else if (value === 'title') {
+                    options = {
+                        by: sortByTitle
+                    };
+                }
+
+                this.shuffle.sort(options);
+            } // Advanced filtering
+
+
+            addSearchFilter() {
+                const searchInput = document.querySelector('.js-shuffle-search');
+
+                if (!searchInput) {
+                    return;
+                }
+
+                searchInput.addEventListener('keyup', this._handleSearchKeyup.bind(this));
+            }
+            /**
+             * Filter the shuffle instance by items with a title that matches the search input.
+             * @param {Event} evt Event object.
+             */
+
+
+            _handleSearchKeyup(evt) {
+                const searchText = evt.target.value.toLowerCase();
+                this.shuffle.filter((element, shuffle) => {
+                    // If there is a current filter applied, ignore elements that don't match it.
+                    if (shuffle.group !== Shuffle.ALL_ITEMS) {
+                        // Get the item's groups.
+                        const groups = JSON.parse(element.getAttribute('data-groups'));
+                        const isElementInCurrentGroup = groups.indexOf(shuffle.group) !== -1; // Only search elements in the current group
+
+                        if (!isElementInCurrentGroup) {
+                            return false;
+                        }
+                    }
+
+                    const titleElement = element.querySelector('.picture-item__title');
+                    const titleText = titleElement.textContent.toLowerCase().trim();
+                    return titleText.indexOf(searchText) !== -1;
+                });
+            }
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.demo = new Demo(document.getElementById('grid'));
+        });
+    </script>
 </body>
