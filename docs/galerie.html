@@ -36,15 +36,6 @@
             max-width: 100%;
         }
 
-        /*a,
-        a:visited {
-            color: #3498db;
-        }
-
-        a:active {
-            color: #2ecc71;
-        }*/
-
         p {
             margin: 1em 0;
             line-height: 1.4;
@@ -184,9 +175,8 @@
 
         .filter-label {
             display: block;
-            padding: 0;
             margin-top: 0;
-            margin-bottom: 4px;
+            margin-bottom: 0.5em;
             color: #95a5a6;
         }
 
@@ -203,7 +193,7 @@
             }
         }
 
-        .btn-group:after,
+        /*.btn-group:after,
         .btn-group:before {
             content: " ";
             display: table;
@@ -211,23 +201,16 @@
 
         .btn-group:after {
             clear: both;
+        }*/
+
+        .btn-group {
+            gap: 0.5em;
+            display: inline-flex;
+            flex-wrap: wrap;
         }
 
         .btn-group .btn {
-            float: left;
-            border-radius: 0;
-        }
-
-        .btn-group .btn:first-child {
-            border-radius: 3px 0 0 3px;
-        }
-
-        .btn-group .btn:not(:first-child) {
-            margin-left: -1px;
-        }
-
-        .btn-group .btn:last-child {
-            border-radius: 0 3px 3px 0;
+            border-radius: 5em;
         }
 
         .btn-group label.btn input[type=radio] {
