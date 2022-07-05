@@ -1458,7 +1458,8 @@ footer #copyright a:hover {
 }
 
 footer #footer-links {
-  gap: 1em;
+  row-gap: 0.5em;
+  column-gap: 1em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
