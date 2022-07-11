@@ -415,27 +415,6 @@ textarea {
   }
 }
 
-.front-page {
-  /*#navbar {
-        background-color: transparent;
-        transition: background-color 0.3s ease-in-out;
-
-        header nav a:hover {
-            color: $orange;
-            background-color: $white;
-        }
-
-        &.scroll {
-            background-color: $blue;
-
-            header nav a:hover {
-                color: $white;
-                background-color: $orange;
-            }
-        }
-    }*/
-}
-
 .front-page #scrolling {
   height: 100vh;
   top: 0;
@@ -591,6 +570,8 @@ textarea {
 
 .front-page main section .section__img img {
   width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: 1em;
 }
 

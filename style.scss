@@ -13,7 +13,8 @@ $orange-hover: #dd6b08;
     padding: 0;
     box-sizing: border-box;
 
-    &::before, &::after {
+    &::before,
+    &::after {
         box-sizing: border-box;
     }
 }
@@ -404,32 +405,13 @@ textarea {
     .nowebp .hero {
         background-image: url("./images/orange.jpg");
     }
-    
+
     .webp .hero {
         background-image: url("./images/orange.webp");
     }
 }
 
 .front-page {
-    /*#navbar {
-        background-color: transparent;
-        transition: background-color 0.3s ease-in-out;
-
-        header nav a:hover {
-            color: $orange;
-            background-color: $white;
-        }
-
-        &.scroll {
-            background-color: $blue;
-
-            header nav a:hover {
-                color: $white;
-                background-color: $orange;
-            }
-        }
-    }*/
-
     #scrolling {
         height: 100vh;
         top: 0;
@@ -562,6 +544,8 @@ textarea {
 
                 img {
                     width: 100%;
+                    aspect-ratio: 16 / 9;
+                    object-fit: cover;
                     border-radius: 1em;
                 }
 
