@@ -689,6 +689,7 @@ textarea {
 }
 
 .front-page .sport .sport__content .sport__img {
+  display: block;
   flex-basis: 100%;
 }
 
