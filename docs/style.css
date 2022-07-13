@@ -648,6 +648,110 @@ textarea {
   }
 }
 
+.front-page .sport {
+  padding: 2em 0;
+  background-color: #264796;
+}
+
+.front-page .sport .sport__content {
+  gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 1em;
+}
+
+.front-page .sport .sport__content .sport__text {
+  color: #ffffff;
+  flex-basis: 100%;
+}
+
+.front-page .sport .sport__content .sport__text h1 {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.front-page .sport .sport__content .sport__text h3 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.front-page .sport .sport__content .sport__text p {
+  margin: 1em 0;
+}
+
+@media only screen and (min-width: 62em) {
+  .front-page .sport .sport__content .sport__text {
+    flex-basis: 50%;
+  }
+  .front-page .sport .sport__content .sport__text h1, .front-page .sport .sport__content .sport__text h3 {
+    text-align: left;
+  }
+}
+
+.front-page .sport .sport__content .sport__img {
+  flex-basis: 100%;
+}
+
+.front-page .sport .sport__content .sport__img img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 1em;
+}
+
+@media only screen and (min-width: 48em) {
+  .front-page .sport .sport__content .sport__img {
+    flex-basis: 60%;
+  }
+}
+
+@media only screen and (min-width: 62em) {
+  .front-page .sport .sport__content .sport__img {
+    flex-basis: 40%;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .front-page .sport .sport__content {
+    width: 70%;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 62em) {
+  .front-page .sport .sport__content {
+    width: 85%;
+    gap: 10%;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .front-page .sport .sport__content {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 100em) {
+  .front-page .sport .sport__content {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .front-page .sport {
+    padding: 3em 0;
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .front-page .sport {
+    padding: 4em 0;
+  }
+}
+
 .page {
   margin: 6em 1em 0 1em;
 }

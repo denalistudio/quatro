@@ -611,6 +611,93 @@ textarea {
             width: 70%;
         }
     }
+
+    .sport {
+        padding: 2em 0;
+        background-color: $blue;
+
+        .sport__content {
+            gap: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 1em;
+
+            .sport__text {
+                color: $white;
+                flex-basis: 100%;
+    
+                h1 {
+                    text-align: center;
+                    margin-bottom: 0.5em;
+                }
+
+                h3 {
+                    text-align: center;
+                    margin-bottom: 1em;
+                }
+
+                p {
+                    margin: 1em 0;
+                }
+
+                @media only screen and (min-width: 62em) {
+                    flex-basis: 50%;
+
+                    h1, h3 {
+                        text-align: left;
+                    }
+                }
+            }
+    
+            .sport__img {
+                flex-basis: 100%;
+    
+                img {
+                    width: 100%;
+                    aspect-ratio: 16 / 9;
+                    object-fit: cover;
+                    border-radius: 1em;
+                }
+    
+                @media only screen and (min-width: 48em) {
+                    flex-basis: 60%;
+                }
+
+                @media only screen and (min-width: 62em) {
+                    flex-basis: 40%;
+                }
+            }
+
+            @media only screen and (min-width: 48em) {
+                width: 70%;
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            @media only screen and (min-width: 62em) {
+                width: 85%;
+                gap: 10%;
+                flex-wrap: nowrap;
+                align-items: center;
+            }
+
+            @media only screen and (min-width: 75em) {
+                width: 80%;
+            }
+
+            @media only screen and (min-width: 100em) {
+                width: 70%;
+            }
+        }
+
+        @media only screen and (min-width: 48em) {
+            padding: 3em 0;
+        }
+
+        @media only screen and (min-width: 75em) {
+            padding: 4em 0;
+        }
+    }
 }
 
 // Page
