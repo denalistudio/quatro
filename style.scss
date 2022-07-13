@@ -81,7 +81,7 @@ textarea {
 
     header {
         height: 4em;
-        margin: 0 0.35em 0 1em;
+        margin: 0 1em;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -95,58 +95,58 @@ textarea {
         }
 
         #menu-btn {
-            width: 3em;
-            height: 3em;
-            display: flex;
-            flex-basis: 3em;
-            justify-content: center;
-            align-items: center;
+            width: 1.875em;
+            height: 1.875em;
             position: relative;
+            flex-basis: 1.875em;
+            transition-duration: 500ms;
             cursor: pointer;
-            transition: all 0.5s ease-in-out;
+            -webkit-tap-highlight-color: transparent;
 
-            #menu-btn__burger {
-                width: 1.7em;
+            .icon {
+                width: 1.875em;
                 height: 0.25em;
+                position: absolute;
+                top: 0.9375em;
+                border-radius: 1em;
                 background-color: $white;
-                border-radius: 0.3em;
-                transition: all 0.5s ease-in-out;
+                transition-duration: 500ms;
 
-                &::before,
-                &::after {
-                    content: '';
-                    position: absolute;
-                    width: 1.7em;
+                &::before {
+                    content: "";
+                    width: 1.875em;
                     height: 0.25em;
+                    position: absolute;
+                    top: -0.625em;
+                    border-radius: 1em;
                     background-color: $white;
-                    border-radius: 0.3em;
-                    transition: all 0.5s ease-in-out;
-                }
-
-                &::before {
-                    transform: translateY(-0.5em);
+                    transition-duration: 500ms;
                 }
 
                 &::after {
-                    transform: translateY(0.5em);
+                    content: "";
+                    width: 1.875em;
+                    height: 0.25em;
+                    position: absolute;
+                    top: 0.625em;
+                    border-radius: 1em;
+                    background-color: $white;
+                    transition-duration: 500ms;
                 }
             }
 
-            @media only screen and (min-width: 62em) {
-                display: none;
-            }
+            &.open {
+                .icon {
+                    transition-duration: 0.5s;
+                    transform: rotateZ(180deg);
 
-            // Animation
-            &.open #menu-btn__burger {
-                transform: translateX(-2em);
-                background-color: transparent;
+                    &::before {
+                        transform: rotateZ(45deg) scaleX(0.75) translate(0.625em, -0.1875em);
+                    }
 
-                &::before {
-                    transform: rotate(45deg) translate(1.4em, -1.4em) // translate is 70% of width;
-                }
-
-                &::after {
-                    transform: rotate(-45deg) translate(1.4em, 1.4em);
+                    &::after {
+                        transform: rotateZ(-45deg) scaleX(0.75) translate(0.625em, 0.1875em);
+                    }
                 }
             }
 

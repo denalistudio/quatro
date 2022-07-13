@@ -73,7 +73,7 @@ textarea {
 
 #navbar header {
   height: 4em;
-  margin: 0 0.35em 0 1em;
+  margin: 0 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,60 +88,58 @@ textarea {
 }
 
 #navbar header #menu-btn {
-  width: 3em;
-  height: 3em;
-  display: flex;
-  flex-basis: 3em;
-  justify-content: center;
-  align-items: center;
+  width: 1.875em;
+  height: 1.875em;
   position: relative;
+  flex-basis: 1.875em;
+  transition-duration: 500ms;
   cursor: pointer;
-  transition: all 0.5s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
 }
 
-#navbar header #menu-btn #menu-btn__burger {
-  width: 1.7em;
+#navbar header #menu-btn .icon {
+  width: 1.875em;
   height: 0.25em;
-  background-color: #ffffff;
-  border-radius: 0.3em;
-  transition: all 0.5s ease-in-out;
-}
-
-#navbar header #menu-btn #menu-btn__burger::before, #navbar header #menu-btn #menu-btn__burger::after {
-  content: '';
   position: absolute;
-  width: 1.7em;
-  height: 0.25em;
+  top: 0.9375em;
+  border-radius: 1em;
   background-color: #ffffff;
-  border-radius: 0.3em;
-  transition: all 0.5s ease-in-out;
+  transition-duration: 500ms;
 }
 
-#navbar header #menu-btn #menu-btn__burger::before {
-  transform: translateY(-0.5em);
+#navbar header #menu-btn .icon::before {
+  content: "";
+  width: 1.875em;
+  height: 0.25em;
+  position: absolute;
+  top: -0.625em;
+  border-radius: 1em;
+  background-color: #ffffff;
+  transition-duration: 500ms;
 }
 
-#navbar header #menu-btn #menu-btn__burger::after {
-  transform: translateY(0.5em);
+#navbar header #menu-btn .icon::after {
+  content: "";
+  width: 1.875em;
+  height: 0.25em;
+  position: absolute;
+  top: 0.625em;
+  border-radius: 1em;
+  background-color: #ffffff;
+  transition-duration: 500ms;
 }
 
-@media only screen and (min-width: 62em) {
-  #navbar header #menu-btn {
-    display: none;
-  }
+#navbar header #menu-btn.open .icon {
+  transition-duration: 0.5s;
+  transform: rotateZ(180deg);
 }
 
-#navbar header #menu-btn.open #menu-btn__burger {
-  transform: translateX(-2em);
-  background-color: transparent;
+#navbar header #menu-btn.open .icon::before {
+  transform: rotateZ(45deg) scaleX(0.75) translate(0.625em, -0.1875em);
 }
 
-#navbar header #menu-btn.open #menu-btn__burger::before {
-  transform: rotate(45deg) translate(1.4em, -1.4em);
-}
-
-#navbar header #menu-btn.open #menu-btn__burger::after {
-  transform: rotate(-45deg) translate(1.4em, 1.4em);
+#navbar header #menu-btn.open .icon::after {
+  transform: rotateZ(-45deg) scaleX(0.75) translate(0.625em, 0.1875em);
 }
 
 @media only screen and (min-width: 62em) {
