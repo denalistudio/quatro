@@ -81,36 +81,91 @@ h2 {
   margin: 1em 0;
 }
 
-.barva {
+.barvy {
+  gap: 2em;
   display: flex;
+  justify-content: center;
 }
 
-input[type=radio] {
+.barva {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+}
+
+.barva input[type=radio]:checked + label {
+  opacity: 1;
+}
+
+.barva input[type=radio] {
   all: unset;
-  width: 1em;
-  height: 1em;
+  cursor: pointer;
+  width: 3em;
+  height: 3em;
   display: block;
+  margin: 1em 0;
   border-radius: 5em;
 }
 
-input[type=radio]#black {
+.barva input[type=radio]:checked {
+  outline-width: 4px;
+  outline-style: solid;
+  outline-offset: 3px;
+}
+
+.barva input[type=radio]#black {
   background-color: #000;
 }
 
-input[type=radio]#blue {
+.barva input[type=radio]#black:checked {
+  outline-color: #000000;
+}
+
+.barva input[type=radio]#blue {
   background-color: blue;
 }
 
-input[type=radio]#bordeaux {
+.barva input[type=radio]#blue:checked {
+  outline-color: blue;
+}
+
+.barva input[type=radio]#bordeaux {
   background-color: red;
 }
 
-input[type=radio]#gold {
-  background-color: goldenrod;
+.barva input[type=radio]#bordeaux:checked {
+  outline-color: red;
 }
 
+.barva label {
+  opacity: 0;
+  font-weight: 600;
+  transition: opacity 200ms ease-in-out;
+}
+
+input[type=radio]#gold,
 input[type=radio]#silver {
-  background-color: silver;
+  all: unset;
+  width: 1em;
+  height: 1em;
+  position: relative;
+}
+
+input[type=radio]#gold::after,
+input[type=radio]#silver::after {
+  content: "Aa";
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+input[type=radio]#gold::after {
+  color: goldenrod;
+}
+
+input[type=radio]#silver::after {
+  color: silver;
 }
 
 textarea {

@@ -289,14 +289,22 @@ if (isset($_POST['send'])) {
                         <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
                     </select>
                 </div>
-                <div class="barva">
-                    <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
-                    <label for="black">Černá</label>
-                    <input type="radio" name="barva-desek" value="Modrá" id="blue">
-                    <label for="blue">Modrá</label>
-                    <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
-                    <label for="bordeaux">Bordó</label>
+                <h3>Barva desek</h3>
+                <div class="barvy">
+                    <div class="barva">
+                        <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
+                        <label for="black">Černá</label>
+                    </div>
+                    <div class="barva">
+                        <input type="radio" name="barva-desek" value="Modrá" id="blue">
+                        <label for="blue">Modrá</label>
+                    </div>
+                    <div class="barva">
+                        <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
+                        <label for="bordeaux">Bordó</label>
+                    </div>
                 </div>
+                <h3>Barva písma</h3>
                 <div class="barva">
                     <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
                     <label for="gold">Zlatý tisk</label>
