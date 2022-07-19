@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+
+$black: #000000;
+$white: #ffffff;
+$blue: #264796;
+$orange: #ef7c00;
+$orange-hover: #dd6b08;
+
+// General styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
+}
+
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+}
+
+main {
+    width: 40%;
+    margin: 4em auto;
+    padding: 3em;
+    border-radius: 2em;
+    box-shadow: 0 0 2em #0000004d;
+}
+
+h2 {
+    text-align: center;
+}
+
+.customer-info {
+
+    input[type=text],
+    input[type=email],
+    input[type=tel] {
+        width: 100%;
+        display: block;
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        border-top: none;
+        border-left: none;
+        border-bottom: 1px solid #00000033;
+        border-right: none;
+        font-size: 1rem;
+        transition: border-bottom 200ms ease-in-out;
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid #00000066;
+        }
+    }
+}
+
+.button {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+
+    button {
+        all: unset;
+        cursor: pointer;
+        color: $white;
+        font-weight: 600;
+        background-color: $orange;
+        padding: 0.5em 1em;
+        border-radius: 2em;
+        transition: background-color 200ms ease-in-out;
+
+        &:hover,
+        &:focus {
+            background-color: $orange-hover;
+        }
+    }
+}
+
+.select {
+    gap: 2em;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin: 1em 0;
+}
+
+.barva {
+    display: flex;
+}
+
+input[type=radio] {
+    all: unset;
+    width: 1em;
+    height: 1em;
+    display: block;
+    border-radius: 5em;
+
+    &#black {
+        background-color: #000;
+    }
+
+    &#blue {
+        background-color: blue;
+    }
+
+    &#bordeaux {
+        background-color: red;
+    }
+
+    &#gold {
+        background-color: goldenrod;
+    }
+
+    &#silver {
+        background-color: silver;
+    }
+}
+
+textarea {
+    width: 100%;
+    min-height: 5em;
+    max-height: 15em;
+    padding: 0.5em;
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+}

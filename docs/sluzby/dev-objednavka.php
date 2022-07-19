@@ -230,146 +230,119 @@ if (isset($_POST['send'])) {
 <head>
     <meta charset="UTF-8">
     <title>(Dev) Objednávka diplomové práce - Quatro</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        label,
-        input,
-        select {
-            display: block;
-        }
-
-        .barva {
-            display: flex;
-        }
-
-        input[type=radio] {
-            all: unset;
-            width: 1em;
-            height: 1em;
-            display: block;
-            border-radius: 5em;
-        }
-
-        input[type=radio]#black {
-            background-color: #000;
-        }
-
-        input[type=radio]#blue {
-            background-color: blue;
-        }
-
-        input[type=radio]#bordeaux {
-            background-color: red;
-        }
-
-        input[type=radio]#gold {
-            background-color: goldenrod;
-        }
-
-        input[type=radio]#silver {
-            background-color: silver;
-        }
-    </style>
+    <link rel="stylesheet" href="../objednavka.css">
 </head>
 
 <body>
-    <h2>Zákazník</h2>
     <form method="POST" action="">
-        <div class="customer-info">
-            <input type="text" name="name" placeholder="Jméno a příjmení" value="<?php if (isset($name)) print $name ?>" required>
-            <input type="email" name="email" placeholder="E-mail" value="<?php if (isset($email)) print $email ?>" required>
-            <input type="tel" name="tel" placeholder="Telefonní číslo" value="<?php if (isset($tel)) print $tel ?>" required>
-        </div>
-        <div class="product-info">
-            <label for="pevne-desky">Počet zhotovení pevných desek</label>
-            <select name="pevne-desky" required>
-                <option value="">Zvolte počet</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-            <label for="krouzkove-vazby">Počet zhotovení kroužkových vazeb</label>
-            <select name="krouzkove-vazby" required>
-                <option value="">Zvolte počet</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-            <!-- Požadovaný termín zhotovení -->
-            <label for="pocet-listu">Moje práce má</label>
-            <select name="pocet-listu" required>
-                <option value="">Zvolte počet listů</option>
-                <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
-                <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
-                <option value="13 mm (B) 91-120 listů">13 mm (B) 91-120 listů</option>
-                <option value="16 mm (C) 121-145 listů">16 mm (C) 121-145 listů</option>
-                <option value="20 mm (D) 146-185 listů">20 mm (D) 146-185 listů</option>
-                <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
-                <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
-                <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
-            </select>
-            <div class="barva">
-                <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
-                <label for="black">Černá</label>
-                <input type="radio" name="barva-desek" value="Modrá" id="blue">
-                <label for="blue">Modrá</label>
-                <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
-                <label for="bordeaux">Bordó</label>
+        <main>
+            <!-- logo -->
+            <div class="customer-info">
+                <h2>Nová objednávka diplomové práce</h2>
+                <input type="text" name="name" placeholder="Jméno a příjmení" value="<?php if (isset($name)) print $name ?>" required>
+                <input type="email" name="email" placeholder="E-mail" value="<?php if (isset($email)) print $email ?>" required>
+                <input type="tel" name="tel" placeholder="Telefonní číslo" value="<?php if (isset($tel)) print $tel ?>" required>
+                <div class="button">
+                    <button type="submit">Pokračovat</button>
+                </div>
             </div>
-            <div class="barva">
-                <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
-                <label for="gold">Zlatý tisk</label>
-                <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
-                <label for="silver">Stříbrný tisk</label>
+        </main>
+        <main>
+            <div class="product-info">
+                <div class="select">
+                    <label for="pevne-desky">Počet zhotovení pevných desek</label>
+                    <select name="pevne-desky" required>
+                        <option value="">Zvolte počet</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <label for="krouzkove-vazby">Počet zhotovení kroužkových vazeb</label>
+                    <select name="krouzkove-vazby" required>
+                        <option value="">Zvolte počet</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <!-- Požadovaný termín zhotovení -->
+                <div class="select">
+                    <label for="pocet-listu">Moje práce má</label>
+                    <select name="pocet-listu" required>
+                        <option value="">Zvolte počet listů</option>
+                        <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
+                        <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
+                        <option value="13 mm (B) 91-120 listů">13 mm (B) 91-120 listů</option>
+                        <option value="16 mm (C) 121-145 listů">16 mm (C) 121-145 listů</option>
+                        <option value="20 mm (D) 146-185 listů">20 mm (D) 146-185 listů</option>
+                        <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
+                        <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
+                        <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
+                    </select>
+                </div>
+                <div class="barva">
+                    <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
+                    <label for="black">Černá</label>
+                    <input type="radio" name="barva-desek" value="Modrá" id="blue">
+                    <label for="blue">Modrá</label>
+                    <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
+                    <label for="bordeaux">Bordó</label>
+                </div>
+                <div class="barva">
+                    <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
+                    <label for="gold">Zlatý tisk</label>
+                    <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
+                    <label for="silver">Stříbrný tisk</label>
+                </div>
+                <div class="select">
+                    <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
+                    <select name="kapsy-cd-dvd" required>
+                        <option value="">Zvolte počet</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <label for="chlopne-na-prilohy">Chci do vazby i chlopně na přílohy</label>
+                    <select name="chlopne-na-prilohy" required>
+                        <option value="">Zvolte počet</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <input type="checkbox" name="listy-navic">
+                <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
+                <textarea name="poznamka"></textarea>
             </div>
-            <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
-            <select name="kapsy-cd-dvd" required>
-                <option value="">Zvolte počet</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-            <label for="chlopne-na-prilohy">Chci do vazby i chlopně na přílohy</label>
-            <select name="chlopne-na-prilohy" required>
-                <option value="">Zvolte počet</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-            <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
-            <input type="checkbox" name="listy-navic">
-            <textarea name="poznamka" cols="30" rows="10"></textarea>
-        </div>
-        <p>Místo vyzvednutí:</p>
-        <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
-        <input type="checkbox" name="obchodni-podminky" required>
-        <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
-        <button type="submit" name="send">Odeslat</button>
+        </main>
+        <main>
+            <div class="place-order">
+                <p>Místo vyzvednutí:</p>
+                <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
+                <input type="checkbox" name="obchodni-podminky" required>
+                <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
+                <button type="submit" name="send">Odeslat</button>
+            </div>
+        </main>
     </form>
 </body>
 
