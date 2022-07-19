@@ -291,25 +291,29 @@ if (isset($_POST['send'])) {
                 </div>
                 <h3>Barva desek</h3>
                 <div class="barvy">
-                    <div class="barva">
+                    <div class="barva-desek">
                         <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
                         <label for="black">Černá</label>
                     </div>
-                    <div class="barva">
+                    <div class="barva-desek">
                         <input type="radio" name="barva-desek" value="Modrá" id="blue">
                         <label for="blue">Modrá</label>
                     </div>
-                    <div class="barva">
+                    <div class="barva-desek">
                         <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
                         <label for="bordeaux">Bordó</label>
                     </div>
                 </div>
                 <h3>Barva písma</h3>
-                <div class="barva">
+                <div class="barvy">
+                    <div class="barva-pisma">
                     <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
                     <label for="gold">Zlatý tisk</label>
+                    </div>
+                    <div class="barva-pisma">
                     <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
                     <label for="silver">Stříbrný tisk</label>
+                    </div>
                 </div>
                 <div class="select">
                     <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
