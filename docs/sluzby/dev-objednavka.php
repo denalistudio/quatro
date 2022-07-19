@@ -10,9 +10,19 @@ if (isset($_POST['send'])) {
     // Product details
     $pevneDesky = $_POST['pevne-desky'];
     $krouzkoveVazby = $_POST['krouzkove-vazby'];
+    $barvaDesek = $_POST['barva-desek'];
+    $barvaPisma = $_POST['barva-pisma'];
     $pocetListu = $_POST['pocet-listu'];
     $kapsyCdDvd = $_POST['kapsy-cd-dvd'];
     $chlopneNaPrilohy = $_POST['chlopne-na-prilohy'];
+    $listyNavic = "NE";
+    if (isset($_POST['listy-navic'])) {
+        $listyNavic = "ANO";
+    }
+    $poznamka = "ŽÁDNÁ";
+    if (strlen($_POST['poznamka'])) {
+        $poznamka = htmlspecialchars($_POST['poznamka']);
+    }
 
     // From
     $from = 'admin@studiodenali.cz';
@@ -158,11 +168,11 @@ if (isset($_POST['send'])) {
                         </tr>
                         <tr>
                             <td>Barva desek</td>
-                            <td>barva</td>
+                            <td>' . $barvaDesek . '</td>
                         </tr>
                         <tr>
                             <td>Barva písma</td>
-                            <td>barva</td>
+                            <td>' . $barvaPisma . '</td>
                         </tr>
                         <tr>
                             <td>Kapsy na CD/DVD</td>
@@ -171,6 +181,14 @@ if (isset($_POST['send'])) {
                         <tr>
                             <td>Chlopně na přílohy</td>
                             <td>' . $chlopneNaPrilohy . '</td>
+                        </tr>
+                        <tr>
+                            <td>Budu do vazby vkládat ještě nějaké listy (např. originální zadání)</td>
+                            <td>' . $listyNavic . '</td>
+                        </tr>
+                        <tr>
+                            <td>Poznámka</td>
+                            <td>' . $poznamka . '</td>
                         </tr>
                     </table>
                 </td>
@@ -204,173 +222,64 @@ if (isset($_POST['send'])) {
         echo 'Litujeme, ale vaši objednávku se nepodařilo odeslat. Zkuste to prosím znovu.';
     }
 };
-
-// Compose a simple HTML email message
-/*$message = '
-    <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xlmns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <style type="text/css">
-        body {
-            margin: 0;
-            background-color: #cccccc;
-        }
-
-        table {
-            border-spacing: 0;
-        }
-
-        td {
-            padding: 0;
-        }
-
-        img {
-            border: 0
-        }
-
-        .wrapper {
-            width: 100%;
-            table-layout: fixed;
-            background-color: #cccccc;
-            padding: 30px 0 60px 0;
-        }
-
-        .main {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 50px;
-            border-spacing: 0;
-            background-color: #ffffff;
-            font-family: "Manrope", sans-serif;
-            color: #000000;
-        }
-
-        .main,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        td {
-            font-family: "Manrope", sans-serif;
-        }
-
-        h1 {
-            color: #000000;
-        }
-    </style>
-</head>
-
-<body>
-    <center class="wrapper">
-        <table class="main" width="100%">
-            <tr>
-                <td style="height: 150px">
-                    <a href="https://nastartuj.cz">
-                        <img src="./logo.png" height="50px" title="Quatro">
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h1>Kontaktní údaje</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>Jméno a příjmení</td>
-                <td>' . $name . '</td>
-            </tr>
-            <tr>
-                <td>E-mail</td>
-                <td>' . $email . '</td>
-            </tr>
-            <tr>
-                <td>Telefonní číslo</td>
-                <td>' . $tel . '</td>
-            </tr>
-            <tr>
-                <td>
-                    <h1>Vaše objednávka</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h2>Shrnutí objednávky</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table width="100%">
-                        <tr>
-                            <td colspan="2">Vazba práce</td>
-                        </tr>
-                        <tr>
-                            <td>Počet zhotovení pevných desek</td>
-                            <td>počet</td>
-                        </tr>
-                        <tr>
-                            <td>Počet zhotovení kroužkových vazeb</td>
-                            <td>počet</td>
-                        </tr>
-                        <tr>
-                            <td>Požadovaný termín objednávky</td>
-                            <td>datum</td>
-                        </tr>
-                        <tr>
-                            <td>Počet listů</td>
-                            <td>počet</td>
-                        </tr>
-                        <tr>
-                            <td>Barva desek</td>
-                            <td>barva</td>
-                        </tr>
-                        <tr>
-                            <td>Barva písma</td>
-                            <td>barva</td>
-                        </tr>
-                        <tr>
-                            <td>Kapsy na CD/DVD</td>
-                            <td>počet</td>
-                        </tr>
-                        <tr>
-                            <td>Chlopně na přílohy</td>
-                            <td>počet</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3>Orientační cena:</h3>
-                </td>
-                <td>
-                    <h3>cena</h3>
-                </td>
-            </tr>
-        </table>
-    </center>
-</body>
-
-</html>';*/
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>(Dev) Objednávka diplomové práce - Quatro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        label,
+        input,
+        select {
+            display: block;
+        }
+
+        .barva {
+            display: flex;
+        }
+
+        input[type=radio] {
+            all: unset;
+            width: 1em;
+            height: 1em;
+            display: block;
+            border-radius: 5em;
+        }
+
+        input[type=radio]#black {
+            background-color: #000;
+        }
+
+        input[type=radio]#blue {
+            background-color: blue;
+        }
+
+        input[type=radio]#bordeaux {
+            background-color: red;
+        }
+
+        input[type=radio]#gold {
+            background-color: goldenrod;
+        }
+
+        input[type=radio]#silver {
+            background-color: silver;
+        }
+    </style>
 </head>
 
 <body>
@@ -416,8 +325,21 @@ if (isset($_POST['send'])) {
                 <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
                 <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
             </select>
-            <!-- Barva desek -->
-            <!-- Barva písma -->
+            <div class="barva">
+                <input type="radio" name="barva-desek" value="Černá" id="black" required checked>
+                <label for="black">Černá</label>
+                <input type="radio" name="barva-desek" value="Modrá" id="blue">
+                <label for="blue">Modrá</label>
+                <input type="radio" name="barva-desek" value="Bordó" id="bordeaux">
+                <label for="bordeaux">Bordó</label>
+            </div>
+            <div class="barva">
+                <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
+                <label for="gold">Zlatý tisk</label>
+                <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
+                <label for="silver">Stříbrný tisk</label>
+            </div>
+            <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
             <select name="kapsy-cd-dvd" required>
                 <option value="">Zvolte počet</option>
                 <option value="0">0</option>
@@ -428,6 +350,7 @@ if (isset($_POST['send'])) {
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
+            <label for="chlopne-na-prilohy">Chci do vazby i chlopně na přílohy</label>
             <select name="chlopne-na-prilohy" required>
                 <option value="">Zvolte počet</option>
                 <option value="0">0</option>
@@ -438,7 +361,14 @@ if (isset($_POST['send'])) {
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
+            <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
+            <input type="checkbox" name="listy-navic">
+            <textarea name="poznamka" cols="30" rows="10"></textarea>
         </div>
+        <p>Místo vyzvednutí:</p>
+        <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
+        <input type="checkbox" name="obchodni-podminky" required>
+        <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
         <button type="submit" name="send">Odeslat</button>
     </form>
 </body>
