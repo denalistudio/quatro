@@ -10,6 +10,9 @@ if (isset($_POST['send'])) {
     // Product details
     $pevneDesky = $_POST['pevne-desky'];
     $krouzkoveVazby = $_POST['krouzkove-vazby'];
+    $pocetListu = $_POST['pocet-listu'];
+    $kapsyCdDvd = $_POST['kapsy-cd-dvd'];
+    $chlopneNaPrilohy = $_POST['chlopne-na-prilohy'];
 
     // From
     $from = 'admin@studiodenali.cz';
@@ -151,7 +154,7 @@ if (isset($_POST['send'])) {
                         </tr>
                         <tr>
                             <td>Počet listů</td>
-                            <td>počet</td>
+                            <td>' . $pocetListu . '</td>
                         </tr>
                         <tr>
                             <td>Barva desek</td>
@@ -163,11 +166,11 @@ if (isset($_POST['send'])) {
                         </tr>
                         <tr>
                             <td>Kapsy na CD/DVD</td>
-                            <td>počet</td>
+                            <td>' . $kapsyCdDvd . '</td>
                         </tr>
                         <tr>
                             <td>Chlopně na přílohy</td>
-                            <td>počet</td>
+                            <td>' . $chlopneNaPrilohy . '</td>
                         </tr>
                     </table>
                 </td>
@@ -412,6 +415,28 @@ if (isset($_POST['send'])) {
                 <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
                 <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
                 <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
+            </select>
+            <!-- Barva desek -->
+            <!-- Barva písma -->
+            <select name="kapsy-cd-dvd" required>
+                <option value="">Zvolte počet</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <select name="chlopne-na-prilohy" required>
+                <option value="">Zvolte počet</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
             </select>
         </div>
         <button type="submit" name="send">Odeslat</button>
