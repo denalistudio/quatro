@@ -1,4 +1,52 @@
-<!DOCTYPE html
+<?php
+
+if (isset($_POST['send'])) {
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $tel = $_POST['tel'];
+
+    $adminTo = 'admin@studiodenali.cz';
+    $clientTo = $email;
+
+    $adminSubject = 'Nová objednávka';
+    $clientSubject = 'Děkujeme za vaši objednávku - Reklamka Quatro';
+
+    $from = 'admin@studiodenali.cz';
+
+    // To send HTML mail, the Content-type header must be set
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+    // Create email headers
+    $headers .= 'From: ' . $from . "\r\n" .
+        'Reply-To: ' . $from . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+    $adminMessage = 'admin';
+    $clientMessage = 'client';
+
+    $adminMail = mail($adminTo, $adminSubject, $adminMessage, $headers);
+    $clientMail = mail($clientTo, $clientSubject, $clientMessage, $headers);
+
+    if ($adminMail && $clientMail) {
+        echo 'Děkujeme za vaši objednávku.';
+    } else {
+        echo 'Litujeme, ale vaši objednávku se nepodařilo odeslat. Zkuste to prosím znovu.';
+    }
+};
+
+
+    // Sending email
+    /*if (mail($to, $subject, $message, $headers)) {
+        echo 'E-mail byl úspěšně odeslán.';
+    } else {
+        echo 'E-mail se nepodařilo odeslat. Zkuste to znovu.';
+    }*/
+
+    // Compose a simple HTML email message
+    /*$message = '
+    <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xlmns="http://www.w3.org/1999/xhtml">
 
@@ -76,6 +124,23 @@
             </tr>
             <tr>
                 <td>
+                    <h1>Kontaktní údaje</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>Jméno a příjmení</td>
+                <td>' . $name . '</td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>' . $email . '</td>
+            </tr>
+            <tr>
+                <td>Telefonní číslo</td>
+                <td>' . $tel . '</td>
+            </tr>
+            <tr>
+                <td>
                     <h1>Vaše objednávka</h1>
                 </td>
             </tr>
@@ -135,6 +200,43 @@
             </tr>
         </table>
     </center>
+</body>
+
+</html>';*/
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>(Dev) Objednávka diplomové práce - Quatro</title>
+</head>
+
+<body>
+    <h2>Zákazník</h2>
+    <form method="POST" action="">
+        <table>
+            <tr>
+                <td>Jméno a příjmení</td>
+                <td>
+                    <input type="text" name="name" value="<?php if (isset($name)) print $name ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>
+                    <input type="email" name="email" value="<?php if (isset($email)) print $email ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>Telefonní číslo</td>
+                <td>
+                    <input type="tel" name="tel" value="<?php if (isset($tel)) print $tel ?>">
+                </td>
+            </tr>
+        </table>
+        <button type="submit" name="send">Odeslat</button>
+    </form>
 </body>
 
 </html>

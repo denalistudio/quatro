@@ -1,22 +1,5 @@
-<?php
-
-$to = 'admin@studiodenali.cz';
-$subject = 'Nová objednávka - Quatro';
-$from = 'admin@studiodenali.cz';
-
-// To send HTML mail, the Content-type header must be set
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-
-// Create email headers
-$headers .= 'From: ' . $from . "\r\n" .
-    'Reply-To: ' . $from . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
-
-// Compose a simple HTML email message
-$message = '
 <!DOCTYPE html
-PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xlmns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -93,6 +76,22 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
             </tr>
             <tr>
                 <td>
+                    <h1>Kontaktní údaje</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>Jméno a příjmení</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+            </tr>
+            <tr>
+                <td>Telefonní číslo</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
                     <h1>Vaše objednávka</h1>
                 </td>
             </tr>
@@ -154,11 +153,4 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
     </center>
 </body>
 
-</html>';
-
-// Sending email
-if (mail($to, $subject, $message, $headers)) {
-    echo 'E-mail byl úspěšně odeslán.';
-} else {
-    echo 'E-mail se nepodařilo odeslat. Zkuste to znovu.';
-}
+</html>
