@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['send'])) {
+if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'])) {
 
     // Customer details
     $name = $_POST['name'];
@@ -35,7 +35,6 @@ if (isset($_POST['send'])) {
     $headers .= 'From: ' . $from . "\r\n" .
         'Reply-To: ' . $from . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
-
 
     // Admin email
     $adminTo = 'admin@studiodenali.cz';
@@ -221,34 +220,33 @@ if (isset($_POST['send'])) {
     } else {
         echo 'Litujeme, ale vaši objednávku se nepodařilo odeslat. Zkuste to prosím znovu.';
     }
-};
+}
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(Dev) Objednávka diplomové práce - Quatro</title>
     <link rel="stylesheet" href="../objednavka.css">
 </head>
 
 <body>
-    <form method="POST" action="">
+    <form method="POST" action="" novalidate class="survey-form">
         <main>
             <!-- logo -->
-            <div class="customer-info">
+            <div class="step-content current customer-info" data-step="1">
                 <h2>Nová objednávka diplomové práce</h2>
-                <input type="text" name="name" placeholder="Jméno a příjmení" value="<?php if (isset($name)) print $name ?>" required>
-                <input type="email" name="email" placeholder="E-mail" value="<?php if (isset($email)) print $email ?>" required>
-                <input type="tel" name="tel" placeholder="Telefonní číslo" value="<?php if (isset($tel)) print $tel ?>" required>
-                <div class="button">
-                    <button type="submit">Pokračovat</button>
+                <input type="text" name="name" placeholder="Jméno a příjmení" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <input type="tel" name="tel" placeholder="Telefonní číslo" required>
+                <div class="buttons">
+                    <a href="#" class="btn" data-set-step="2">Next</a>
                 </div>
             </div>
-        </main>
-        <main>
-            <div class="product-info">
+            <div class="step-content product-info" data-step="2">
                 <div class="select">
                     <label for="pevne-desky">Počet zhotovení pevných desek</label>
                     <select name="pevne-desky" required>
@@ -307,12 +305,12 @@ if (isset($_POST['send'])) {
                 <h3>Barva písma</h3>
                 <div class="barvy">
                     <div class="barva-pisma">
-                    <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
-                    <label for="gold">Zlatý tisk</label>
+                        <input type="radio" name="barva-pisma" value="Zlatý tisk" id="gold" required checked>
+                        <label for="gold">Zlatý tisk</label>
                     </div>
                     <div class="barva-pisma">
-                    <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
-                    <label for="silver">Stříbrný tisk</label>
+                        <input type="radio" name="barva-pisma" value="Stříbrný tisk" id="silver">
+                        <label for="silver">Stříbrný tisk</label>
                     </div>
                 </div>
                 <div class="select">
@@ -344,18 +342,50 @@ if (isset($_POST['send'])) {
                 <input type="checkbox" name="listy-navic">
                 <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
                 <textarea name="poznamka"></textarea>
+                <div class="buttons">
+                    <a href="#" class="btn alt" data-set-step="1">Prev</a>
+                    <a href="#" class="btn" data-set-step="3">Next</a>
+                </div>
             </div>
-        </main>
-        <main>
-            <div class="place-order">
+            <div class="step-content place-order" data-step="3">
                 <p>Místo vyzvednutí:</p>
                 <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
                 <input type="checkbox" name="obchodni-podminky" required>
                 <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
-                <button type="submit" name="send">Odeslat</button>
+                <div class="buttons">
+                    <a href="#" class="btn alt" data-set-step="2">Prev</a>
+                    <input type="submit" class="btn" name="submit" value="Submit">
+                </div>
+            </div>
+            <div class="step-content" data-step="4">
+                <div class="result"><?= $response ?></div>
+            </div>
+            <div class="steps">
+                <div class="step current"></div>
+                <div class="step"></div>
+                <div class="step"></div>
             </div>
         </main>
     </form>
+    <script>
+        const setStep = step => {
+            document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
+            document.querySelector("[data-step='" + step + "']").style.display = "block";
+            document.querySelectorAll(".steps .step").forEach((element, index) => {
+                index < step - 1 ? element.classList.add("complete") : element.classList.remove("complete");
+                index == step - 1 ? element.classList.add("current") : element.classList.remove("current");
+            });
+        };
+        document.querySelectorAll("[data-set-step]").forEach(element => {
+            element.onclick = event => {
+                event.preventDefault();
+                setStep(parseInt(element.dataset.setStep));
+            };
+        });
+        <?php if (!empty($_POST)) : ?>
+            setStep(4);
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>
