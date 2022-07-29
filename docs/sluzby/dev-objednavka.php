@@ -231,13 +231,14 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(Dev) Objednávka diplomové práce - Quatro</title>
     <link rel="stylesheet" href="../objednavka.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <form method="POST" action="" novalidate class="survey-form">
-        <main>
+    <main>
+        <form method="POST" action="" id="order">
             <!-- logo -->
-            <div class="step-content current customer-info" data-step="1">
+            <fieldset class="customer-info" data-step="1">
                 <h2>Nová objednávka diplomové práce</h2>
                 <input type="text" name="name" placeholder="Jméno a příjmení" required>
                 <input type="email" name="email" placeholder="E-mail" required>
@@ -245,8 +246,8 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 <div class="buttons">
                     <a href="#" class="btn" data-set-step="2">Next</a>
                 </div>
-            </div>
-            <div class="step-content product-info" data-step="2">
+            </fieldset>
+            <fieldset class="product-info" data-step="2">
                 <div class="select">
                     <label for="pevne-desky">Počet zhotovení pevných desek</label>
                     <select name="pevne-desky" required>
@@ -346,8 +347,8 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                     <a href="#" class="btn alt" data-set-step="1">Prev</a>
                     <a href="#" class="btn" data-set-step="3">Next</a>
                 </div>
-            </div>
-            <div class="step-content place-order" data-step="3">
+            </fieldset>
+            <fieldset class="step-content place-order" data-step="3" style="display: none">
                 <p>Místo vyzvednutí:</p>
                 <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
                 <input type="checkbox" name="obchodni-podminky" required>
@@ -356,35 +357,27 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                     <a href="#" class="btn alt" data-set-step="2">Prev</a>
                     <input type="submit" class="btn" name="submit" value="Submit">
                 </div>
-            </div>
-            <div class="step-content" data-step="4">
-                <div class="result"><?= $response ?></div>
-            </div>
-            <div class="steps">
-                <div class="step current"></div>
-                <div class="step"></div>
-                <div class="step"></div>
-            </div>
-        </main>
-    </form>
+            </fieldset>
+        </form>
+    </main>
     <script>
-        const setStep = step => {
-            document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
-            document.querySelector("[data-step='" + step + "']").style.display = "block";
-            document.querySelectorAll(".steps .step").forEach((element, index) => {
-                index < step - 1 ? element.classList.add("complete") : element.classList.remove("complete");
-                index == step - 1 ? element.classList.add("current") : element.classList.remove("current");
-            });
-        };
-        document.querySelectorAll("[data-set-step]").forEach(element => {
-            element.onclick = event => {
-                event.preventDefault();
-                setStep(parseInt(element.dataset.setStep));
-            };
+        var v = $("#order").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlenght: 2
+                },
+                email: {
+                    required: true,
+                    minlenght: 5,
+                    email: true
+                },
+                tel: {
+                    required: true,
+                    minlenght: 2
+                }
+            }
         });
-        <?php if (!empty($_POST)) : ?>
-            setStep(4);
-        <?php endif; ?>
     </script>
 </body>
 
