@@ -79,15 +79,15 @@
             </tr>
             <tr>
                 <td>Jméno a příjmení</td>
-                <td>' . $name . '</td>
+                <td><?php echo $name; ?></td>
             </tr>
             <tr>
                 <td>E-mail</td>
-                <td>' . $email . '</td>
+                <td><?php echo $email; ?></td>
             </tr>
             <tr>
                 <td>Telefonní číslo</td>
-                <td>' . $tel . '</td>
+                <td><?php echo $tel; ?></td>
             </tr>
             <tr>
                 <td>
@@ -107,11 +107,11 @@
                         </tr>
                         <tr>
                             <td>Počet zhotovení pevných desek</td>
-                            <td>' . $pevneDesky . '</td>
+                            <td><?php echo $pevneDesky; ?></td>
                         </tr>
                         <tr>
                             <td>Počet zhotovení kroužkových vazeb</td>
-                            <td>' . $krouzkoveVazby . '</td>
+                            <td><?php echo $krouzkoveVazby; ?></td>
                         </tr>
                         <tr>
                             <td>Požadovaný termín objednávky</td>
@@ -119,31 +119,31 @@
                         </tr>
                         <tr>
                             <td>Počet listů</td>
-                            <td>' . $pocetListu . '</td>
+                            <td><?php echo $pocetListu; ?></td>
                         </tr>
                         <tr>
                             <td>Barva desek</td>
-                            <td>' . $barvaDesek . '</td>
+                            <td><?php echo $barvaDesek; ?></td>
                         </tr>
                         <tr>
                             <td>Barva písma</td>
-                            <td>' . $barvaPisma . '</td>
+                            <td><?php echo $barvaPisma; ?></td>
                         </tr>
                         <tr>
                             <td>Kapsy na CD/DVD</td>
-                            <td>' . $kapsyCdDvd . '</td>
+                            <td><?php echo $kapsyCdDvd; ?></td>
                         </tr>
                         <tr>
                             <td>Chlopně na přílohy</td>
-                            <td>' . $chlopneNaPrilohy . '</td>
+                            <td><?php echo $chlopneNaPrilohy; ?></td>
                         </tr>
                         <tr>
                             <td>Budu do vazby vkládat ještě nějaké listy (např. originální zadání)</td>
-                            <td>' . $listyNavic . '</td>
+                            <td><?php echo $listyNavic; ?></td>
                         </tr>
                         <tr>
                             <td>Poznámka</td>
-                            <td>' . $poznamka . '</td>
+                            <td><?php echo $poznamka; ?></td>
                         </tr>
                     </table>
                 </td>

@@ -58,7 +58,8 @@ html {
         }
 
         &[data-step="1"],
-        &[data-step="4"] {
+        &[data-step="4"],
+        &[data-step="5"] {
             @media only screen and (min-width: 36em) {
                 width: 70%;
             }

@@ -305,7 +305,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         };
 
         <?php if (!empty($_POST)) : ?>
-            setStep(4);
+            setStep(5);
         <?php endif; ?>
     </script>
 </body>
