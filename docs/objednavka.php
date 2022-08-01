@@ -48,9 +48,9 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
 
     // Try to send the mail
     if ($adminMail && $clientMail) {
-        $response = '<h3>Thank You!</h3><p>With your help, we can improve our services for all our trusted members.</p>';
+        $response = '<h3>Děkujeme vám za vaši objednávku!</h3><p>Vaše objednávka byla úspěšně odeslána.</p>';
     } else {
-        $response = '<h3>Error!</h3><p>Message could not be sent! Please check your mail server settings!</a>';
+        $response = '<h3>Vyskytla se chyba!</h3><p>Odeslání vaší objednávky se nezdařilo. Zkuste to prosím znovu.</a>';
     }
 }
 ?>
