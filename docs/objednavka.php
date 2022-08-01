@@ -85,7 +85,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <input id="email" type="email" name="email" placeholder="E-mail" required>
             <input id="tel" type="tel" name="tel" placeholder="Telefonní číslo" required>
             <div class="buttons">
-                <a href="#" class="btn" data-set-step="2" onclick="validation()">
+                <a href="#" class="btn" data-set-step="2">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <path d="M64,32c0,-2.76 -2.24,-5 -5,-5l-54,0c-2.76,0 -5,2.24 -5,5c0,2.76 2.24,5 5,5l54,0c2.76,0 5,-2.24 5,-5Z" />
@@ -294,15 +294,6 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 setStep(parseInt(element.dataset.setStep));
             };
         });
-
-        function validation() {
-            var elements = document.forms["order-form"]["name"].value;
-            if (elements == "") {
-                console.log("empty")
-            } else {
-                console.log("filled")
-            }
-        };
 
         <?php if (!empty($_POST)) : ?>
             setStep(5);
