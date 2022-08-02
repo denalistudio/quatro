@@ -1,5 +1,8 @@
 RewriteEngine on
 
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://nastartuj.cz%{REQUEST_URI} [L,R=301]
+
 RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
 RewriteRule ^ /%1 [NC,L,R]
 
