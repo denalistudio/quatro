@@ -8,6 +8,10 @@ $blue: #264796;
 $orange: #ef7c00;
 $orange-hover: #dd6b08;
 
+:root {
+    --currentHeight: 413px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -46,54 +50,29 @@ html {
 
 #order-form {
     width: 100%;
+    height: 0;
+    position: relative;
+    padding-top: var(--currentHeight);
+    overflow: hidden;
 
     .step-content {
         width: 100%;
-        display: none;
+        position: absolute;
+        top: 0;
         padding: 3em;
         border: none;
+        transition: left 500ms ease-in-out;
 
         &.current {
-            display: block;
+            left: 0;
         }
 
-        &[data-step="1"],
-        &[data-step="4"],
-        &[data-step="5"] {
-            @media only screen and (min-width: 36em) {
-                width: 70%;
-            }
-
-            @media only screen and (min-width: 62em) {
-                width: 45%;
-            }
-
-            @media only screen and (min-width: 75em) {
-                width: 35%;
-            }
-
-            @media only screen and (min-width: 100em) {
-                width: 25%;
-            }
+        &.next {
+            left: 100%;
         }
 
-        &[data-step="2"],
-        &[data-step="3"] {
-            @media only screen and (min-width: 36em) {
-                width: 80%;
-            }
-
-            @media only screen and (min-width: 62em) {
-                width: 60%;
-            }
-
-            @media only screen and (min-width: 75em) {
-                width: 50%;
-            }
-
-            @media only screen and (min-width: 100em) {
-                width: 40%;
-            }
+        &.previous {
+            left: -100%
         }
 
         .step-indicator {
@@ -263,12 +242,6 @@ html {
                 }
             }
         }
-
-        @media only screen and (min-width: 36em) {
-            margin: 4em auto;
-            border-radius: 2em;
-            box-shadow: #63636333 0 0.125em 0.5em 0;
-        }
     }
 
     textarea {
@@ -334,6 +307,25 @@ html {
                 background-color: $orange-hover;
             }
         }
+    }
+
+    @media only screen and (min-width: 36em) {
+        width: 80%;
+        margin: 4em auto;
+        border-radius: 2em;
+        box-shadow: #63636333 0 0.125em 0.5em 0;
+    }
+
+    @media only screen and (min-width: 62em) {
+        width: 60%;
+    }
+
+    @media only screen and (min-width: 75em) {
+        width: 50%;
+    }
+
+    @media only screen and (min-width: 100em) {
+        width: 40%;
     }
 }
 

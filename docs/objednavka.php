@@ -73,7 +73,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         </svg>
     </a>
     <form id="order-form" class="survey-form" name="order-form" method="POST" action="" required>
-        <fieldset class="step-content current" data-step="1">
+        <fieldset class="step-content current" data-step="1" style="visibility: visible;">
             <div class="step-indicator">
                 <svg viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                     <path d="M121.186,20c-0,-11.046 -8.955,-20 -20,-20l-81.186,0c-11.046,0 -20,8.954 -20,20l0,81.186c0,11.045 8.954,20 20,20l81.186,-0c11.045,-0 20,-8.955 20,-20l-0,-81.186Z" style="fill:#ef7c02;" />
@@ -96,7 +96,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
         <!-- page 2 -->
-        <fieldset class="step-content" data-step="2">
+        <fieldset class="step-content next" data-step="2">
             <div class="step-indicator">
                 <svg viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                     <path d="M121.186,20c-0,-11.046 -8.955,-20 -20,-20l-81.186,0c-11.046,0 -20,8.954 -20,20l0,81.186c0,11.045 8.954,20 20,20l81.186,-0c11.045,-0 20,-8.955 20,-20l-0,-81.186Z" style="fill:#ef7c02;" />
@@ -164,7 +164,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
         <!-- page 3 -->
-        <fieldset class="step-content" data-step="3">
+        <fieldset class="step-content next" data-step="3">
             <div class="step-indicator">
                 <svg viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                     <path d="M121.186,20c-0,-11.046 -8.955,-20 -20,-20l-81.186,0c-11.046,0 -20,8.954 -20,20l0,81.186c0,11.045 8.954,20 20,20l81.186,-0c11.045,-0 20,-8.955 20,-20l-0,-81.186Z" style="fill:#ef7c02;" />
@@ -251,7 +251,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
         <!-- page 4 -->
-        <fieldset class="step-content" data-step="4">
+        <fieldset class="step-content next" data-step="4">
             <div class="step-indicator">
                 <svg viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                     <path d="M121.186,20c-0,-11.046 -8.955,-20 -20,-20l-81.186,0c-11.046,0 -20,8.954 -20,20l-0,81.186c0,11.045 8.954,20 20,20l81.186,-0c11.045,-0 20,-8.955 20,-20l-0,-81.186Z" style="fill:#ef7c02;" />
@@ -278,22 +278,37 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
         <!-- page 5 -->
-        <fieldset class="step-content" data-step="5">
+        <fieldset class="step-content next" data-step="5">
             <div class="result"><?= $response ?></div>
         </fieldset>
     </form>
     <script>
-        const setStep = step => {
-            document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
-            document.querySelector("[data-step='" + step + "']").style.display = "block";
-        };
+        document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
 
         document.querySelectorAll("[data-set-step]").forEach(element => {
             element.onclick = event => {
                 event.preventDefault();
                 setStep(parseInt(element.dataset.setStep));
+                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
             };
         });
+
+        document.getElementById("order-form").style.transition = "padding-top 500ms ease-in-out";
+
+        const setStep = step => {
+            document.querySelectorAll(".step-content").forEach((element) => {
+                if (element.dataset.step < step) {
+                    element.classList.remove("current", "next");
+                    element.classList.add("previous");
+                } else if (element.dataset.step > step) {
+                    element.classList.remove("current", "previous");
+                    element.classList.add("next");
+                } else {
+                    element.classList.remove("previous", "next");
+                    element.classList.add("current");
+                }
+            })
+        };
 
         <?php if (!empty($_POST)) : ?>
             setStep(5);
