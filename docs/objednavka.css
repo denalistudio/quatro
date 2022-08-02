@@ -274,9 +274,16 @@ html {
   margin-top: 2em;
 }
 
+#order-form .buttons button.btn {
+  font-size: 1rem;
+}
+
 #order-form .buttons .btn {
   cursor: pointer;
-  display: inline-block;
+  width: 4em;
+  height: 4em;
+  display: flex;
+  flex-basis: 4em;
   padding: 1em;
   border: none;
   border-radius: 5em;

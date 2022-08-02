@@ -261,7 +261,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
             <p>Místo vyzvednutí:</p>
             <p>QUATRO - Bohumínská 323/21, Karviná - Staré město</p>
-            <input type="checkbox" name="obchodni-podminky" required>
+            <input type="checkbox" name="obchodni-podminky" id="obchodni-podminky" required>
             <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
             <div class="buttons">
                 <a href="#" class="btn alt" data-set-step="3">
@@ -274,7 +274,11 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         </g>
                     </svg>
                 </a>
-                <input type="submit" class="btn" name="submit" value="Submit">
+                <button type="submit" class="btn" name="submit">
+                    <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                        <path d="M5,41.6l18.295,17.4l35.705,-54" style="fill:none;stroke:#fff;stroke-width:10px;" />
+                    </svg>
+                </button>
             </div>
         </fieldset>
         <!-- page 5 -->
