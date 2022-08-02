@@ -87,6 +87,10 @@ html {
   display: flex;
 }
 
+#order-form .step-content .step-indicator p {
+  font-weight: 600;
+}
+
 #order-form .step-content input[type=text],
 #order-form .step-content input[type=email],
 #order-form .step-content input[type=tel],
