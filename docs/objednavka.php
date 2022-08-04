@@ -104,31 +104,31 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 </svg>
                 <p>Vaše diplomová práce</p>
             </div>
-            <div class="select">
-                <label for="pevne-desky">Počet zhotovení pevných desek</label>
-                <select name="pevne-desky" required>
-                    <option value="">Zvolte počet</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+            <h3>Počet zhotovení pevných desek</h3>
+            <div class="range">
+                <input type="range" name="pevne-desky" min="1" max="7" steps="1" value="1" required>
             </div>
-            <div class="select">
-                <label for="krouzkove-vazby">Počet zhotovení kroužkových vazeb</label>
-                <select name="krouzkove-vazby" required>
-                    <option value="">Zvolte počet</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+            <ul class="range-labels">
+                <li class="active selected">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+            </ul>
+            <h3>Počet zhotovení kroužkových vazeb</h3>
+            <div class="range">
+                <input type="range" name="krouzkove-vazby" min="1" max="6" steps="1" value="1" required>
             </div>
+            <ul class="range-labels">
+                <li class="active selected">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+            </ul>
             <!-- Požadovaný termín zhotovení -->
             <div class="select">
                 <label for="pocet-listu">Moje práce má</label>
@@ -313,6 +313,46 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 }
             })
         };
+
+        var sheet = document.createElement('style'),
+            $rangeInput = $('.range input'),
+            prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
+
+        document.body.appendChild(sheet);
+
+        var getTrackStyle = function(el) {
+            var curVal = el.value,
+                val = (curVal - 1) * 16.666666667,
+                style = '';
+
+            // Set active label
+            $('.range-labels li').removeClass('active selected');
+
+            var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
+
+            curLabel.addClass('active selected');
+            curLabel.prevAll().addClass('selected');
+
+            // Change background gradient
+            for (var i = 0; i < prefs.length; i++) {
+                style += '.range {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #fff ' + val + '%, #fff 100%)}';
+                style += '.range input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #b2b2b2 ' + val + '%, #b2b2b2 100%)}';
+            }
+
+            return style;
+        }
+
+        $rangeInput.on('input', function() {
+            sheet.textContent = getTrackStyle(this);
+        });
+
+        // Change input value on label click
+        $('.range-labels li').on('click', function() {
+            var index = $(this).index();
+
+            $rangeInput.val(index + 1).trigger('input');
+
+        });
 
         <?php if (!empty($_POST)) : ?>
             setStep(5);
