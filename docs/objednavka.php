@@ -200,7 +200,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
             <div class="select">
                 <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
-                <select name="kapsy-cd-dvd" required>
+                <select name="kapsy-cd-dvd" data-vypocet="kapsy-cd-dvd" required>
                     <option value="">Zvolte počet</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -357,6 +357,13 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         <?php if (!empty($_POST)) : ?>
             setStep(5);
         <?php endif; ?>
+    </script>
+    <script>
+        // Výpočet ceny
+        
+        const items = {
+            kapsy: document.querySelector("[data-vypocet='kapsy-cd-dvd']"),
+        }
     </script>
 </body>
 
