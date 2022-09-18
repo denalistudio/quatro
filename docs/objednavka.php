@@ -287,8 +287,10 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         </fieldset>
     </form>
     <script>
+        // Height of fieldset
         document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
 
+        // Click event on button
         document.querySelectorAll("[data-set-step]").forEach(element => {
             element.onclick = event => {
                 event.preventDefault();
@@ -297,8 +299,10 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             };
         });
 
+        // Add transition to the form
         document.getElementById("order-form").style.transition = "padding-top 500ms ease-in-out";
 
+        // Set buttons
         const setStep = step => {
             document.querySelectorAll(".step-content").forEach((element) => {
                 if (element.dataset.step < step) {
