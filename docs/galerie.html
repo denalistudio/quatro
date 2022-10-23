@@ -162,7 +162,7 @@
             display: grid;
             grid-template-rows: auto auto;
             grid-template-columns: 1fr;
-            grid-template-areas: "filter-search""filter-options";
+            grid-template-areas: "filter-search" "filter-options";
         }
 
         @media only screen and (min-width: 62em) {
@@ -583,58 +583,32 @@
             <div id="content" class="page">
                 <main class="gallery">
                     <h1 style="margin-bottom: 0.5em;">Galerie</h1>
-                    <div class="filters-container">
-                        <div class="filters-group" style="grid-area: filter-search;">
-                            <label for="filters-search-input" class="filter-label">Vyhledat</label>
-                            <input class="textfield filter__search js-shuffle-search" type="search"
-                                id="filters-search-input" />
-                        </div>
-                        <div class="filters-group" style="grid-area: filter-options;">
-                            <p class="filter-label">Filtry</p>
-                            <div class="btn-group filter-options">
-                                <button class="btn btn--primary active">Všechny</button>
-                                <button class="btn btn--primary" data-group="acka">Áčka</button>
-                                <button class="btn btn--primary" data-group="auta">Auta</button>
-                                <button class="btn btn--primary" data-group="bannery">Bannery</button>
-                                <button class="btn btn--primary" data-group="drevo">Dřevo</button>
-                                <button class="btn btn--primary" data-group="fototapety">Fototapety</button>
-                                <button class="btn btn--primary" data-group="informacni-systemy">Informační systémy</button>
-                                <button class="btn btn--primary" data-group="interiery">Interiéry</button>
-                                <button class="btn btn--primary" data-group="kamen">Kámen</button>
-                                <button class="btn btn--primary" data-group="malba-na-zed">Malba na zeď</button>
-                                <button class="btn btn--primary" data-group="napisy-na-budovy">Nápisy na budovy</button>
-                                <button class="btn btn--primary" data-group="pecetidla">Pečetidla</button>
-                                <button class="btn btn--primary" data-group="plexisklo">Plexisklo</button>
-                                <button class="btn btn--primary" data-group="polepy">Polepy</button>
-                                <button class="btn btn--primary" data-group="potisk-predmetu">Potisk předmětů</button>
-                                <button class="btn btn--primary" data-group="reklamni-predmety">Reklamní předměty</button>
-                                <button class="btn btn--primary" data-group="rollupy">Rollupy</button>
-                                <button class="btn btn--primary" data-group="stitky">Štítky</button>
-                                <button class="btn btn--primary" data-group="svetelne-reklamy">Světelné reklamy</button>
-                                <button class="btn btn--primary" data-group="tabule">Tabule</button>
-                                <button class="btn btn--primary" data-group="tiskoviny">Tiskoviny</button>
-                            </div>
+                    <div class="filters-group">
+                        <div class="btn-group filter-options">
+                            <button class="btn btn--primary active">Všechny</button>
+                            <button class="btn btn--primary" data-group="acka">Áčka</button>
+                            <button class="btn btn--primary" data-group="auta">Auta</button>
+                            <button class="btn btn--primary" data-group="bannery">Bannery</button>
+                            <button class="btn btn--primary" data-group="drevo">Dřevo</button>
+                            <button class="btn btn--primary" data-group="fototapety">Fototapety</button>
+                            <button class="btn btn--primary" data-group="informacni-systemy">Informační systémy</button>
+                            <button class="btn btn--primary" data-group="interiery">Interiéry</button>
+                            <button class="btn btn--primary" data-group="kamen">Kámen</button>
+                            <button class="btn btn--primary" data-group="malba-na-zed">Malba na zeď</button>
+                            <button class="btn btn--primary" data-group="napisy-na-budovy">Nápisy na budovy</button>
+                            <button class="btn btn--primary" data-group="pecetidla">Pečetidla</button>
+                            <button class="btn btn--primary" data-group="plexisklo">Plexisklo</button>
+                            <button class="btn btn--primary" data-group="polepy">Polepy</button>
+                            <button class="btn btn--primary" data-group="potisk-predmetu">Potisk předmětů</button>
+                            <button class="btn btn--primary" data-group="reklamni-predmety">Reklamní předměty</button>
+                            <button class="btn btn--primary" data-group="rollupy">Rollupy</button>
+                            <button class="btn btn--primary" data-group="stitky">Štítky</button>
+                            <button class="btn btn--primary" data-group="svetelne-reklamy">Světelné reklamy</button>
+                            <button class="btn btn--primary" data-group="tabule">Tabule</button>
+                            <button class="btn btn--primary" data-group="tiskoviny">Tiskoviny</button>
                         </div>
                     </div>
-                    <!--
-                            <fieldset class="filters-group">
-                                <legend class="filter-label">Sort</legend>
-                                <div class="btn-group sort-options">
-                                    <label class="btn active">
-                                        <input type="radio" name="sort-value" value="dom" checked /> Default
-                                    </label>
-                                    <label class="btn">
-                                        <input type="radio" name="sort-value" value="title" /> Title
-                                    </label>
-                                    <label class="btn">
-                                        <input type="radio" name="sort-value" value="date-created" /> Date Created
-                                    </label>
-                                </div>
-                            </fieldset>
-                            -->
-
                     <div id="grid" class="row my-shuffle-container">
-                        
                         <div class="col-1@sm col-1@xs my-sizer-element"></div>
                     </div>
                 </main>
