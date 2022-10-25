@@ -6,4 +6,3 @@ RewriteRule (.*) https://www.nastartuj.cz%{REQUEST_URI} [L,R=301,QSA]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC, L]
-RewriteRule ^([^\.]+)$ $1.php [NC, L]
