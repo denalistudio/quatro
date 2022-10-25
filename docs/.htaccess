@@ -1,8 +1,13 @@
-RewriteEngine On
+RewriteEngine on
 
-RewriteCond %{HTTPS} off [NC]
-RewriteRule (.*) https://www.nastartuj.cz%{REQUEST_URI} [L,R=301,QSA]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://nastartuj.cz%{REQUEST_URI} [L,R=301]
 
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC, L]
+RewriteRule ^([^.]+)$ $1.html [NC,L]
