@@ -2,7 +2,7 @@
 
 $response = '';
 
-{if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'])) {
+if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'])) {
     // Detaily zákazníka
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -284,7 +284,9 @@ $response = '';
         // Height of fieldset
         document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
 
-        //
+        // Form transition
+        document.getElementById("order-form").style.transition = "padding-top 500ms ease-in-out";
+
         // Steps
         const step1 = document.querySelector('.step-content[data-step="1"]');
         const step2 = document.querySelector('.step-content[data-step="2"]');
@@ -301,6 +303,7 @@ $response = '';
         const btnPrevStep3 = document.querySelector('a.btn.btn-prev[data-set-step="3"]');
         const submitOrder = document.querySelector("button.btn.btn-forward");
 
+        // Onclick events
         btnForwardStep2.onclick = function() {
             const name = document.getElementById("name");
             const email = document.getElementById("email");
@@ -379,33 +382,30 @@ $response = '';
                 document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
             }
         };
-        // Click event on button
-        /*document.querySelectorAll("[data-set-step]").forEach(element => {
-            element.onclick = event => {
-                event.preventDefault();
-                setStep(parseInt(element.dataset.setStep));
-                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
-            };
-        });
 
-        // Add transition to the form
-        document.getElementById("order-form").style.transition = "padding-top 500ms ease-in-out";
+        btnPrevStep1.onclick = function() {
+            step2.classList.remove("current");
+            step2.classList.add("next");
+            step1.classList.remove("prev");
+            step1.classList.add("current");
+            document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+        };
 
-        // Set buttons
-        const setStep = step => {
-            document.querySelectorAll(".step-content").forEach((element) => {
-                if (element.dataset.step < step) {
-                    element.classList.remove("current", "next");
-                    element.classList.add("previous");
-                } else if (element.dataset.step > step) {
-                    element.classList.remove("current", "previous");
-                    element.classList.add("next");
-                } else {
-                    element.classList.remove("previous", "next");
-                    element.classList.add("current");
-                }
-            })
-        };*/
+        btnPrevStep2.onclick = function() {
+            step3.classList.remove("current");
+            step3.classList.add("next");
+            step2.classList.remove("prev");
+            step2.classList.add("current");
+            document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+        };
+
+        btnPrevStep3.onclick = function() {
+            step4.classList.remove("current");
+            step4.classList.add("next");
+            step3.classList.remove("prev");
+            step3.classList.add("current");
+            document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+        };
 
         /*var sheet = document.createElement('style'),
             $rangeInput = $('.range input'),
@@ -446,13 +446,6 @@ $response = '';
             $rangeInput.val(index + 1).trigger('input');
 
         });*/
-    </script>
-    <script>
-        // Výpočet ceny
-
-        const items = {
-            kapsy: document.querySelector("[data-vypocet='kapsy-cd-dvd']"),
-        }
     </script>
 </body>
 
