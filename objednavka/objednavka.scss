@@ -7,6 +7,8 @@ $gray: #808080;
 $blue: #264796;
 $orange: #ef7c00;
 $orange-hover: #dd6b08;
+$green: #009500;
+$red: #be0000;
 
 :root {
     --currentHeight: 413px;
@@ -116,6 +118,22 @@ html {
 
             &::placeholder {
                 color: $gray;
+            }
+
+            &.valid {
+                border-bottom: 1px solid $green;
+
+                &::placeholder {
+                    color: $green;
+                }
+            }
+
+            &.invalid {
+                border-bottom: 1px solid $red;
+
+                &::placeholder {
+                    color: $red;
+                }
             }
         }
 

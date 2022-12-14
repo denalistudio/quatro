@@ -108,6 +108,26 @@ html {
 #order-form .step-content input[type=tel]::placeholder {
   color: #808080;
 }
+#order-form .step-content input[type=text].valid,
+#order-form .step-content input[type=email].valid,
+#order-form .step-content input[type=tel].valid {
+  border-bottom: 1px solid #009500;
+}
+#order-form .step-content input[type=text].valid::placeholder,
+#order-form .step-content input[type=email].valid::placeholder,
+#order-form .step-content input[type=tel].valid::placeholder {
+  color: #009500;
+}
+#order-form .step-content input[type=text].invalid,
+#order-form .step-content input[type=email].invalid,
+#order-form .step-content input[type=tel].invalid {
+  border-bottom: 1px solid #be0000;
+}
+#order-form .step-content input[type=text].invalid::placeholder,
+#order-form .step-content input[type=email].invalid::placeholder,
+#order-form .step-content input[type=tel].invalid::placeholder {
+  color: #be0000;
+}
 #order-form .step-content .select {
   gap: 2em;
   display: grid;

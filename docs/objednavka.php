@@ -99,7 +99,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 <p>Vaše diplomová práce</p>
             </div>
             <h3>Počet zhotovení pevných desek</h3>
-            <div class="range">
+            <div id="range-pevne-desky" class="range">
                 <input id="pevne-desky" type="range" name="pevne-desky" min="1" max="7" steps="1" value="1" required>
             </div>
             <ul class="range-labels">
@@ -112,7 +112,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 <li>7</li>
             </ul>
             <h3>Počet zhotovení kroužkových vazeb</h3>
-            <div class="range">
+            <div id="range-krouzkove-vazby" class="range">
                 <input id="krouzkove-vazby" type="range" name="krouzkove-vazby" min="1" max="6" steps="1" value="1" required>
             </div>
             <ul class="range-labels">
@@ -311,9 +311,9 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
 
             document.querySelectorAll("input#name, input#email, input#tel").forEach((element) => {
                 if (!element.value) {
-                    element.classList.add("invalid");
+                    element.className = "invalid";
                 } else {
-                    element.className = "";
+                    element.className = "valid";
                 }
             });
 
@@ -406,46 +406,53 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             step3.classList.add("current");
             document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
         };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script>
+        const rangeInput = $(".range input");
+        rangeInput.each(function() {
+            const input = $(this);
+            const id = input.attr("id");
+            const parentId = input.parent().attr("id");
 
-        /*var sheet = document.createElement('style'),
-            $rangeInput = $('.range input'),
-            prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
+            var sheet = document.createElement('style'),
+                prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
 
-        document.body.appendChild(sheet);
+            document.body.appendChild(sheet);
 
-        var getTrackStyle = function(el) {
-            var curVal = el.value,
-                val = (curVal - 1) * 16.666666667,
-                style = '';
+            var getTrackStyle = function(el) {
+                var curVal = el.value,
+                    val = (curVal - 1) * 16.666666667,
+                    style = '';
 
-            // Set active label
-            $('.range-labels li').removeClass('active selected');
+                // Set active label
+                $('.range-labels li').removeClass('active selected');
 
-            var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
+                var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
 
-            curLabel.addClass('active selected');
-            curLabel.prevAll().addClass('selected');
+                curLabel.addClass('active selected');
+                curLabel.prevAll().addClass('selected');
 
-            // Change background gradient
-            for (var i = 0; i < prefs.length; i++) {
-                style += '.range {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #fff ' + val + '%, #fff 100%)}';
-                style += '.range input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #b2b2b2 ' + val + '%, #b2b2b2 100%)}';
+                // Change background gradient
+                for (var i = 0; i < prefs.length; i++) {
+                    console.log(val)
+                    style += '#' + parentId + ' {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #fff ' + val + '%, #fff 100%)}';
+                    style += '#' + parentId + ' input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #b2b2b2 ' + val + '%, #b2b2b2 100%)}';
+                }
+                return style;
             }
 
-            return style;
-        }
+            input.on('input', function() {
+                sheet.textContent = getTrackStyle(this);
+            });
 
-        $rangeInput.on('input', function() {
-            sheet.textContent = getTrackStyle(this);
+            // Change input value on label click
+            input.children("li").on('click', function() {
+                var index = $(this).index();
+
+                input.val(index + 1).trigger('input');
+            });
         });
-
-        // Change input value on label click
-        $('.range-labels li').on('click', function() {
-            var index = $(this).index();
-
-            $rangeInput.val(index + 1).trigger('input');
-
-        });*/
     </script>
 </body>
 
