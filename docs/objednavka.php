@@ -2,13 +2,13 @@
 
 $response = '';
 
-if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'])) {
-    // Customer details
+{if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'])) {
+    // Detaily zákazníka
     $name = $_POST['name'];
     $email = $_POST['email'];
     $tel = $_POST['tel'];
 
-    // Product details
+    // Detaily diplomky
     $pevneDesky = $_POST['pevne-desky'];
     $krouzkoveVazby = $_POST['krouzkove-vazby'];
     $barvaDesek = $_POST['barva-desek'];
@@ -26,25 +26,19 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     }
 
     // From
-    $from = 'admin@studiodenali.cz';
+    $from = 'admin@denali.studio';
 
-    //// Mail headers
+    // Mail headers
     $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'Return-Path: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 
-    //// Capture the email template file as a string
-    ob_start();
-    include 'email-template.php';
-    $email_template = ob_get_clean();
-
     // Admin email
-    $adminTo = 'admin@studiodenali.cz';
+    $adminTo = 'admin@denali.studio';
     $adminSubject = 'Nová objednávka';
-    $adminMail = mail($adminTo, $adminSubject, $email_template, $headers);
+    $adminMail = mail($adminTo, $adminSubject, 'Hello World!', $headers);
 
     // Client email
-    $clientTo = $email;
     $clientSubject = 'Děkujeme za vaši objednávku - Reklamka Quatro';
-    $clientMail = mail($clientTo, $clientSubject, $email_template, $headers);
+    $clientMail = mail($email, $clientSubject, 'Hello World!', $headers);
 
     // Try to send the mail
     if ($adminMail && $clientMail) {
@@ -73,7 +67,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         </svg>
     </a>
     <form id="order-form" class="survey-form" name="order-form" method="POST" action="" required>
-        <fieldset class="step-content current" data-step="1" style="visibility: visible;">
+        <fieldset class="step-content current" data-step="1">
             <div class="step-indicator">
                 <svg viewBox="0 0 122 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                     <path d="M121.186,20c-0,-11.046 -8.955,-20 -20,-20l-81.186,0c-11.046,0 -20,8.954 -20,20l0,81.186c0,11.045 8.954,20 20,20l81.186,-0c11.045,-0 20,-8.955 20,-20l-0,-81.186Z" style="fill:#ef7c02;" />
@@ -85,7 +79,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <input id="email" type="email" name="email" placeholder="E-mail" required>
             <input id="tel" type="tel" name="tel" placeholder="Telefonní číslo" required>
             <div class="buttons">
-                <a href="#" class="btn" data-set-step="2">
+                <a href="#" class="btn btn-forward" data-set-step="2">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <path d="M64,32c0,-2.76 -2.24,-5 -5,-5l-54,0c-2.76,0 -5,2.24 -5,5c0,2.76 2.24,5 5,5l54,0c2.76,0 5,-2.24 5,-5Z" />
@@ -106,7 +100,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
             <h3>Počet zhotovení pevných desek</h3>
             <div class="range">
-                <input type="range" name="pevne-desky" min="1" max="7" steps="1" value="1" required>
+                <input id="pevne-desky" type="range" name="pevne-desky" min="1" max="7" steps="1" value="1" required>
             </div>
             <ul class="range-labels">
                 <li class="active selected">1</li>
@@ -119,7 +113,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </ul>
             <h3>Počet zhotovení kroužkových vazeb</h3>
             <div class="range">
-                <input type="range" name="krouzkove-vazby" min="1" max="6" steps="1" value="1" required>
+                <input id="krouzkove-vazby" type="range" name="krouzkove-vazby" min="1" max="6" steps="1" value="1" required>
             </div>
             <ul class="range-labels">
                 <li class="active selected">1</li>
@@ -132,7 +126,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <!-- Požadovaný termín zhotovení -->
             <div class="select">
                 <label for="pocet-listu">Moje práce má</label>
-                <select name="pocet-listu" required>
+                <select id="pocet-listu" name="pocet-listu" required>
                     <option value="">Zvolte počet listů</option>
                     <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
                     <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
@@ -145,7 +139,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 </select>
             </div>
             <div class="buttons">
-                <a href="#" class="btn alt" data-set-step="1">
+                <a href="#" class="btn btn-prev alt" data-set-step="1">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <path d="M64,32c0,-2.76 -2.24,-5 -5,-5l-54,0c-2.76,0 -5,2.24 -5,5c0,2.76 2.24,5 5,5l54,0c2.76,0 5,-2.24 5,-5Z" />
@@ -153,7 +147,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         <path d="M29.748,56.748c1.951,-1.952 1.951,-5.12 -0,-7.071l-21.213,-21.214c-1.952,-1.951 -5.12,-1.951 -7.072,0c-1.951,1.952 -1.951,5.12 0,7.072l21.214,21.213c1.951,1.951 5.119,1.951 7.071,-0Z" />
                     </svg>
                 </a>
-                <a href="#" class="btn" data-set-step="3">
+                <a href="#" class="btn btn-forward" data-set-step="3">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <path d="M64,32c0,-2.76 -2.24,-5 -5,-5l-54,0c-2.76,0 -5,2.24 -5,5c0,2.76 2.24,5 5,5l54,0c2.76,0 5,-2.24 5,-5Z" />
@@ -200,7 +194,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
             <div class="select">
                 <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
-                <select name="kapsy-cd-dvd" data-vypocet="kapsy-cd-dvd" required>
+                <select id="kapsy-cd-dvd" name="kapsy-cd-dvd" data-vypocet="kapsy-cd-dvd" required>
                     <option value="">Zvolte počet</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -213,7 +207,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
             <div class="select">
                 <label for="chlopne-na-prilohy">Chci do vazby i chlopně na přílohy</label>
-                <select name="chlopne-na-prilohy" required>
+                <select id="chlopne-na-prilohy" name="chlopne-na-prilohy" required>
                     <option value="">Zvolte počet</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -228,7 +222,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
             <textarea id="poznamka" name="poznamka" placeholder="Poznámka"></textarea>
             <div class="buttons">
-                <a href="#" class="btn alt" data-set-step="2">
+                <a href="#" class="btn btn-prev alt" data-set-step="2">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <g>
@@ -238,7 +232,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         </g>
                     </svg>
                 </a>
-                <a href="#" class="btn" data-set-step="4">
+                <a href="#" class="btn btn-forward" data-set-step="4">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <g>
@@ -264,7 +258,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <input type="checkbox" name="obchodni-podminky" id="obchodni-podminky" required>
             <label for="obchodni-podminky">Souhlasím s <a href="" target="_blank">obchodními podmínkami</a>.</label>
             <div class="buttons">
-                <a href="#" class="btn alt" data-set-step="3">
+                <a href="#" class="btn btn-prev alt" data-set-step="3">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <rect x="0" y="0" width="64" height="64" style="fill:none;" />
                         <g>
@@ -274,7 +268,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         </g>
                     </svg>
                 </a>
-                <button type="submit" class="btn" name="submit">
+                <button type="submit" class="btn btn-forward">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                         <path d="M5,41.6l18.295,17.4l35.705,-54" style="fill:none;stroke:#fff;stroke-width:10px;" />
                     </svg>
@@ -290,8 +284,103 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         // Height of fieldset
         document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
 
+        //
+        // Steps
+        const step1 = document.querySelector('.step-content[data-step="1"]');
+        const step2 = document.querySelector('.step-content[data-step="2"]');
+        const step3 = document.querySelector('.step-content[data-step="3"]');
+        const step4 = document.querySelector('.step-content[data-step="4"]');
+        const step5 = document.querySelector('.step-content[data-step="5"]');
+
+        // Buttons
+        const btnForwardStep2 = document.querySelector('a.btn.btn-forward[data-set-step="2"]');
+        const btnForwardStep3 = document.querySelector('a.btn.btn-forward[data-set-step="3"]');
+        const btnForwardStep4 = document.querySelector('a.btn.btn-forward[data-set-step="4"]');
+        const btnPrevStep1 = document.querySelector('a.btn.btn-prev[data-set-step="1"]');
+        const btnPrevStep2 = document.querySelector('a.btn.btn-prev[data-set-step="2"]');
+        const btnPrevStep3 = document.querySelector('a.btn.btn-prev[data-set-step="3"]');
+        const submitOrder = document.querySelector("button.btn.btn-forward");
+
+        btnForwardStep2.onclick = function() {
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const tel = document.getElementById("tel");
+
+            document.querySelectorAll("input#name, input#email, input#tel").forEach((element) => {
+                if (!element.value) {
+                    element.classList.add("invalid");
+                } else {
+                    element.className = "";
+                }
+            });
+
+            if (name.value && email.value && tel.value) {
+                step1.classList.remove("current");
+                step1.classList.add("prev");
+                step2.classList.remove("next");
+                step2.classList.add("current");
+                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+            };
+        };
+
+        btnForwardStep3.onclick = function() {
+            const pevneDesky = document.getElementById("pevne-desky");
+            const krouzkoveVazby = document.getElementById("krouzkove-vazby");
+            const pocetListu = document.getElementById("pocet-listu");
+
+            document.querySelectorAll("input#pevne-desky, input#krouzkove-vazby, select#pocet-listu").forEach((element) => {
+                if (!element.value) {
+                    element.classList.add("invalid");
+                };
+            });
+
+            if (pevneDesky.value && krouzkoveVazby.value && pocetListu.selectedIndex !== 0) {
+                step2.classList.remove("current");
+                step2.classList.add("prev");
+                step3.classList.remove("next");
+                step3.classList.add("current");
+                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+            };
+        };
+
+        btnForwardStep4.onclick = function() {
+            const kapsyCdDvd = document.getElementById("kapsy-cd-dvd");
+            const chlopneNaPrilohy = document.getElementById("chlopne-na-prilohy");
+
+            document.querySelectorAll("select#kapsy-cd-dvd, select#chlopne-na-prilohy").forEach((element) => {
+                if (!element.value) {
+                    element.classList.add("invalid");
+                } else {
+                    element.className = "";
+                };
+            });
+
+            if (kapsyCdDvd.selectedIndex !== 0 && chlopneNaPrilohy.selectedIndex !== 0) {
+                step3.classList.remove("current");
+                step3.classList.add("prev");
+                step4.classList.remove("next");
+                step4.classList.add("current");
+                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+            };
+        };
+
+        submitOrder.onclick = (button) => {
+            button.preventDefault();
+
+            const obchodniPodminky = document.getElementById("obchodni-podminky");
+            const form = document.getElementById("order-form");
+
+            if (obchodniPodminky.checked) {
+                form.submit();
+                step4.classList.remove("current");
+                step4.classList.add("prev");
+                step5.classList.remove("next");
+                step5.classList.add("current");
+                document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+            }
+        };
         // Click event on button
-        document.querySelectorAll("[data-set-step]").forEach(element => {
+        /*document.querySelectorAll("[data-set-step]").forEach(element => {
             element.onclick = event => {
                 event.preventDefault();
                 setStep(parseInt(element.dataset.setStep));
@@ -316,9 +405,9 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                     element.classList.add("current");
                 }
             })
-        };
+        };*/
 
-        var sheet = document.createElement('style'),
+        /*var sheet = document.createElement('style'),
             $rangeInput = $('.range input'),
             prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
 
@@ -356,15 +445,11 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
 
             $rangeInput.val(index + 1).trigger('input');
 
-        });
-
-        <?php if (!empty($_POST)) : ?>
-            setStep(5);
-        <?php endif; ?>
+        });*/
     </script>
     <script>
         // Výpočet ceny
-        
+
         const items = {
             kapsy: document.querySelector("[data-vypocet='kapsy-cd-dvd']"),
         }

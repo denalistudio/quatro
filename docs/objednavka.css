@@ -8,11 +8,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Manrope", sans-serif;
-}
-
-*::before, *::after {
-  box-sizing: border-box;
+  line-height: 1.3;
   font-family: "Manrope", sans-serif;
 }
 
@@ -26,19 +22,16 @@ html {
   display: block;
   margin: 4em auto 2em auto;
 }
-
 @media only screen and (min-width: 36em) {
   #logo {
     width: 25%;
   }
 }
-
 @media only screen and (min-width: 62em) {
   #logo {
     width: 20%;
   }
 }
-
 @media only screen and (min-width: 75em) {
   #logo {
     width: 15%;
@@ -52,7 +45,6 @@ html {
   padding-top: var(--currentHeight);
   overflow: hidden;
 }
-
 #order-form .step-content {
   width: 100%;
   position: absolute;
@@ -61,36 +53,29 @@ html {
   border: none;
   transition: left 500ms ease-in-out;
 }
-
 #order-form .step-content.current {
   left: 0;
 }
-
 #order-form .step-content.next {
   left: 100%;
 }
-
-#order-form .step-content.previous {
+#order-form .step-content.prev {
   left: -100%;
 }
-
 #order-form .step-content .step-indicator {
   height: 2.5em;
   gap: 0.7em;
   display: inline-flex;
   align-items: center;
 }
-
 #order-form .step-content .step-indicator svg {
   width: auto;
   height: 2.5em;
   display: flex;
 }
-
 #order-form .step-content .step-indicator p {
   font-weight: 600;
 }
-
 #order-form .step-content input[type=text],
 #order-form .step-content input[type=email],
 #order-form .step-content input[type=tel],
@@ -98,7 +83,6 @@ html {
 #order-form .step-content textarea {
   outline: 0;
 }
-
 #order-form .step-content input[type=text],
 #order-form .step-content input[type=email],
 #order-form .step-content input[type=tel] {
@@ -108,25 +92,22 @@ html {
   padding: 0.5em 1em;
   border-top: none;
   border-left: none;
-  border-bottom: 1px solid #00000033;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   border-right: none;
   font-size: 1rem;
   transition: border-bottom 200ms ease-in-out;
 }
-
 #order-form .step-content input[type=text]:focus,
 #order-form .step-content input[type=email]:focus,
 #order-form .step-content input[type=tel]:focus {
   outline: none;
-  border-bottom: 1px solid #00000066;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
-
 #order-form .step-content input[type=text]::placeholder,
 #order-form .step-content input[type=email]::placeholder,
 #order-form .step-content input[type=tel]::placeholder {
   color: #808080;
 }
-
 #order-form .step-content .select {
   gap: 2em;
   display: grid;
@@ -134,31 +115,25 @@ html {
   grid-template-columns: 1fr 1fr;
   margin: 1em 0;
 }
-
 #order-form .step-content .select select {
   width: 100%;
 }
-
 #order-form .step-content .select select option:first-child {
   display: none;
 }
-
 #order-form .step-content .barvy {
   gap: 2em;
   display: flex;
   justify-content: center;
 }
-
 #order-form .step-content .barvy .barva-desek {
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]:checked + label {
   opacity: 1;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio] {
   all: unset;
   cursor: pointer;
@@ -168,50 +143,40 @@ html {
   margin: 1em 0;
   border-radius: 5em;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]:checked {
   outline-width: 4px;
   outline-style: solid;
   outline-offset: 3px;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#black {
   background-color: #000000;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#black:checked {
   outline-color: #000000;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#blue {
   background-color: #242e48;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#blue:checked {
   outline-color: #242e48;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#bordeaux {
   background-color: #571f25;
 }
-
 #order-form .step-content .barvy .barva-desek input[type=radio]#bordeaux:checked {
   outline-color: #571f25;
 }
-
 #order-form .step-content .barvy .barva-desek label {
   opacity: 0;
   font-weight: 600;
   transition: opacity 200ms ease-in-out;
 }
-
 #order-form .step-content .barvy .barva-pisma {
   gap: 0.5em;
   display: grid;
   grid-template-rows: 4.06251em auto;
   grid-template-columns: 1fr;
 }
-
 #order-form .step-content .barvy .barva-pisma input[type=radio]#gold,
 #order-form .step-content .barvy .barva-pisma input[type=radio]#silver {
   all: unset;
@@ -220,7 +185,6 @@ html {
   height: 4.06251em;
   position: relative;
 }
-
 #order-form .step-content .barvy .barva-pisma input[type=radio]#gold::after,
 #order-form .step-content .barvy .barva-pisma input[type=radio]#silver::after {
   content: "Aa";
@@ -233,25 +197,20 @@ html {
   font-family: "Merriweather", serif;
   font-size: 3rem;
 }
-
 #order-form .step-content .barvy .barva-pisma input[type=radio]#gold:checked::after,
 #order-form .step-content .barvy .barva-pisma input[type=radio]#silver:checked::after {
   text-decoration: underline;
   text-underline-offset: 0.05em;
 }
-
 #order-form .step-content .barvy .barva-pisma input[type=radio]#gold::after {
   color: goldenrod;
 }
-
 #order-form .step-content .barvy .barva-pisma input[type=radio]#silver::after {
   color: silver;
 }
-
 #order-form .step-content .barvy .barva-pisma label {
   font-weight: 600;
 }
-
 #order-form textarea {
   width: 100%;
   min-height: 5em;
@@ -260,11 +219,9 @@ html {
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
 }
-
 #order-form textarea::placeholder {
   color: #808080;
 }
-
 #order-form .buttons {
   width: 100%;
   gap: 1em;
@@ -273,11 +230,9 @@ html {
   justify-content: center;
   margin-top: 2em;
 }
-
 #order-form .buttons button.btn {
   font-size: 1rem;
 }
-
 #order-form .buttons .btn {
   cursor: pointer;
   width: 4em;
@@ -290,61 +245,50 @@ html {
   background-color: #ef7c00;
   transition: background-color 200ms ease-in-out;
 }
-
 #order-form .buttons .btn svg {
   width: 2em;
   height: 2em;
   display: block;
 }
-
 #order-form .buttons .btn svg path {
   fill: #ffffff;
 }
-
 #order-form .buttons .btn.alt {
   padding: 0.8125em;
   border: 3px solid #ef7c00;
   background-color: #ffffff;
 }
-
 #order-form .buttons .btn.alt svg path {
   fill: #ef7c00;
   transition: fill 200ms ease-in-out;
 }
-
 #order-form .buttons .btn.alt:hover {
   border: 3px solid #dd6b08;
 }
-
 #order-form .buttons .btn.alt:hover svg path {
   fill: #ffffff;
 }
-
 #order-form .buttons .btn:hover {
   background-color: #dd6b08;
 }
-
 @media only screen and (min-width: 36em) {
   #order-form {
     width: 80%;
     margin: 4em auto;
     border-radius: 2em;
-    box-shadow: #63636333 0 0.125em 0.5em 0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 0.125em 0.5em 0;
   }
 }
-
 @media only screen and (min-width: 62em) {
   #order-form {
     width: 60%;
   }
 }
-
 @media only screen and (min-width: 75em) {
   #order-form {
     width: 50%;
   }
 }
-
 @media only screen and (min-width: 100em) {
   #order-form {
     width: 40%;
@@ -379,7 +323,6 @@ input[type="date"] {
   top: 2px;
   -webkit-appearance: none;
 }
-
 .range input::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
@@ -390,7 +333,6 @@ input[type="date"] {
   cursor: pointer;
   border: 0 !important;
 }
-
 .range input::-moz-range-thumb {
   width: 18px;
   height: 18px;
@@ -400,7 +342,6 @@ input[type="date"] {
   cursor: pointer;
   border: 0 !important;
 }
-
 .range input::-ms-thumb {
   width: 18px;
   height: 18px;
@@ -410,33 +351,28 @@ input[type="date"] {
   cursor: pointer;
   border: 0 !important;
 }
-
 .range input::-webkit-slider-runnable-track {
   width: 100%;
   height: 0.25em;
   cursor: pointer;
   background: #b2b2b2;
 }
-
 .range input::-moz-range-track {
   width: 100%;
   height: 0.25em;
   cursor: pointer;
   background: #b2b2b2;
 }
-
 .range input::-ms-track {
   width: 100%;
   height: 0.25em;
   cursor: pointer;
   background: #b2b2b2;
 }
-
 .range input:focus {
   background: none;
   outline: none;
 }
-
 .range input::-ms-track {
   width: 100%;
   cursor: pointer;
@@ -450,17 +386,15 @@ input[type="date"] {
   padding: 0;
   list-style: none;
 }
-
 .range-labels li {
   position: relative;
   float: left;
-  width: calc(100% / 7);
+  width: 14.2857142857%;
   text-align: center;
   color: #b2b2b2;
   font-size: 14px;
   cursor: pointer;
 }
-
 .range-labels li::before {
   position: absolute;
   top: -25px;
@@ -473,15 +407,12 @@ input[type="date"] {
   background: #b2b2b2;
   border-radius: 50%;
 }
-
 .range-labels .active {
   color: #ef7c00;
 }
-
 .range-labels .selected::before {
   background: #ef7c00;
 }
-
 .range-labels .active.selected::before {
   display: none;
 }
