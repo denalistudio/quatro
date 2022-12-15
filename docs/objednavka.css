@@ -436,3 +436,37 @@ input[type="date"] {
 .range-labels .active.selected::before {
   display: none;
 }
+
+.my_range_input {
+  width: 100%;
+  height: 0.5em;
+  position: relative;
+}
+
+ul.range_input_dots {
+  width: 100%;
+  display: inline-flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  list-style-type: none;
+}
+ul.range_input_dots li {
+  position: relative;
+  width: 16.6666666667%;
+  text-align: center;
+  color: red;
+  cursor: pointer;
+}
+ul.range_input_dots li::before {
+  content: "";
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+  background: #ef7c00;
+  border-radius: 5em;
+}

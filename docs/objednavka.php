@@ -78,6 +78,18 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <input id="name" type="text" name="name" placeholder="Jméno a příjmení" required>
             <input id="email" type="email" name="email" placeholder="E-mail" required>
             <input id="tel" type="tel" name="tel" placeholder="Telefonní číslo" required>
+            <div class="my_range_input">
+                <input type="range" min="1" max="7" step="1" value="1" style="width:100%;">
+                <ul class="range_input_dots">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
             <div class="buttons">
                 <a href="#" class="btn btn-forward" data-set-step="2">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
