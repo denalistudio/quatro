@@ -368,6 +368,8 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         };
     </script>
     <script>
+        // Link: https://codepen.io/erevan/pen/geGjzx
+        
         //----------------------------------------//
         //  GLOBAL VARS
         //----------------------------------------//
