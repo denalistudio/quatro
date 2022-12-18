@@ -373,9 +373,9 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         //----------------------------------------//
 
         // Lower track color
-        var rangeSliderTrackColor = '#ccc',
+        var rangeSliderTrackColor = '#cdcdcd',
             // Upper track color
-            rangeSliderTrackFillColor = '#666',
+            rangeSliderTrackFillColor = '#ef7c00',
 
             // ID of the HTML style element that gets appended to the HTML head
             rangeSliderStyleElementID = 'rangeSliderStyleElement',
@@ -410,7 +410,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             // Get the current value of the actual range slider
             var rangeValue = $rangeSliderElement[rangeSliderInstance].value,
                 // Get the min and max attributes value of the actual range slider
-                rangeMinValue = $rangeSliderElement[rangeSliderInstance].getAttribute('min');
+                rangeMinValue = $rangeSliderElement[rangeSliderInstance].getAttribute('min'),
             rangeMaxValue = $rangeSliderElement[rangeSliderInstance].getAttribute('max');
 
             // Generate the CSS and put it into the style tag with the appropriate ID in the HTML head
@@ -573,11 +573,11 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             let value = input.value;
 
             if (displayValueElement) {
-                displayValueElement.innerHTML = value;
+                displayValueElement.innerHTML = "<h4>" + value + "</h4>";
 
                 input.oninput = function() {
                     value = input.value
-                    displayValueElement.innerHTML = value;
+                    displayValueElement.innerHTML = "<h4>" + value + "</h4>";
                 };
             };
         });
@@ -625,7 +625,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         secondLine = "32 mm (G)";
                         break;
                 };
-                displayValueElement.innerHTML = "<p>" + firstLine + "</p><p>" + secondLine + "</p>";
+                displayValueElement.innerHTML = "<h4>" + firstLine + "</h4><p>" + secondLine + "</p>";
 
                 input.oninput = function() {
                     value = input.value;
@@ -663,25 +663,12 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                             secondLine = "32 mm (G)";
                             break;
                     };
-                    displayValueElement.innerHTML = "<p>" + firstLine + "</p><p>" + secondLine + "</p>";
+                    displayValueElement.innerHTML = "<h4>" + firstLine + "</h4><p>" + secondLine + "</p>";
                 };
             };
         };
         showValueOfPocetListu();
     </script>
-    <!--<div class="select">
-                <select>
-                    <option value="">Zvolte počet listů</option>
-                    <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
-                    <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
-                    <option value="13 mm (B) 91-120 listů">13 mm (B) 91-120 listů</option>
-                    <option value="16 mm (C) 121-145 listů">16 mm (C) 121-145 listů</option>
-                    <option value="20 mm (D) 146-185 listů">20 mm (D) 146-185 listů</option>
-                    <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
-                    <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
-                    <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
-                </select>
-            </div>-->
 </body>
 
 </html>

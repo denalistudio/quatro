@@ -72,6 +72,10 @@ html {
             left: -100%
         }
 
+        h3 {
+            margin: 1em 0 .75em 0;
+        }
+
         .step-indicator {
             height: 2.5em;
             gap: 0.7em;
@@ -137,19 +141,17 @@ html {
             }
         }
 
-        .select {
-            gap: 2em;
-            display: grid;
-            grid-template-rows: 1fr;
-            grid-template-columns: 1fr 1fr;
-            margin: 1em 0;
+        .input-value {
+            margin: .75em 0 1em 0;
 
-            select {
-                width: 100%;
+            h4 {
+                font-size: 2rem;
+                font-weight: 500;
+            }
 
-                option:first-child {
-                    display: none;
-                }
+            p {
+                font-size: 1.25rem;
+                margin-top: .2em;
             }
         }
 
@@ -353,147 +355,13 @@ html {
     }
 }
 
-/*input[type="date"]::-webkit-calendar-picker-indicator {
-    color: #ddd;
-    filter: invert(0.8);
-}
-
-input[type="date"] {
-    width: 100%;
-    height: 3em;
-    margin: 1em 0;
-    border: 1px solid #dfe0e0;
-
-    &:focus {
-        border: 1px solid #c6c7c7;
-    }
-}*/
-
-// Range slider
-/*@mixin rangeThumb {
-    width: 18px;
-    height: 18px;
-    margin: -8px 0 0;
-    border-radius: 50%;
-    background: $orange;
-    cursor: pointer;
-    border: 0 !important;
-}
-
-@mixin rangeTrack {
-    width: 100%;
-    height: 0.25em;
-    cursor: pointer;
-    background: #b2b2b2;
-}
-
-.range {
-    position: relative;
-    width: 100%;
-    height: 0.25em;
-}
-
-.range input {
-    width: 100%;
-    height: 0;
-    position: absolute;
-    top: 2px;
-    -webkit-appearance: none;
-
-    // Thumb
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none; // needed again for Chrome & Safari
-        @include rangeThumb;
-    }
-
-    &::-moz-range-thumb {
-        @include rangeThumb;
-    }
-
-    &::-ms-thumb {
-        @include rangeThumb;
-    }
-
-    // Track
-    &::-webkit-slider-runnable-track {
-        @include rangeTrack;
-    }
-
-    &::-moz-range-track {
-        @include rangeTrack;
-    }
-
-    &::-ms-track {
-        @include rangeTrack;
-    }
-
-    &:focus {
-        // override outline/background on focus
-        background: none;
-        outline: none;
-    }
-
-    &::-ms-track {
-        // A little somethin' somethin' for IE
-        width: 100%;
-        cursor: pointer;
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
-    }
-}
-
-// Labels below slider
-.range-labels {
-    margin: 18px -41px 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-        position: relative;
-        float: left;
-        width: calc(100% / 7);
-        text-align: center;
-        color: #b2b2b2;
-        font-size: 14px;
-        cursor: pointer;
-
-        &::before {
-            position: absolute;
-            top: -25px;
-            right: 0;
-            left: 0;
-            content: "";
-            margin: 0 auto;
-            width: 9px;
-            height: 9px;
-            background: #b2b2b2;
-            border-radius: 50%;
-        }
-    }
-
-    .active {
-        color: $orange;
-    }
-
-    .selected::before {
-        background: $orange;
-    }
-
-    .active.selected::before {
-        display: none;
-    }
-}*/
-
-//
-
+// Range input styles
 $range-slider-track-height: 2px !default;
 $range-slider-track-step-size: 12px !default;
-$range-slider-thumb-size: 46px !default;
-$range-slider-thumb-background: white !default;
+$range-slider-thumb-size: 22px !default;
+$range-slider-thumb-background: #ef7c00 !default;
 $range-slider-thumb-dot-size: 12px !default;
 $range-slider-thumb-dot-color: #ef7c00 !default;
-$range-slider-thumb-border-color: black !default;
 $range-slider-thumb-border-width: 1px !default;
 
 .range-slider {
@@ -535,7 +403,6 @@ $range-slider-thumb-border-width: 1px !default;
     height: $range-slider-thumb-size;
     margin-top: -($range-slider-thumb-size/2 - $range-slider-track-height/2);
     border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
-    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
     border-radius: 50%;
     background: $range-slider-thumb-dot-color;
     cursor: pointer;
@@ -553,7 +420,6 @@ $range-slider-thumb-border-width: 1px !default;
     height: $range-slider-thumb-size;
     margin-top: -($range-slider-thumb-size/2 - $range-slider-track-height/2);
     border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
-    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
     border-radius: 50%;
     background: $range-slider-thumb-dot-color;
     cursor: pointer;
@@ -590,8 +456,6 @@ $range-slider-thumb-border-width: 1px !default;
     width: $range-slider-thumb-size - ($range-slider-thumb-border-width * 2);
     height: $range-slider-thumb-size - ($range-slider-thumb-border-width * 2);
     margin-top: 0;
-    border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
-    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
     border-radius: 50%;
     background: $range-slider-thumb-dot-color;
     cursor: pointer;
