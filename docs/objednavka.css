@@ -330,143 +330,240 @@ input[type="date"] {
         border: 1px solid #c6c7c7;
     }
 }*/
+/*@mixin rangeThumb {
+    width: 18px;
+    height: 18px;
+    margin: -8px 0 0;
+    border-radius: 50%;
+    background: $orange;
+    cursor: pointer;
+    border: 0 !important;
+}
+
+@mixin rangeTrack {
+    width: 100%;
+    height: 0.25em;
+    cursor: pointer;
+    background: #b2b2b2;
+}
+
 .range {
-  position: relative;
-  width: 100%;
-  height: 0.25em;
+    position: relative;
+    width: 100%;
+    height: 0.25em;
 }
 
 .range input {
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: 2px;
+    -webkit-appearance: none;
+
+    // Thumb
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none; // needed again for Chrome & Safari
+        @include rangeThumb;
+    }
+
+    &::-moz-range-thumb {
+        @include rangeThumb;
+    }
+
+    &::-ms-thumb {
+        @include rangeThumb;
+    }
+
+    // Track
+    &::-webkit-slider-runnable-track {
+        @include rangeTrack;
+    }
+
+    &::-moz-range-track {
+        @include rangeTrack;
+    }
+
+    &::-ms-track {
+        @include rangeTrack;
+    }
+
+    &:focus {
+        // override outline/background on focus
+        background: none;
+        outline: none;
+    }
+
+    &::-ms-track {
+        // A little somethin' somethin' for IE
+        width: 100%;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+}
+
+// Labels below slider
+.range-labels {
+    margin: 18px -41px 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        position: relative;
+        float: left;
+        width: calc(100% / 7);
+        text-align: center;
+        color: #b2b2b2;
+        font-size: 14px;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            left: 0;
+            content: "";
+            margin: 0 auto;
+            width: 9px;
+            height: 9px;
+            background: #b2b2b2;
+            border-radius: 50%;
+        }
+    }
+
+    .active {
+        color: $orange;
+    }
+
+    .selected::before {
+        background: $orange;
+    }
+
+    .active.selected::before {
+        display: none;
+    }
+}*/
+.range-slider {
+  position: relative;
+  height: 46px;
+}
+
+.range-slider__input {
   width: 100%;
-  height: 0;
-  position: absolute;
-  top: 2px;
-  -webkit-appearance: none;
+  height: 46px;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  appearance: none;
 }
-.range input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  margin: -8px 0 0;
-  border-radius: 50%;
-  background: #ef7c00;
-  cursor: pointer;
-  border: 0 !important;
-}
-.range input::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  margin: -8px 0 0;
-  border-radius: 50%;
-  background: #ef7c00;
-  cursor: pointer;
-  border: 0 !important;
-}
-.range input::-ms-thumb {
-  width: 18px;
-  height: 18px;
-  margin: -8px 0 0;
-  border-radius: 50%;
-  background: #ef7c00;
-  cursor: pointer;
-  border: 0 !important;
-}
-.range input::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 0.25em;
-  cursor: pointer;
-  background: #b2b2b2;
-}
-.range input::-moz-range-track {
-  width: 100%;
-  height: 0.25em;
-  cursor: pointer;
-  background: #b2b2b2;
-}
-.range input::-ms-track {
-  width: 100%;
-  height: 0.25em;
-  cursor: pointer;
-  background: #b2b2b2;
-}
-.range input:focus {
-  background: none;
+
+.range-slider__input:focus {
   outline: none;
 }
-.range input::-ms-track {
-  width: 100%;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
+
+/**
+     * 1. Remove outline on FF.
+     */
+.range-slider__input::-moz-focus-outer {
+  border: 0;
+  /* [1] */
 }
 
-.range-labels {
-  margin: 18px -41px 0;
-  padding: 0;
-  list-style: none;
-}
-.range-labels li {
-  position: relative;
-  float: left;
-  width: 14.2857142857%;
-  text-align: center;
-  color: #b2b2b2;
-  font-size: 14px;
+.range-slider__input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
   cursor: pointer;
+  background-color: #CCC;
+  border-radius: 10px;
 }
-.range-labels li::before {
-  position: absolute;
-  top: -25px;
-  right: 0;
-  left: 0;
-  content: "";
-  margin: 0 auto;
-  width: 9px;
-  height: 9px;
-  background: #b2b2b2;
+
+.range-slider__input::-webkit-slider-thumb {
+  width: 46px;
+  height: 46px;
+  margin-top: -22px;
+  border: 17px solid white;
+  box-shadow: 0 0 0 1px black;
   border-radius: 50%;
-}
-.range-labels .active {
-  color: #ef7c00;
-}
-.range-labels .selected::before {
   background: #ef7c00;
-}
-.range-labels .active.selected::before {
-  display: none;
-}
-
-.my_range_input {
-  width: 100%;
-  height: 0.5em;
-  position: relative;
+  cursor: pointer;
+  appearance: none;
 }
 
-ul.range_input_dots {
+.range-slider__input::-moz-range-track {
   width: 100%;
-  display: inline-flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  list-style-type: none;
-}
-ul.range_input_dots li {
-  position: relative;
-  width: 16.6666666667%;
-  text-align: center;
-  color: red;
+  height: 2px;
   cursor: pointer;
 }
-ul.range_input_dots li::before {
-  content: "";
-  display: block;
-  width: 0.5em;
-  height: 0.5em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: auto;
+
+.range-slider__input::-moz-range-thumb {
+  width: 46px;
+  height: 46px;
+  margin-top: -22px;
+  border: 17px solid white;
+  box-shadow: 0 0 0 1px black;
+  border-radius: 50%;
   background: #ef7c00;
-  border-radius: 5em;
+  cursor: pointer;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.range-slider__input::-ms-track {
+  width: 100%;
+  height: 2px;
+  border-color: transparent;
+  border-width: 2px 0;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.range-slider__input::-ms-fill-lower {
+  background: #666;
+  border-radius: 0;
+  height: 2px;
+  box-sizing: border-box;
+}
+
+.range-slider__input::-ms-fill-upper {
+  background: #CCC;
+  border-radius: 0;
+  height: 2px;
+  box-sizing: border-box;
+}
+
+.range-slider__input::-ms-thumb {
+  width: 44px;
+  height: 44px;
+  margin-top: 0;
+  border: 17px solid white;
+  box-shadow: 0 0 0 1px black;
+  border-radius: 50%;
+  background: #ef7c00;
+  cursor: pointer;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+/**
+     * The container for the dot elements to sit in.
+     */
+.range-slider__dots {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - (46px - 12px));
+  margin-left: 17px;
+  position: absolute;
+  top: 17px;
+  left: 0;
+  z-index: -1;
+}
+.range-slider__dots span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: #CCC;
+  border-radius: 50%;
 }

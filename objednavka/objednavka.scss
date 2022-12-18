@@ -370,7 +370,7 @@ input[type="date"] {
 }*/
 
 // Range slider
-@mixin rangeThumb {
+/*@mixin rangeThumb {
     width: 18px;
     height: 18px;
     margin: -8px 0 0;
@@ -483,40 +483,143 @@ input[type="date"] {
     .active.selected::before {
         display: none;
     }
-}
+}*/
 
-.my_range_input {
-    width: 100%;
-    height: .5em;
+//
+
+$range-slider-track-height: 2px !default;
+$range-slider-track-step-size: 12px !default;
+$range-slider-thumb-size: 46px !default;
+$range-slider-thumb-background: white !default;
+$range-slider-thumb-dot-size: 12px !default;
+$range-slider-thumb-dot-color: #ef7c00 !default;
+$range-slider-thumb-border-color: black !default;
+$range-slider-thumb-border-width: 1px !default;
+
+.range-slider {
     position: relative;
+    height: $range-slider-thumb-size;
 }
 
-ul.range_input_dots {
+.range-slider__input {
     width: 100%;
-    display: inline-flex;
+    height: $range-slider-thumb-size;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    appearance: none;
+}
+
+.range-slider__input:focus {
+    outline: none;
+}
+
+/**
+     * 1. Remove outline on FF.
+     */
+.range-slider__input::-moz-focus-outer {
+    border: 0;
+    /* [1] */
+}
+
+.range-slider__input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: $range-slider-track-height;
+    cursor: pointer;
+    background-color: #CCC;
+    border-radius: 10px;
+}
+
+.range-slider__input::-webkit-slider-thumb {
+    width: $range-slider-thumb-size;
+    height: $range-slider-thumb-size;
+    margin-top: -($range-slider-thumb-size/2 - $range-slider-track-height/2);
+    border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
+    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
+    border-radius: 50%;
+    background: $range-slider-thumb-dot-color;
+    cursor: pointer;
+    appearance: none;
+}
+
+.range-slider__input::-moz-range-track {
+    width: 100%;
+    height: $range-slider-track-height;
+    cursor: pointer;
+}
+
+.range-slider__input::-moz-range-thumb {
+    width: $range-slider-thumb-size;
+    height: $range-slider-thumb-size;
+    margin-top: -($range-slider-thumb-size/2 - $range-slider-track-height/2);
+    border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
+    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
+    border-radius: 50%;
+    background: $range-slider-thumb-dot-color;
+    cursor: pointer;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+.range-slider__input::-ms-track {
+    width: 100%;
+    height: $range-slider-track-height;
+    border-color: transparent;
+    border-width: 2px 0;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.range-slider__input::-ms-fill-lower {
+    background: #666;
+    border-radius: 0;
+    height: $range-slider-track-height;
+    box-sizing: border-box;
+}
+
+.range-slider__input::-ms-fill-upper {
+    background: #CCC;
+    border-radius: 0;
+    height: $range-slider-track-height;
+    box-sizing: border-box;
+}
+
+.range-slider__input::-ms-thumb {
+    width: $range-slider-thumb-size - ($range-slider-thumb-border-width * 2);
+    height: $range-slider-thumb-size - ($range-slider-thumb-border-width * 2);
+    margin-top: 0;
+    border: (($range-slider-thumb-size / 2) - ($range-slider-thumb-dot-size / 2)) solid $range-slider-thumb-background;
+    box-shadow: 0 0 0 $range-slider-thumb-border-width $range-slider-thumb-border-color;
+    border-radius: 50%;
+    background: $range-slider-thumb-dot-color;
+    cursor: pointer;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+
+
+/**
+     * The container for the dot elements to sit in.
+     */
+.range-slider__dots {
+    display: flex;
+    justify-content: space-between;
+    width: calc((100%) - (#{$range-slider-thumb-size} - #{$range-slider-track-step-size}));
+    margin-left: ($range-slider-thumb-size / 2) - ($range-slider-track-step-size / 2);
     position: absolute;
-    top: 0;
+    top: ($range-slider-thumb-size / 2) - ($range-slider-track-step-size / 2);
     left: 0;
-    list-style-type: none;
+    z-index: -1;
 
-    li {
-        position: relative;
-        width: calc(100% / 6);
-        text-align: center;
-        color: red;
-        cursor: pointer;
-
-        &::before {
-            content: "";
-            display: block;
-            width: .5em;
-            height: .5em;
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: auto;
-            background: $orange;
-            border-radius: 5em;
-        }
+    span {
+        display: block;
+        width: $range-slider-track-step-size;
+        height: $range-slider-track-step-size;
+        background-color: #CCC;
+        border-radius: 50%;
     }
+
 }

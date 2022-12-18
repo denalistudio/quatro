@@ -78,18 +78,6 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <input id="name" type="text" name="name" placeholder="Jméno a příjmení" required>
             <input id="email" type="email" name="email" placeholder="E-mail" required>
             <input id="tel" type="tel" name="tel" placeholder="Telefonní číslo" required>
-            <div class="my_range_input">
-                <input type="range" min="1" max="7" step="1" value="1" style="width:100%;">
-                <ul class="range_input_dots">
-                    <li class="active"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
             <div class="buttons">
                 <a href="#" class="btn btn-forward" data-set-step="2">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -111,45 +99,21 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                 <p>Vaše diplomová práce</p>
             </div>
             <h3>Počet zhotovení pevných desek</h3>
-            <div id="range-pevne-desky" class="range">
-                <input id="pevne-desky" type="range" name="pevne-desky" min="1" max="7" steps="1" value="1" required>
+            <div class="range-slider range-slider--dotted">
+                <input id="pevne-desky" class="range-slider__input js-dotted-range-slider" type="range" name="pevne-desky" value="1" min="1" max="7" required>
             </div>
-            <ul class="range-labels">
-                <li class="active selected">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-            </ul>
+            <div id="value-of-pevne-desky" class="input-value"></div>
             <h3>Počet zhotovení kroužkových vazeb</h3>
-            <div id="range-krouzkove-vazby" class="range">
-                <input id="krouzkove-vazby" type="range" name="krouzkove-vazby" min="1" max="6" steps="1" value="1" required>
+            <div class="range-slider range-slider--dotted">
+                <input id="krouzkove-vazby" class="range-slider__input js-dotted-range-slider" type="range" name="krouzkove-vazby" value="0" min="0" max="6" required>
             </div>
-            <ul class="range-labels">
-                <li class="active selected">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-            </ul>
+            <div id="value-of-krouzkove-vazby" class="input-value"></div>
             <!-- Požadovaný termín zhotovení -->
-            <div class="select">
-                <label for="pocet-listu">Moje práce má</label>
-                <select id="pocet-listu" name="pocet-listu" required>
-                    <option value="">Zvolte počet listů</option>
-                    <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
-                    <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
-                    <option value="13 mm (B) 91-120 listů">13 mm (B) 91-120 listů</option>
-                    <option value="16 mm (C) 121-145 listů">16 mm (C) 121-145 listů</option>
-                    <option value="20 mm (D) 146-185 listů">20 mm (D) 146-185 listů</option>
-                    <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
-                    <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
-                    <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
-                </select>
+            <h3>Moje práce má</h3>
+            <div class="range-slider range-slider--dotted">
+                <input id="pocet-listu" class="range-slider__input js-dotted-range-slider" type="range" name="pocet-listu" value="1" min="1" max="8" required>
             </div>
+            <div id="value-of-pocet-listu" class="input-value"></div>
             <div class="buttons">
                 <a href="#" class="btn btn-prev alt" data-set-step="1">
                     <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -204,32 +168,16 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                     <label for="silver">Stříbrný tisk</label>
                 </div>
             </div>
-            <div class="select">
-                <label for="kapsy-cd-dvd">Chci do vazby i kapsy na CD/DVD</label>
-                <select id="kapsy-cd-dvd" name="kapsy-cd-dvd" data-vypocet="kapsy-cd-dvd" required>
-                    <option value="">Zvolte počet</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+            <h3>Chci do vazby i kapsy na CD/DVD</h3>
+            <div class="range-slider range-slider--dotted">
+                <input id="kapsy-cd-dvd" class="range-slider__input js-dotted-range-slider" type="range" name="kapsy-cd-dvd" value="0" min="0" max="6" required>
             </div>
-            <div class="select">
-                <label for="chlopne-na-prilohy">Chci do vazby i chlopně na přílohy</label>
-                <select id="chlopne-na-prilohy" name="chlopne-na-prilohy" required>
-                    <option value="">Zvolte počet</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+            <div id="value-of-kapsy-cd-dvd" class="input-value"></div>
+            <h3>Chci do vazby i chlopně na přílohy</h3>
+            <div class="range-slider range-slider--dotted">
+                <input id="chlopne-na-prilohy" class="range-slider__input js-dotted-range-slider" type="range" name="chlopne-na-prilohy" value="0" min="0" max="6" required>
             </div>
+            <div id="value-of-chlopne-na-prilohy" class="input-value"></div>
             <input type="checkbox" name="listy-navic">
             <label for="listy-navic">Budu do vazby vkládat ještě nějaké listy (např. originál zadání)</label>
             <textarea id="poznamka" name="poznamka" placeholder="Poznámka"></textarea>
@@ -419,53 +367,321 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
         };
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
     <script>
-        const rangeInput = $(".range input");
-        rangeInput.each(function() {
-            const input = $(this);
-            const id = input.attr("id");
-            const parentId = input.parent().attr("id");
+        //----------------------------------------//
+        //  GLOBAL VARS
+        //----------------------------------------//
 
-            var sheet = document.createElement('style'),
-                prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
+        // Lower track color
+        var rangeSliderTrackColor = '#ccc',
+            // Upper track color
+            rangeSliderTrackFillColor = '#666',
 
-            document.body.appendChild(sheet);
+            // ID of the HTML style element that gets appended to the HTML head
+            rangeSliderStyleElementID = 'rangeSliderStyleElement',
 
-            var getTrackStyle = function(el) {
-                var curVal = el.value,
-                    val = (curVal - 1) * 16.666666667,
-                    style = '';
+            // Class that gets assigned to the individual range sliders (+ ongoing index number)
+            rangeSliderClass = 'range-slider__input--',
 
-                // Set active label
-                $('.range-labels li').removeClass('active selected');
+            // A variable to call every instance of range sliders
+            $rangeSliderElement = document.querySelectorAll('.range-slider input[type=range]'),
 
-                var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
+            // A variable to call every instance of dotted range sliders
+            $dottedRangeSliderElement = document.querySelectorAll('.range-slider--dotted input[type=range]');
 
-                curLabel.addClass('active selected');
-                curLabel.prevAll().addClass('selected');
+        //----------------------------------------//
+        //  FUNCTIONS
+        //----------------------------------------//
 
-                // Change background gradient
-                for (var i = 0; i < prefs.length; i++) {
-                    console.log(val)
-                    style += '#' + parentId + ' {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #fff ' + val + '%, #fff 100%)}';
-                    style += '#' + parentId + ' input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #b2b2b2 ' + val + '%, #b2b2b2 100%)}';
+        // Function to create empty style elements in the HTML head 
+        // to append the dynamic syles for the range sliders to
+        function createStyleElements(numberOfStyleElements) {
+            // We want a <style> element
+            var rangeSliderStyleElement = document.createElement('style');
+            // ...equal the amount of range sliders on the side
+            rangeSliderStyleElement.id = rangeSliderStyleElementID + numberOfStyleElements;
+            // ...and append it to the HTML head
+            document.head.appendChild(rangeSliderStyleElement);
+        }
+
+        // Function that takes care of coloring the range slider track differently
+        // on the left and on the right side of the slider handle.
+        function paintRangeTrack(rangeSliderInstance) {
+            // Get the current value of the actual range slider
+            var rangeValue = $rangeSliderElement[rangeSliderInstance].value,
+                // Get the min and max attributes value of the actual range slider
+                rangeMinValue = $rangeSliderElement[rangeSliderInstance].getAttribute('min');
+            rangeMaxValue = $rangeSliderElement[rangeSliderInstance].getAttribute('max');
+
+            // Generate the CSS and put it into the style tag with the appropriate ID in the HTML head
+            // (One for Webkit, one for Firefox)    
+            document.getElementById(rangeSliderStyleElementID + rangeSliderInstance).textContent =
+                'input[class~="' + rangeSliderClass + rangeSliderInstance + '"]::-webkit-slider-runnable-track{background: linear-gradient(90deg, ' + rangeSliderTrackFillColor + ' ' + Math.round(((rangeValue - rangeMinValue) / (rangeMaxValue - rangeMinValue)) * 100) + '% , ' + rangeSliderTrackColor + ' ' + Math.round(((rangeValue - rangeMinValue) / (rangeMaxValue - rangeMinValue)) * 100 + 1) + '%)}' +
+                'input[class~="' + rangeSliderClass + rangeSliderInstance + '"]::-moz-range-track{background: linear-gradient(90deg, ' + rangeSliderTrackFillColor + ' ' + Math.round(((rangeValue - rangeMinValue) / (rangeMaxValue - rangeMinValue)) * 100) + '% , ' + rangeSliderTrackColor + ' ' + Math.round(((rangeValue - rangeMinValue) / (rangeMaxValue - rangeMinValue)) * 100 + 1) + '%)}';
+        }
+
+
+
+        // Function to generate the correct amount dots for dotted range sliders
+        function createRangeSliderDots(dottedRangeSliderInstance) {
+            // Get the min value of the actual range slider
+            var rangeSliderMinValue = $dottedRangeSliderElement[dottedRangeSliderInstance].getAttribute('min'),
+                // Get the max value of the actual range slider
+                rangeSliderMaxValue = $dottedRangeSliderElement[dottedRangeSliderInstance].getAttribute('max'),
+                // Calculate the correct number of steps thereof
+                rangeSliderDots = rangeSliderMaxValue - rangeSliderMinValue + 1,
+                // Get the container to put the dot elements into
+                $rangeSliderStepsContainer = document.querySelectorAll('.range-slider__dots');
+
+            // Iterate over the amount of the actual needed dots
+            for (var i = 0; i < rangeSliderDots; i++) {
+                // We want to create span elements representing the dots
+                var rangeSliderDotElement = document.createElement('span');
+
+                // Append the span to the dots container
+                $rangeSliderStepsContainer[dottedRangeSliderInstance].appendChild(rangeSliderDotElement);
+            }
+        }
+
+
+
+        // Function to generate the necessary container for the dots of the dotted range slider
+        function createDotsContainerElement() {
+
+            // For every dotted range slider...    
+            Array.prototype.forEach.call(document.querySelectorAll('.range-slider--dotted'), function(el, i) {
+                // ...we want a <div> element
+                var dotsContainerElement = document.createElement('div');
+
+                // ...with a class of 'range-slider__dots`
+                dotsContainerElement.className = 'range-slider__dots';
+
+                // ...and append it to the actual range slider
+                el.appendChild(dotsContainerElement);
+            });
+
+        }
+
+
+
+        // Function to paint the slider dots in the correct color
+        function paintSliderDots(dottedRangeSliderInstance) {
+            // Get the current value of the actual range slider    
+            var rangeSliderValue = $dottedRangeSliderElement[dottedRangeSliderInstance].value,
+                // Collect all dots from the actual dotted slider
+                rangeSliderDots = $dottedRangeSliderElement[dottedRangeSliderInstance].parentNode.querySelectorAll('.range-slider__dots span');
+
+            // Iterate over all dots of this respective dotted range slider
+            for (var j = 0; j < rangeSliderDots.length; j++) {
+                // If the dot is lower than the sliders current value...
+                if (j < rangeSliderValue) {
+                    // ...paint it in the lower slider tracks color
+                    rangeSliderDots[j].style.backgroundColor = rangeSliderTrackFillColor;
+                    // If it's greater than the current sliders value...
+                } else {
+                    // ...paint it in the upper slider tracks color
+                    rangeSliderDots[j].style.backgroundColor = rangeSliderTrackColor;
                 }
-                return style;
+            }
+        }
+
+
+
+
+
+        //----------------------------------------//
+        //  DOM-READY FUNCTION
+        //----------------------------------------//
+
+        document.addEventListener('DOMContentLoaded', function(event) {
+
+
+
+            // NORMAL RANGE SLIDERS    
+
+            // Get all range sliders on the page
+            var sliders = $rangeSliderElement;
+
+            // Iterate over all range sliders on the page
+            for (var rangeSliders = 0; rangeSliders < sliders.length; rangeSliders++) {
+                // Create an empty style element for each range slider 
+                // in the hmtl head and give each one an unique id.
+                createStyleElements(rangeSliders);
+
+                // Give each range slider an unique class
+                $rangeSliderElement[rangeSliders].classList.add(rangeSliderClass + rangeSliders);
+
+                // Fill the lower and upper end of the range slider track with the correct color
+                paintRangeTrack(rangeSliders);
+
+                // On-change function, so the filled area 
+                // changes dynamically with the current sliders value   
+                sliders[rangeSliders].addEventListener('input', function() {
+                    // Iterate over all range sliders on the page
+                    for (var i = 0; i < sliders.length; i++) {
+                        // Fill the lower and upper end of the range slider track with the correct color
+                        paintRangeTrack(i);
+                    }
+                })
             }
 
-            input.on('input', function() {
-                sheet.textContent = getTrackStyle(this);
-            });
 
-            // Change input value on label click
-            input.children("li").on('click', function() {
-                var index = $(this).index();
 
-                input.val(index + 1).trigger('input');
-            });
+            // DOTTED RANGE SLIDERS    
+
+            // Get all dotted range sliders on the page
+            var dottedSliders = $dottedRangeSliderElement;
+
+            // Create the dots container element
+            createDotsContainerElement();
+
+            // Iterate over all range sliders on the page
+            for (var dottedRangeSliders = 0; dottedRangeSliders < dottedSliders.length; dottedRangeSliders++) {
+
+                // Create the dots
+                createRangeSliderDots(dottedRangeSliders);
+
+                // ...and paint them appropriately
+                paintSliderDots(dottedRangeSliders);
+
+                // Add event listener (when the user changes the value)
+                dottedSliders[dottedRangeSliders].addEventListener('input', function() {
+                    // Iterate over all range dotted sliders on the page
+                    for (var i = 0; i < dottedSliders.length; i++) {
+                        // ...and paint them correctly on change
+                        paintSliderDots(i);
+                    }
+                })
+
+                // Add an additional event listener ('mousemove') for IE
+                // (IE seems to have a problem with the 'input' event listeners on range sliders)
+                dottedSliders[dottedRangeSliders].addEventListener('mousemove', function() {
+                    // Iterate over all range dotted sliders on the page
+                    for (var i = 0; i < dottedSliders.length; i++) {
+                        // ...and paint them correctly on change
+                        paintSliderDots(i);
+                    };
+                });
+            };
         });
     </script>
+    <script>
+        // Show value of 'pevne-desky', 'krouzkove-vazby', 'kapsy-cd-dvd' and 'chlopne-na-prilohy'
+        document.querySelectorAll("input#pevne-desky, input#krouzkove-vazby, input#kapsy-cd-dvd, input#chlopne-na-prilohy").forEach((input) => {
+            const name = input.name;
+            const displayValueElement = document.getElementById("value-of-" + name);
+            let value = input.value;
+
+            if (displayValueElement) {
+                displayValueElement.innerHTML = value;
+
+                input.oninput = function() {
+                    value = input.value
+                    displayValueElement.innerHTML = value;
+                };
+            };
+        });
+
+        // Show value of 'pocet-listu'
+        function showValueOfPocetListu() {
+            const input = document.getElementById("pocet-listu");
+            const displayValueElement = document.getElementById("value-of-pocet-listu");
+            let value = input.value;
+            let firstLine = "";
+            let secondLine = "";
+
+            if (displayValueElement) {
+                switch (value) {
+                    case "1":
+                        firstLine = "20 - 40 listů";
+                        secondLine = "5 mm (AA)";
+                        break;
+                    case "2":
+                        firstLine = "41 - 90 listů";
+                        secondLine = "10 mm (A)";
+                        break;
+                    case "3":
+                        firstLine = "91 - 120 listů";
+                        secondLine = "13 mm (B)";
+                        break;
+                    case "4":
+                        firstLine = "121 - 145 listů";
+                        secondLine = "16 mm (C)";
+                        break;
+                    case "5":
+                        firstLine = "146 - 185 listů";
+                        secondLine = "20 mm (D)";
+                        break;
+                    case "6":
+                        firstLine = "186 - 230 listů";
+                        secondLine = "24 mm (E)";
+                        break;
+                    case "7":
+                        firstLine = "231 - 265 listů";
+                        secondLine = "28 mm (F)";
+                        break;
+                    case "8":
+                        firstLine = "266 - 300 listů";
+                        secondLine = "32 mm (G)";
+                        break;
+                };
+                displayValueElement.innerHTML = "<p>" + firstLine + "</p><p>" + secondLine + "</p>";
+
+                input.oninput = function() {
+                    value = input.value;
+                    switch (value) {
+                        case "1":
+                            firstLine = "20 - 40 listů";
+                            secondLine = "5 mm (AA)";
+                            break;
+                        case "2":
+                            firstLine = "41 - 90 listů";
+                            secondLine = "10 mm (A)";
+                            break;
+                        case "3":
+                            firstLine = "91 - 120 listů";
+                            secondLine = "13 mm (B)";
+                            break;
+                        case "4":
+                            firstLine = "121 - 145 listů";
+                            secondLine = "16 mm (C)";
+                            break;
+                        case "5":
+                            firstLine = "146 - 185 listů";
+                            secondLine = "20 mm (D)";
+                            break;
+                        case "6":
+                            firstLine = "186 - 230 listů";
+                            secondLine = "24 mm (E)";
+                            break;
+                        case "7":
+                            firstLine = "231 - 265 listů";
+                            secondLine = "28 mm (F)";
+                            break;
+                        case "8":
+                            firstLine = "266 - 300 listů";
+                            secondLine = "32 mm (G)";
+                            break;
+                    };
+                    displayValueElement.innerHTML = "<p>" + firstLine + "</p><p>" + secondLine + "</p>";
+                };
+            };
+        };
+        showValueOfPocetListu();
+    </script>
+    <!--<div class="select">
+                <select>
+                    <option value="">Zvolte počet listů</option>
+                    <option value="5 mm (AA) 20-40 listů">5 mm (AA) 20-40 listů</option>
+                    <option value="10 mm (A) 41-90 listů">10 mm (A) 41-90 listů</option>
+                    <option value="13 mm (B) 91-120 listů">13 mm (B) 91-120 listů</option>
+                    <option value="16 mm (C) 121-145 listů">16 mm (C) 121-145 listů</option>
+                    <option value="20 mm (D) 146-185 listů">20 mm (D) 146-185 listů</option>
+                    <option value="24 mm (E) 186-230 listů">24 mm (E) 186-230 listů</option>
+                    <option value="28 mm (F) 231-265 listů">28 mm (F) 231-265 listů</option>
+                    <option value="32 mm (G) 266-300 listů">32 mm (G) 266-300 listů</option>
+                </select>
+            </div>-->
 </body>
 
 </html>
