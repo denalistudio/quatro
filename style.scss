@@ -625,7 +625,7 @@ textarea {
             .sport__text {
                 color: $white;
                 flex-basis: 100%;
-    
+
                 h1 {
                     text-align: center;
                     margin-bottom: 0.5em;
@@ -643,23 +643,24 @@ textarea {
                 @media only screen and (min-width: 62em) {
                     flex-basis: 50%;
 
-                    h1, h3 {
+                    h1,
+                    h3 {
                         text-align: left;
                     }
                 }
             }
-    
+
             .sport__img {
                 display: block;
                 flex-basis: 100%;
-    
+
                 img {
                     width: 100%;
                     aspect-ratio: 16 / 9;
                     object-fit: cover;
                     border-radius: 1em;
                 }
-    
+
                 @media only screen and (min-width: 48em) {
                     flex-basis: 60%;
                 }
@@ -1360,7 +1361,7 @@ textarea {
             display: grid;
             grid-template-rows: auto auto;
             grid-template-columns: auto auto;
-            grid-template-areas: "razitko-h3 razitko-h3""razitko-img razitko-text";
+            grid-template-areas: "razitko-h3 razitko-h3" "razitko-img razitko-text";
             margin: 2em 0;
 
             h3 {

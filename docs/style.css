@@ -589,7 +589,8 @@ textarea {
   .front-page .sport .sport__content .sport__text {
     flex-basis: 50%;
   }
-  .front-page .sport .sport__content .sport__text h1, .front-page .sport .sport__content .sport__text h3 {
+  .front-page .sport .sport__content .sport__text h1,
+  .front-page .sport .sport__content .sport__text h3 {
     text-align: left;
   }
 }
@@ -1042,8 +1043,8 @@ textarea {
 }
 @media (hover: none) and (pointer: coarse) {
   .sluzby main #form input[type=text],
-.sluzby main #form input[type=email],
-.sluzby main #form select {
+  .sluzby main #form input[type=email],
+  .sluzby main #form select {
     padding: 0.5em;
   }
 }
