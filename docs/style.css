@@ -671,8 +671,7 @@ textarea {
 .page main.kontakt {
   gap: 2em;
   display: grid;
-  grid-template-rows: auto auto auto auto;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1, auto);
 }
 .page main.kontakt h2 {
   margin-bottom: 0.5em;
@@ -691,20 +690,28 @@ textarea {
 }
 @media only screen and (min-width: 36em) {
   .page main.kontakt #mapa iframe {
-    height: 15em;
+    grid-column: span 2;
   }
 }
 @media only screen and (min-width: 62em) {
   .page main.kontakt #mapa iframe {
-    height: 20em;
+    height: 25em;
+  }
+}
+@media only screen and (min-width: 87.5em) {
+  .page main.kontakt #mapa iframe {
+    height: 30em;
+  }
+}
+@media only screen and (min-width: 36em) {
+  .page main.kontakt #mapa {
+    grid-column: span 2;
   }
 }
 @media only screen and (min-width: 36em) {
   .page main.kontakt {
     row-gap: 4em;
     column-gap: 2em;
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr 1fr;
   }
 }
 @media only screen and (min-width: 48em) {

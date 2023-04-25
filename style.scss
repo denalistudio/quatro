@@ -731,8 +731,7 @@ textarea {
         &.kontakt {
             gap: 2em;
             display: grid;
-            grid-template-rows: auto auto auto auto;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(1, auto);
 
             h2 {
                 margin-bottom: 0.5em;
@@ -747,6 +746,7 @@ textarea {
             }
 
             #mapa {
+
                 iframe {
                     width: 100%;
                     height: 20em;
@@ -754,20 +754,28 @@ textarea {
                     border-radius: 1em;
 
                     @media only screen and (min-width: 36em) {
-                        height: 15em;
+                        //height: 15em; // Použít při jednom kontaktu
+                        grid-column: span 2; // Použít při dvou kontaktech
                     }
 
                     @media only screen and (min-width: 62em) {
-                        height: 20em;
+                        // height: 20em; // Použít při jednom kontaktu
+                        height: 25em; // Použít při dvou kontaktech
                     }
+
+                    @media only screen and (min-width: 87.5em) {
+                        height: 30em; // Použít při dvou kontaktech
+                    }
+                }
+
+                @media only screen and (min-width: 36em) {
+                    grid-column: span 2;
                 }
             }
 
             @media only screen and (min-width: 36em) {
                 row-gap: 4em;
                 column-gap: 2em;
-                grid-template-rows: auto auto;
-                grid-template-columns: 1fr 1fr;
             }
         }
 
