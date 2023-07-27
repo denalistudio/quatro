@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
         current_lang: 'cs',
         page_scripts: true,
 
-        theme_css: 'https://nastartuj.cz/cookieconsent.css',
+        theme_css: 'https://nastartuj.cz/css/cookieconsent.css',
 
         autorun: true,
         delay: 0,
