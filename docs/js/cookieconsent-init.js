@@ -61,7 +61,7 @@ window.addEventListener('load', function () {
                     },
                     secondary_btn: {
                         text: 'Odmítnout vše',
-                        role: 'settings'   //'settings' or 'accept_necessary'
+                        role: 'accept_necessary'   //'settings' or 'accept_necessary'
                     }
                 },
                 settings_modal: {
@@ -82,14 +82,6 @@ window.addEventListener('load', function () {
                             title: 'Použití cookies 📢',
                             description: 'Soubory cookie používáme k analýze údajů o našich návštěvnících, ke zlepšení našich webových stránek, zobrazení personalizovaného obsahu a k tomu, abychom vám poskytli skvělý zážitek z webu. Používáním tohoto webu s tímto používáním souhlasíte.',
                         }, {
-                            title: 'Cookies nutné pro fungování webu',
-                            description: 'Tyto soubory cookies jsou nezbytné pro fungování webu a díky tomu je není možné zakázat. Neukládají žádné informace, které lze přiřadit ke konkrétní osobě.',
-                            toggle: {
-                                value: 'necessary',
-                                enabled: true,
-                                readonly: true
-                            }
-                        }, {
                             title: 'Analytické cookies',
                             description: 'Tento typ cookies nám umožňuje zkoumat vaši aktivitu na stránce a přizpůsobovat tak v budoucnu náš web tak, abychom zlepšili váš zážitek při prohlížení.',
                             toggle: {
@@ -102,20 +94,14 @@ window.addEventListener('load', function () {
                                     col1: '_ga',
                                     col2: 'google.com',
                                     col3: '2 roky',
-                                    col4: 'Rozlišuje uživatele.',
+                                    col4: 'Slouží k rozlišení uživatelů.',
                                     is_regex: true
                                 },
                                 {
-                                    col1: '_gid',
+                                    col1: '_ga_H9F8DP85PF',
                                     col2: 'google.com',
-                                    col3: '24 hodin',
-                                    col4: 'Rozlišuje uživatele.',
-                                },
-                                {
-                                    col1: '_gat',
-                                    col2: 'google.com',
-                                    col3: '1 minuta',
-                                    col4: 'Omezuje a reguluje rychlost požadavků.'
+                                    col3: '2 roky',
+                                    col4: 'Slouží k zachování stavu relace.',
                                 }
                             ]
                         }
