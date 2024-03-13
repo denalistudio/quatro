@@ -948,7 +948,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </section>
             <section>
                 <input type="checkbox" name="obchodni-podminky" id="obchodni-podminky" required>
-                <label for="obchodni-podminky" id="label-obchodni-podminky">Souhlasím s <a href="../obchodni_podminky.html" target="_blank">obchodními podmínkami</a>.</label>
+                <label for="obchodni-podminky" id="label-obchodni-podminky">Souhlasím s <a href="../obchodni_podminky.php" target="_blank">obchodními podmínkami</a>.</label>
                 <input type="hidden" name="price" id="price">
             </section>
             <div class="buttons">
