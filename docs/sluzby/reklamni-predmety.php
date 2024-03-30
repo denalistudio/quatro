@@ -60,9 +60,11 @@
                         rel="noopener">
                         <img src="../images/reklamni-predmety/live_02.jpg" alt="Retumbler" title="Retumbler">
                     </a>
-                    <a href="https://www.textileeurope.com/?_currency=CZK#" target="_blank" rel="noopener">
-                        <img src="../images/reklamni-predmety/textileeurope.png" alt="Textile Europe"
-                            title="Textile Europe">
+                    <a href="https://quatro.alltextiles.cz/" target="_blank" rel="noopener">
+                        <img src="../images/reklamni-predmety/quatro_alltextiles.png">
+                    </a>
+                    <a href="https://onlinecatalog.malfini.com/nastartuj/cs/catalog" target="_blank" rel="noopener">
+                        <img src="../images/reklamni-predmety/malfini.png" alt="Online katalog Malfini" title="Online katalog Malfini">
                     </a>
                 </main>
             </div>
