@@ -41,20 +41,18 @@
                 </div>
                 <main>
                     <h1>Samonamáčecí, dřevěná a rychlorazítka</h1>
-                    <p>Nemá opravdu cenu popisovat jaká, zdali dřevěný, samonamáčecí, paginovací ... Řekněte si sami
-                        jakou
-                        máte
-                        představu a my vám nabídneme jen to nejlepší.</p>
-                    <h2>Colop</h2>
+                    <p>Nemá opravdu cenu popisovat jaká, zdali dřevěný, samonamáčecí, paginovací ... Řekněte si sami jakou máte představu a my vám nabídneme jen to nejlepší.</p>
+                    <div class="razitka_section_heading_with_link">
+                        <h2>Colop</h2>
+                        <div class="link">
+                            <a href="../colop_katalog.pdf" target="_blank" rel="noopener">Zobrazit katalog</a>
+                        </div>
+                    </div>
                     <div class="razitko">
                         <h3>Colop printer 10</h3>
                         <img src="../images/razitka/colop_p10.jpg" alt="Razítko Colop printer 10">
                         <div class="razitko-text">
-                            <p>Nejmenšími modely razítek ve své skupině - vytváří rohový otisk razítka a tímto
-                                nejběžnějším
-                                formátem
-                                se hodí
-                                obzvláště pro adresy bez loga.</p>
+                            <p>Nejmenšími modely razítek ve své skupině - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.</p>
                             <p>Maximální velikost otisku je <b>27 x 10 mm</b>.</p>
                             <p>Maximální počet řádků je <b>3</b>.</p>
                         </div>
@@ -63,11 +61,7 @@
                         <h3>Colop printer 20</h3>
                         <img src="../images/razitka/colop_p20.jpg" alt="Razítko Colop printer 20">
                         <div class="razitko-text">
-                            <p>Razítka správné velikosti pro ty nejdůležitější informace. Razítka Printer 20 vytváří
-                                rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.</p>
+                            <p>Razítka správné velikosti pro ty nejdůležitější informace. Razítka Printer 20 vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.</p>
                             <p>Maximální velikost otisku je <b>38 x 14 mm</b>.</p>
                             <p>Maximální počet řádků je <b>4</b>.</p>
                         </div>
@@ -76,11 +70,7 @@
                         <h3>Colop printer 30</h3>
                         <img src="../images/razitka/colop_p30.jpg" alt="Razítko Colop printer 30">
                         <div class="razitko-text">
-                            <p>Razítka s jednou z nejčastěji používaných velikostí pro razítka s adresami - vytváří
-                                rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
+                            <p>Razítka s jednou z nejčastěji používaných velikostí pro razítka s adresami - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
                             <p>Maximální velikost otisku je <b>47 x 18 mm</b>.</p>
                             <p>Maximální počet řádků je <b>5</b>.</p>
                         </div>
@@ -89,10 +79,7 @@
                         <h3>Colop printer 40</h3>
                         <img src="../images/razitka/colop_p40.jpg" alt="Razítko Colop printer 40">
                         <div class="razitko-text">
-                            <p>Nabízí dostatečně velkou plochu také pro delší adresy a různé informace - vytváří rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
+                            <p>Nabízí dostatečně velkou plochu také pro delší adresy a různé informace - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
                             <p>Maximální velikost otisku je <b>59 x 23 mm</b>.</p>
                             <p>Maximální počet řádků je <b>6</b>.</p>
                         </div>
@@ -107,11 +94,7 @@
                         <h3>Trodat 4910</h3>
                         <img src="../images/razitka/trodat_4910.jpg" alt="Razítko Trodat 4910">
                         <div class="razitko-text">
-                            <p>Nejmenšími modely razítek ve své skupině - vytváří rohový otisk razítka a tímto
-                                nejběžnějším
-                                formátem
-                                se hodí
-                                obzvláště pro adresy bez loga.
+                            <p>Nejmenšími modely razítek ve své skupině - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.
                             </p>
                             <p>Maximální velikost otisku je <b>26 x 9 mm</b>.</p>
                             <p>Maximální počet řádků je <b>3</b>.</p>
@@ -121,11 +104,7 @@
                         <h3>Trodat 4911</h3>
                         <img src="../images/razitka/trodat_4911.jpg" alt="Razítko Trodat 4911">
                         <div class="razitko-text">
-                            <p>Razítka správné velikosti pro ty nejdůležitější informace. Razítka Printer 20 vytváří
-                                rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.</p>
+                            <p>Razítka správné velikosti pro ty nejdůležitější informace. Razítka Printer 20 vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy bez loga.</p>
                             <p>Maximální velikost otisku je <b>38 x 14 mm</b>.</p>
                             <p>Maximální počet řádků je <b>4</b>.</p>
                         </div>
@@ -134,11 +113,7 @@
                         <h3>Trodat 4912</h3>
                         <img src="../images/razitka/trodat_4912.jpg" alt="Razítko Trodat 4912">
                         <div class="razitko-text">
-                            <p>Razítka s jednou z nejčastěji používaných velikostí pro razítka s adresami - vytváří
-                                rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
+                            <p>Razítka s jednou z nejčastěji používaných velikostí pro razítka s adresami - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
                             <p>Maximální velikost otisku je <b>47 x 18 mm</b>.</p>
                             <p>Maximální počet řádků je <b>5</b>.</p>
                         </div>
@@ -147,10 +122,7 @@
                         <h3>Trodat 4913</h3>
                         <img src="../images/razitka/trodat_4913.jpg" alt="Razítko Trodat 4913">
                         <div class="razitko-text">
-                            <p>Nabízí dostatečně velkou plochu také pro delší adresy a různé informace - vytváří rohový
-                                otisk
-                                razítka a
-                                tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
+                            <p>Nabízí dostatečně velkou plochu také pro delší adresy a různé informace - vytváří rohový otisk razítka a tímto nejběžnějším formátem se hodí obzvláště pro adresy s logem nebo bez loga.</p>
                             <p>Maximální velikost otisku je <b>58 x 22 mm</b>.</p>
                             <p>Maximální počet řádků je <b>6</b>.</p>
                         </div>
