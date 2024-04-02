@@ -145,7 +145,7 @@
     <script src="../js/cookieconsent.js"></script>
     <script src="../js/cookieconsent-init.js"></script>
     <script>
-        $("#navbar").load("../components/header-sluzby.html");
+        $("#navbar").load("../components/header.html");
         $("#nav-mobile").load("../components/nav-mobile-sluzby.html");
         $("#sidebar").load("../components/aside.html");
         $("footer").load("../components/footer.html");

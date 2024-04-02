@@ -9,7 +9,7 @@
     <meta name="description"
         content="Reklamní firma s širokým záběrem a bohatými zkušenostmi, profesionálním přístupem a příznivými cenami.">
     <meta name="keywords" content="reklama, karviná, reklamka, levná, akce, sleva, quatro">
-    <title>Quatro</title>
+    <title>Obchodní podmínky - Quatro</title>
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
