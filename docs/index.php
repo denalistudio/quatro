@@ -117,10 +117,10 @@
                                 identifikace s naší firmou k definitivní změně názvu na Quatro Reklama. Za dobu naší
                                 spolupráce se nám podařilo dosáhnout na již výše zmíněný postup do 1.KFL či vybojovat
                                 3.místo v Letním karvinském poháru 2008 a 2009.</p>
-                            <p>Více na <a href="http://www.quatroreklamafc.ic.cz/" target="_blank"
-                                    rel="noopener">http://www.quatroreklamafc.ic.cz/</a></p>
+                            <p>Více na <a href="https://www.quatroreklamafc.ic.cz/" target="_blank"
+                                    rel="noopener">www.quatroreklamafc.ic.cz</a></p>
                         </div>
-                        <a class="sport__img" href="http://www.quatroreklamafc.ic.cz/" target="_blank" rel="noopener">
+                        <a class="sport__img" href="https://www.quatroreklamafc.ic.cz/" target="_blank" rel="noopener">
                             <img src="./images/fc_quatro.jpg">
                         </a>
                     </div>
