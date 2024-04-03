@@ -37,8 +37,9 @@
         <div id="content" class="single">
             <main>
                 <h1>Soubory ke stažení</h1>
-                <p><a href="./colop_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Colop</a></p>
-                <p><a href="./trodat_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Trodat</a></p>
+                <p><a href="./files/colop_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Colop</a></p>
+                <p><a href="./files/trodat_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Trodat</a></p>
+                <p><a href="./files/AluSign.pdf" target="_blank" rel="noopener">Informační systém &dash; AluSign</a></p>
             </main>
             <footer>
             </footer>
