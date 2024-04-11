@@ -40,6 +40,7 @@
                 <p><a href="./files/colop_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Colop</a></p>
                 <p><a href="./files/trodat_katalog.pdf" target="_blank" rel="noopener">Katalog razítek Trodat</a></p>
                 <p><a href="./files/AluSign.pdf" target="_blank" rel="noopener">Informační systém &dash; AluSign</a></p>
+                <p><a href="https://online.flippingbook.com/view/1015447310/" target="_blank" rel="noopener">Prezentační systémy</a></p>
             </main>
             <footer>
             </footer>
