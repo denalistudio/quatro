@@ -1208,6 +1208,25 @@ textarea {
             height: 25em;
         }
 
+        // Reklamní předměty
+        .reklamni_predmety {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 2em;
+            column-gap: 0.5em;
+
+            a {
+                width: 9.375em;
+                display: block;
+
+                img {
+                    width: 100%;
+                    display: block;
+                    margin: 0;
+                }
+            }
+        }
+
         // Velkoplošný tisk
         .plocha {
             margin: 2.5em 0;

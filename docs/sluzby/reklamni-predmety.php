@@ -46,26 +46,31 @@
                         i opravdové fajnovky. Přijďte si vybrat i vy z našich katalogů. Samozřejmostí je i jejich
                         potisk. Dodáme
                         včetně tamponového, termotransferového, sítotisku nebo ofsetového tisku.</p>
-                    <a href="http://primgifts.eu/" target="_blank" rel="noopener">
-                        <img src="../images/reklamni-predmety/primgifts.jpg" alt="Primgifts" title="Primgifts">
-                    </a>
-                    <a href="http://www.katalogmagic.cz/" target="_blank" rel="noopener">
-                        <img src="../images/reklamni-predmety/3d_profil.jpg" alt="Magic" title="Magic">
-                    </a>
-                    <a href="https://gallery.reflects.de/onlinekatalog/COMPLETE_2020_EN-MP/" target="_blank"
-                        rel="noopener">
-                        <img src="../images/reklamni-predmety/live_01.jpg" alt="Complete" title="Complete">
-                    </a>
-                    <a href="https://gallery.reflects.de/onlinekatalog/RETUMBLER_2020_EN-MP/10/" target="_blank"
-                        rel="noopener">
-                        <img src="../images/reklamni-predmety/live_02.jpg" alt="Retumbler" title="Retumbler">
-                    </a>
-                    <a href="https://quatro.alltextiles.cz/" target="_blank" rel="noopener">
-                        <img src="../images/reklamni-predmety/quatro_alltextiles.png">
-                    </a>
-                    <a href="https://onlinecatalog.malfini.com/nastartuj/cs/catalog" target="_blank" rel="noopener">
-                        <img src="../images/reklamni-predmety/malfini.png" alt="Online katalog Malfini" title="Online katalog Malfini">
-                    </a>
+                    <div class="reklamni_predmety">
+                        <a href="http://primgifts.eu/" target="_blank" rel="noopener">
+                            <img src="../images/reklamni-predmety/primgifts.jpg" alt="Primgifts" title="Primgifts">
+                        </a>
+                        <a href="http://www.katalogmagic.cz/" target="_blank" rel="noopener">
+                            <img src="../images/reklamni-predmety/3d_profil.jpg" alt="Magic" title="Magic">
+                        </a>
+                        <a href="https://gallery.reflects.de/onlinekatalog/COMPLETE_2020_EN-MP/" target="_blank"
+                            rel="noopener">
+                            <img src="../images/reklamni-predmety/live_01.jpg" alt="Complete" title="Complete">
+                        </a>
+                        <a href="https://gallery.reflects.de/onlinekatalog/RETUMBLER_2020_EN-MP/10/" target="_blank"
+                            rel="noopener">
+                            <img src="../images/reklamni-predmety/live_02.jpg" alt="Retumbler" title="Retumbler">
+                        </a>
+                        <a href="https://quatro.alltextiles.cz/" target="_blank" rel="noopener">
+                            <img src="../images/reklamni-predmety/quatro_alltextiles.png" alt="">
+                        </a>
+                        <a href="https://onlinecatalog.malfini.com/nastartuj/cs/catalog" target="_blank" rel="noopener">
+                            <img src="../images/reklamni-predmety/malfini.png" alt="Online katalog Malfini" title="Online katalog Malfini">
+                        </a>
+                        <a href="https://quatro.hideagifts.com/cz/" target="_blank" rel="noopener">
+                            <img src="../images/reklamni-predmety/hidea.jpg" alt="">
+                        </a>
+                    </div>
                 </main>
             </div>
         </div>
