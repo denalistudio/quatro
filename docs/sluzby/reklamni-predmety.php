@@ -65,10 +65,18 @@
                             <img src="../images/reklamni-predmety/quatro_alltextiles.png" alt="">
                         </a>
                         <a href="https://onlinecatalog.malfini.com/nastartuj/cs/catalog" target="_blank" rel="noopener">
-                            <img src="../images/reklamni-predmety/malfini.png" alt="Online katalog Malfini" title="Online katalog Malfini">
+                            <picture>
+                                <source srcset="../images/reklamni-predmety/malfini.webp" type="image/webp">
+                                <source srcset="../images/reklamni-predmety/malfini.jpg" type="image/jpeg">
+                                <img src="../images/reklamni-predmety/malfini.jpg" alt="Online katalog Malfini" title="Online katalog Malfini">
+                            </picture>
                         </a>
                         <a href="https://quatro.hideagifts.com/cz/" target="_blank" rel="noopener">
-                            <img src="../images/reklamni-predmety/hidea.jpg" alt="">
+                            <picture>
+                                <source srcset="../images/reklamni-predmety/hidea.webp" type="image/webp">
+                                <source srcset="../images/reklamni-predmety/hidea.jpg" type="image/jpeg">
+                                <img src="../images/reklamni-predmety/hidea.jpg" alt="">
+                            </picture>
                         </a>
                     </div>
                 </main>

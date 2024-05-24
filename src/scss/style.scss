@@ -1217,12 +1217,17 @@ textarea {
 
             a {
                 width: 9.375em;
+                aspect-ratio: 15/21;
                 display: block;
 
                 img {
                     width: 100%;
+                    height: 100%;
                     display: block;
+                    object-fit: cover;
+                    object-position: center;
                     margin: 0;
+                    border: 1px solid rgba(0, 0, 0, 0.15);
                 }
             }
         }

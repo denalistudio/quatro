@@ -368,7 +368,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                                 <img src="https://nastartuj.cz/objednavka/logo.png" height="80">
                             </td>
                             <td style="padding:30px 30px 30px 0;border:0;background:#264796;text-align:right;">
-                                <h2 style="Margin:0 0 10px 0;padding:0;color:#ffffff;">Quatro - Život v reklamě</h2>
+                                <h2 style="Margin:0 0 10px 0;padding:0;color:#ffffff;">Quatro - Živel v reklamě</h2>
                                 <p style="Margin:0;padding:0;color:#ffffff;">Ladislav Frajkowski</p>
                             </td>
                         </tr>
