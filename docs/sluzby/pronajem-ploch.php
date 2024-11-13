@@ -167,7 +167,7 @@
                     </div>
                     <hr>
                     <div class="plocha">
-                        <h2>Plocha 002 na třídě 17. listopadu (07-15)</h2>
+                        <h2>Plocha 002 na třídě 17. listopadu (07-11)</h2>
                         <div class="plocha__grid">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2572.85093255304!2d18.5557815!3d49.8452584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713fffe3623731f%3A0x5c7f33ac5b6ae4fb!2zQm_FvmtvdmEgODQ3LzQsIFLDoWosIDczNCAwMSBLYXJ2aW7DoQ!5e0!3m2!1sen!2scz!4v1648104396259!5m2!1sen!2scz"
@@ -198,7 +198,7 @@
                             <tr>
                                 <th scope="row">Rozměr</th>
                                 <td>
-                                    <p><b>plocha 8, 9, 11, 12, 14, 15</b>: 500 x 300 cm</p>
+                                    <p><b>plocha 8, 9, 11</b>: 500 x 300 cm</p>
                                     <p><b>plocha 10</b>: 430 x 300 cm</p>
                                 </td>
                             </tr>
@@ -215,13 +215,13 @@
                                     <h4 id="p002-1-p">3900 Kč/měsíc</h4>
                                     <script>
                                         document.getElementById("p002-1-1").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "3900 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "4290 Kč/měsíc";
                                         });
                                         document.getElementById("p002-1-2").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "3400 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "3740 Kč/měsíc";
                                         });
                                         document.getElementById("p002-1-3").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "2800 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "3080 Kč/měsíc";
                                         });
                                     </script>
                                     <p><b>plocha 8, 9 a 10</b></p>
@@ -234,13 +234,13 @@
                                     <h4 id="p002-2-p">4500 Kč/měsíc</h4>
                                     <script>
                                         document.getElementById("p002-2-1").addEventListener("click", function () {
-                                            document.getElementById("p002-2-p").innerHTML = "4500 Kč/měsíc";
+                                            document.getElementById("p002-2-p").innerHTML = "4950 Kč/měsíc";
                                         });
                                         document.getElementById("p002-2-2").addEventListener("click", function () {
-                                            document.getElementById("p002-2-p").innerHTML = "3900 Kč/měsíc";
+                                            document.getElementById("p002-2-p").innerHTML = "4290 Kč/měsíc";
                                         });
                                         document.getElementById("p002-2-3").addEventListener("click", function () {
-                                            document.getElementById("p002-2-p").innerHTML = "3400 Kč/měsíc";
+                                            document.getElementById("p002-2-p").innerHTML = "3740 Kč/měsíc";
                                         });
                                     </script>
                                 </td>
