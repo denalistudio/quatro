@@ -53,14 +53,14 @@
                         <a href="http://www.katalogmagic.cz/" target="_blank" rel="noopener">
                             <img src="../images/reklamni-predmety/3d_profil.jpg" alt="Magic" title="Magic">
                         </a>
-                        <a href="https://gallery.reflects.de/onlinekatalog/COMPLETE_2020_EN-MP/" target="_blank"
+                        /*<a href="https://gallery.reflects.de/onlinekatalog/COMPLETE_2020_EN-MP/" target="_blank"
                             rel="noopener">
                             <img src="../images/reklamni-predmety/live_01.jpg" alt="Complete" title="Complete">
                         </a>
                         <a href="https://gallery.reflects.de/onlinekatalog/RETUMBLER_2020_EN-MP/10/" target="_blank"
                             rel="noopener">
                             <img src="../images/reklamni-predmety/live_02.jpg" alt="Retumbler" title="Retumbler">
-                        </a>
+                        </a>*/
                         <a href="https://quatro.alltextiles.cz/" target="_blank" rel="noopener">
                             <img src="../images/reklamni-predmety/quatro_alltextiles.png" alt="">
                         </a>
