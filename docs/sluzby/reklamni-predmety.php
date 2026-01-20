@@ -47,6 +47,13 @@
                         potisk. Dodáme
                         včetně tamponového, termotransferového, sítotisku nebo ofsetového tisku.</p>
                     <div class="reklamni_predmety">
+                        <a href="https://quatro.cool-shop.eu/cz/" target="_blank" rel="noopener">
+                            <picture>
+                                <source srcset="../images/reklamni-predmety/cool.webp" type="image/webp">
+                                <source srcset="../images/reklamni-predmety/cool.jpg" type="image/png">
+                                <img src="../images/reklamni-predmety/cool.png" alt="E-shop" title="E-shop">
+                            </picture>
+                        </a>
                         <a href="http://primgifts.eu/" target="_blank" rel="noopener">
                             <img src="../images/reklamni-predmety/primgifts.jpg" alt="Primgifts" title="Primgifts">
                         </a>
@@ -75,7 +82,7 @@
                             <picture>
                                 <source srcset="../images/reklamni-predmety/hidea.webp" type="image/webp">
                                 <source srcset="../images/reklamni-predmety/hidea.jpg" type="image/jpeg">
-                                <img src="../images/reklamni-predmety/hidea.jpg" alt="">
+                                <img src="../images/reklamni-predmety/hidea.jpg" alt="Hi!deagifts katalog" title="Hi!deagifts katalog">
                             </picture>
                         </a>
                     </div>
