@@ -215,13 +215,13 @@
                                     <h4 id="p002-1-p">4290 Kč/měsíc</h4>
                                     <script>
                                         document.getElementById("p002-1-1").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "4290 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "4400 Kč/měsíc";
                                         });
                                         document.getElementById("p002-1-2").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "3740 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "3840 Kč/měsíc";
                                         });
                                         document.getElementById("p002-1-3").addEventListener("click", function () {
-                                            document.getElementById("p002-1-p").innerHTML = "3080 Kč/měsíc";
+                                            document.getElementById("p002-1-p").innerHTML = "3160 Kč/měsíc";
                                         });
                                     </script>
                                     <p><b>plocha 8, 9 a 10</b></p>
