@@ -212,7 +212,7 @@
                                     <label for="p002-1-2">6 měsíců</label>
                                     <input type="radio" name="p002-1" id="p002-1-3">
                                     <label for="p002-1-3">12 měsíců</label>
-                                    <h4 id="p002-1-p">4290 Kč/měsíc</h4>
+                                    <h4 id="p002-1-p">4400 Kč/měsíc</h4>
                                     <script>
                                         document.getElementById("p002-1-1").addEventListener("click", function () {
                                             document.getElementById("p002-1-p").innerHTML = "4400 Kč/měsíc";
