@@ -100,17 +100,13 @@ btnForwardStep2.onclick = function () {
     };
 
     if (pevneDesky.value == 0) {
-        document.querySelectorAll("#black, #blue, #bordeaux, #gold, #silver").forEach((input) => {
-            input.disabled = true;
-        });
         document.getElementById("section-barva-desek").classList.add("disabled");
         document.getElementById("section-barva-pisma").classList.add("disabled");
+        document.querySelector(".section-soubory").classList.add("disabled");
     } else {
-        document.querySelectorAll("#black, #blue, #bordeaux, #gold, #silver").forEach((input) => {
-            input.disabled = false;
-        });
         document.getElementById("section-barva-desek").className = "";
         document.getElementById("section-barva-pisma").className = "";
+        document.querySelector(".section-soubory").className = "section-soubory";
     };
 
     if ((pevneDesky.value + krouzkoveVazby.value) >= 1 && termin.value && pocetListu.selectedIndex !== 0) {
@@ -132,7 +128,9 @@ btnForwardStep3.onclick = function () {
         };
     });
 
-    if (souboryDesky.files.length === 0) {
+    const needsDeskyFiles = parseInt(pevneDesky.value) > 0;
+
+    if (needsDeskyFiles && souboryDesky.files.length === 0) {
         alert("Musíte přiložit alespoň jeden soubor!");
     };
 
@@ -153,7 +151,9 @@ btnForwardStep3.onclick = function () {
         alert("Maximální velikost příloh může být 10 MB.");
     };
 
-    if (!(vytisknoutPraci.checked) && kapsyCdDvd.selectedIndex !== 0 && chlopneNaPrilohy.selectedIndex !== 0 && souboryDesky.files.length !== 0 && souboryDesky.files.length <= 5 && sizeInMB < 10) {
+    const deskyFilesOk = !needsDeskyFiles || (souboryDesky.files.length !== 0 && souboryDesky.files.length <= 5 && sizeInMB < 10);
+
+    if (!(vytisknoutPraci.checked) && deskyFilesOk) {
         step3.className = "step-content next hidden";
         pocetVytisku.required = false;
         souboryTisk.required = false;
@@ -163,7 +163,7 @@ btnForwardStep3.onclick = function () {
         step4.classList.add("current");
         document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
         window.scrollTo({ top: 0, behavior: "smooth" });
-    } else if (vytisknoutPraci.checked && kapsyCdDvd.selectedIndex !== 0 && chlopneNaPrilohy.selectedIndex !== 0 && souboryDesky.files.length !== 0 && souboryDesky.files.length <= 5 && sizeInMB < 10) {
+    } else if (vytisknoutPraci.checked && deskyFilesOk) {
         pocetVytisku.required = true;
         souboryTisk.required = true;
         step2.classList.remove("current");
@@ -254,16 +254,22 @@ btnForwardStep5.onclick = function () {
     };
     document.querySelector('td[data-input="pocet-listu"]').innerHTML = pocetListuShownValue;
 
-    for (const barvaDesekSelected of barvaDesek) {
-        if (barvaDesekSelected.checked) {
-            document.querySelector('td[data-input="barva-desek"]').innerHTML = barvaDesekSelected.value;
+    if (parseInt(pevneDesky.value) > 0) {
+        document.querySelector('td[data-input="barva-desek"]').closest('tr').style.display = '';
+        document.querySelector('td[data-input="barva-pisma"]').closest('tr').style.display = '';
+        for (const barvaDesekSelected of barvaDesek) {
+            if (barvaDesekSelected.checked) {
+                document.querySelector('td[data-input="barva-desek"]').innerHTML = barvaDesekSelected.value;
+            };
         };
-    };
-
-    for (const barvaPismaSelected of barvaPisma) {
-        if (barvaPismaSelected.checked) {
-            document.querySelector('td[data-input="barva-pisma"]').innerHTML = barvaPismaSelected.value;
+        for (const barvaPismaSelected of barvaPisma) {
+            if (barvaPismaSelected.checked) {
+                document.querySelector('td[data-input="barva-pisma"]').innerHTML = barvaPismaSelected.value;
+            };
         };
+    } else {
+        document.querySelector('td[data-input="barva-desek"]').closest('tr').style.display = 'none';
+        document.querySelector('td[data-input="barva-pisma"]').closest('tr').style.display = 'none';
     };
 
     if (listyNavic.checked) {

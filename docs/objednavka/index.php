@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require './vendor/autoload.php';
 
-if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['barva-desek'], $_POST['barva-pisma'], $_POST['termin-zhotoveni'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'], $_FILES['soubory-desky'])) {
+if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['termin-zhotoveni'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'], $_FILES['soubory-desky'])) {
     // Detaily zákazníka
     $name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars(trim($_POST['email']), ENT_QUOTES, 'UTF-8');
@@ -16,18 +16,14 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     $krouzkove_vazby = $_POST['krouzkove-vazby'];
     $termin_zhotoveni = htmlspecialchars(trim($_POST['termin-zhotoveni']), ENT_QUOTES, 'UTF-8');
     $pocet_listu = $_POST['pocet-listu'];
-    $barva_desek = $_POST['barva-desek'];
-    $barva_pisma = $_POST['barva-pisma'];
+    $barva_desek = isset($_POST['barva-desek']) ? $_POST['barva-desek'] : 'Nepožadována';
+    $barva_pisma = isset($_POST['barva-pisma']) ? $_POST['barva-pisma'] : 'Nepožadována';
     $kapsy_cd_dvd = $_POST['kapsy-cd-dvd'];
     $chlopne_na_prilohy = $_POST['chlopne-na-prilohy'];
     $listy_navic = 'NE';
-    if (isset($_POST['listy-navic'])) {
-        $listy_navic = 'ANO';
-    }
+    if (isset($_POST['listy-navic'])) $listy_navic = 'ANO';
     $poznamka = 'ŽÁDNÁ';
-    if (strlen($_POST['poznamka'])) {
-        $poznamka = htmlspecialchars(trim($_POST['poznamka']), ENT_QUOTES, 'UTF-8');
-    }
+    if (strlen($_POST['poznamka'])) $poznamka = htmlspecialchars(trim($_POST['poznamka']), ENT_QUOTES, 'UTF-8');
 
     // Počet listů
     $pocet_listu_admin = '';
@@ -68,6 +64,48 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         default:
             $pocet_listu_admin = '';
             $pocet_listu_customer = '';
+    }
+
+    // Barva desek / písma (pouze pro pevné desky)
+    $barva_admin_col = '';
+    $barva_customer_col = '';
+    if ($pevne_desky > 0) {
+        $barva_admin_col = '
+        <tr>
+            <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                Barva desek
+            </th>
+            <td style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                ' . $barva_desek . '
+            </td>
+        </tr>
+        <tr>
+            <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                Barva písma
+            </th>
+            <td style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                ' . $barva_pisma . '
+            </td>
+        </tr>
+        ';
+        $barva_customer_col = '
+        <tr>
+            <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
+                Barva desek
+            </th>
+            <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
+                ' . $barva_desek . '
+            </td>
+        </tr>
+        <tr>
+            <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
+                Barva písma
+            </th>
+            <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
+                ' . $barva_pisma . '
+            </td>
+        </tr>
+        ';
     }
 
     // Cena
@@ -246,22 +284,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                                             ' . $pocet_listu_admin . '
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
-                                            Barva desek
-                                        </th>
-                                        <td style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
-                                            ' . $barva_desek . '
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
-                                            Barva písma
-                                        </th>
-                                        <td style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
-                                            ' . $barva_pisma . '
-                                        </td>
-                                    </tr>
+                                    ' . $barva_admin_col . '
                                     <tr>
                                         <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
                                             Počet kapes na CD/DVD
@@ -435,22 +458,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                                             ' . $pocet_listu_customer . '
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
-                                            Barva desek
-                                        </th>
-                                        <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
-                                            ' . $barva_desek . '
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
-                                            Barva písma
-                                        </th>
-                                        <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
-                                            ' . $barva_pisma . '
-                                        </td>
-                                    </tr>
+                                    ' . $barva_customer_col . '
                                     <tr>
                                         <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
                                             Počet kapes na CD/DVD
@@ -520,9 +528,10 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
         $customerEmail->addAddress($email);
 
         foreach ($_FILES['soubory-desky']['tmp_name'] as $key => $tmp_name) {
-            $name = $_FILES['soubory-desky']['name'][$key];
-            $path = $_FILES['soubory-desky']['tmp_name'][$key];
-            $adminEmail->addAttachment($path, 'desky--' . $name);
+            if ($_FILES['soubory-desky']['error'][$key] === UPLOAD_ERR_OK) {
+                $fileName = $_FILES['soubory-desky']['name'][$key];
+                $adminEmail->addAttachment($tmp_name, 'desky--' . $fileName);
+            }
         }
 
         if (!empty($_FILES['soubory-tisk']['tmp_name'][0])) {
@@ -970,7 +979,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
     </form>
-    <script src="./js/script.js"></script>
+    <script src="./js/script.js?v=1.0.0"></script>
     <!-- Google tag (gtag.js) -->
     <script type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-2ETTMLM0RD"></script>
     <script type="text/plain" data-cookiecategory="analytics">
