@@ -5,25 +5,236 @@ use PHPMailer\PHPMailer\Exception;
 
 require './vendor/autoload.php';
 
-if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'], $_POST['krouzkove-vazby'], $_POST['termin-zhotoveni'], $_POST['pocet-listu'], $_POST['kapsy-cd-dvd'], $_POST['chlopne-na-prilohy'], $_FILES['soubory-desky'])) {
-    // Detaily zákazníka
-    $name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
-    $email = htmlspecialchars(trim($_POST['email']), ENT_QUOTES, 'UTF-8');
-    $tel = htmlspecialchars(trim($_POST['tel']), ENT_QUOTES, 'UTF-8');
+session_start();
 
-    // Detaily diplomky
-    $pevne_desky = $_POST['pevne-desky'];
-    $krouzkove_vazby = $_POST['krouzkove-vazby'];
-    $termin_zhotoveni = htmlspecialchars(trim($_POST['termin-zhotoveni']), ENT_QUOTES, 'UTF-8');
-    $pocet_listu = $_POST['pocet-listu'];
-    $barva_desek = isset($_POST['barva-desek']) ? $_POST['barva-desek'] : 'Nepožadována';
-    $barva_pisma = isset($_POST['barva-pisma']) ? $_POST['barva-pisma'] : 'Nepožadována';
-    $kapsy_cd_dvd = $_POST['kapsy-cd-dvd'];
-    $chlopne_na_prilohy = $_POST['chlopne-na-prilohy'];
-    $listy_navic = 'NE';
-    if (isset($_POST['listy-navic'])) $listy_navic = 'ANO';
-    $poznamka = 'ŽÁDNÁ';
-    if (strlen($_POST['poznamka'])) $poznamka = htmlspecialchars(trim($_POST['poznamka']), ENT_QUOTES, 'UTF-8');
+// ---------------------------------------------------------------------------
+// Nastavení formuláře
+// ---------------------------------------------------------------------------
+const FORM_MAX_FILES        = 5;
+const FORM_MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB na jednu skupinu příloh
+const FORM_MIN_FILL_SECONDS = 5;                // rychlejší odeslání = robot
+const FORM_TOKEN_TTL        = 7200;             // platnost formuláře (2 hodiny)
+const FORM_ADMIN_ADDRESS    = 'hned@nastartuj.cz';
+const FORM_ADMIN_NAME       = 'Objednávkový formulář';
+
+/**
+ * Ořízne hodnotu, zbaví ji řídicích znaků a zabezpečí pro vložení do HTML e-mailu.
+ */
+function cleanText($value, int $maxLength = 255): string
+{
+    $value = is_string($value) ? $value : '';
+    $value = preg_replace('/[\x00-\x1F\x7F]+/u', ' ', $value);
+    $value = trim((string) $value);
+
+    if (mb_strlen($value, 'UTF-8') > $maxLength) $value = mb_substr($value, 0, $maxLength, 'UTF-8');
+
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Vrátí celé číslo z POSTu pouze pokud leží v povoleném rozsahu, jinak null.
+ */
+function postInt(string $field, int $min, int $max): ?int
+{
+    if (!isset($_POST[$field]) || !is_scalar($_POST[$field])) return null;
+
+    $value = filter_var($_POST[$field], FILTER_VALIDATE_INT);
+
+    if ($value === false || $value < $min || $value > $max) return null;
+
+    return $value;
+}
+
+/**
+ * Vrátí hodnotu z POSTu pouze pokud je na seznamu povolených, jinak $default.
+ */
+function postChoice(string $field, array $allowed, string $default): string
+{
+    if (!isset($_POST[$field]) || !is_string($_POST[$field])) return $default;
+    return in_array($_POST[$field], $allowed, true) ? $_POST[$field] : $default;
+}
+
+/**
+ * Očistí název přílohy - do e-mailu nesmí proniknout cesty ani řídicí znaky.
+ */
+function safeFileName(string $name): string
+{
+    $name = preg_replace('#[\x00-\x1F\x7F"\\\\/]+#u', '', $name);
+    $name = trim((string) $name);
+
+    if ($name === '') $name = 'priloha';
+
+    return mb_substr($name, 0, 120, 'UTF-8');
+}
+
+/**
+ * Ověří nahrané soubory a vrátí jen ty, které projdou všemi pravidly.
+ * Stejná pravidla hlídá i javascript, ale na ten se nelze spolehnout -
+ * robot posílá POST rovnou na index.php a žádný javascript neprovede.
+ */
+function collectUploads(string $field, array $allowedExtensions, string $label, array &$errors): array
+{
+    $files = [];
+
+    if (empty($_FILES[$field]) || !isset($_FILES[$field]['tmp_name']) || !is_array($_FILES[$field]['tmp_name'])) return $files;
+
+    $tooLarge = false;
+
+    foreach ($_FILES[$field]['tmp_name'] as $key => $tmpName) {
+        $uploadError = $_FILES[$field]['error'][$key] ?? UPLOAD_ERR_NO_FILE;
+
+        if ($uploadError === UPLOAD_ERR_NO_FILE) continue;
+
+        if ($uploadError === UPLOAD_ERR_INI_SIZE || $uploadError === UPLOAD_ERR_FORM_SIZE) {
+            $tooLarge = true;
+            continue;
+        }
+
+        if ($uploadError !== UPLOAD_ERR_OK || !is_string($tmpName) || !is_uploaded_file($tmpName)) {
+            $errors[] = $label . ': soubor se nepodařilo nahrát, zkuste to prosím znovu.';
+            continue;
+        }
+
+        $originalName = basename((string) ($_FILES[$field]['name'][$key] ?? ''));
+        $extension    = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $allowedExtensions, true)) {
+            $errors[] = $label . ': nepodporovaný formát souboru (povoleno ' . strtoupper(implode(', ', $allowedExtensions)) . ').';
+            continue;
+        }
+
+        $files[] = [
+            'tmp'  => $tmpName,
+            'name' => safeFileName($originalName),
+            'size' => (int) ($_FILES[$field]['size'][$key] ?? 0),
+        ];
+    }
+
+    if ($tooLarge) $errors[] = $label . ': některý ze souborů je příliš velký.';
+
+    if (count($files) > FORM_MAX_FILES) {
+        $errors[] = $label . ': můžete vložit maximálně ' . FORM_MAX_FILES . ' souborů.';
+        return [];
+    }
+
+    if (array_sum(array_column($files, 'size')) > FORM_MAX_UPLOAD_BYTES) {
+        $errors[] = $label . ': maximální celková velikost příloh je 10 MB.';
+        return [];
+    }
+
+    return $files;
+}
+
+$formErrors   = [];
+$isPost       = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
+$souboryDesky = [];
+$souboryTisk  = [];
+
+// Když přílohy přesáhnou limit serveru (post_max_size), PHP zahodí celý obsah
+// požadavku - $_POST i $_FILES dorazí prázdné. Bez této větve by zákazník
+// dostal zavádějící hlášku o vypršení platnosti formuláře.
+$oversizedPost = $isPost && $_POST === [] && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0;
+
+if ($oversizedPost) {
+    $formErrors[] = 'Přílohy jsou příliš velké. Vložte prosím soubory do celkové velikosti 10 MB.';
+}
+
+if ($isPost && !$oversizedPost) {
+    // -----------------------------------------------------------------------
+    // Ochrana proti robotům
+    // -----------------------------------------------------------------------
+
+    // 1) Honeypot - skryté pole, které vyplní jen robot. Tváříme se, že vše
+    //    proběhlo v pořádku, aby se robot nesnažil odesílat znovu jinak.
+    if (!empty($_POST['website'])) {
+        error_log('Objednavka zablokovana - honeypot (IP ' . ($_SERVER['REMOTE_ADDR'] ?? '?') . ')');
+        header('Location: ./order-sent.html');
+        exit();
+    }
+
+    // 2) Jednorázový token - robot, který posílá POST rovnou na index.php,
+    //    si stránku nikdy nenačetl, takže žádný platný token nemá.
+    $token    = isset($_POST['form-token']) && is_string($_POST['form-token']) ? $_POST['form-token'] : '';
+    $expected = isset($_SESSION['form_token']) && is_string($_SESSION['form_token']) ? $_SESSION['form_token'] : '';
+    $issuedAt = (int) ($_SESSION['form_token_time'] ?? 0);
+
+    if ($expected === '' || $token === '' || !hash_equals($expected, $token)) {
+        $formErrors[] = 'Platnost formuláře vypršela. Načtěte prosím stránku znovu a objednávku odešlete ještě jednou.';
+    } elseif ((time() - $issuedAt) < FORM_MIN_FILL_SECONDS) {
+        // 3) Časová past - pětikrokový formulář včetně příloh nelze vyplnit
+        //    za pár sekund.
+        error_log('Objednavka zablokovana - prilis rychle odeslani (IP ' . ($_SERVER['REMOTE_ADDR'] ?? '?') . ')');
+        $formErrors[] = 'Formulář byl odeslán příliš rychle. Zkuste to prosím znovu.';
+    }
+
+    // -----------------------------------------------------------------------
+    // Serverová validace údajů
+    // -----------------------------------------------------------------------
+
+    // Detaily zákazníka
+    $nameRaw  = isset($_POST['name']) && is_string($_POST['name']) ? trim($_POST['name']) : '';
+    $emailRaw = isset($_POST['email']) && is_string($_POST['email']) ? trim($_POST['email']) : '';
+    $telRaw   = isset($_POST['tel']) && is_string($_POST['tel']) ? trim($_POST['tel']) : '';
+
+    if ($nameRaw === '') $formErrors[] = 'Vyplňte prosím jméno a příjmení.';
+
+    if (filter_var($emailRaw, FILTER_VALIDATE_EMAIL) === false) {
+        $formErrors[] = 'Vyplňte prosím platnou e-mailovou adresu.';
+        $emailRaw = '';
+    }
+
+    if (preg_match('/^\+?[\d\s\/().-]{9,20}$/', $telRaw) !== 1) $formErrors[] = 'Vyplňte prosím platné telefonní číslo.';
+
+    if (empty($_POST['obchodni-podminky'])) $formErrors[] = 'Bez souhlasu s obchodními podmínkami nelze objednávku odeslat.';
+
+    $name  = cleanText($nameRaw, 100);
+    $email = cleanText($emailRaw, 190);
+    $tel   = cleanText($telRaw, 30);
+
+    // Detaily diplomky - posuvníky mají pevný rozsah, mimo něj jde o podvrh
+    $pevne_desky        = postInt('pevne-desky', 0, 6);
+    $krouzkove_vazby    = postInt('krouzkove-vazby', 0, 6);
+    $pocet_listu        = postInt('pocet-listu', 1, 8);
+    $kapsy_cd_dvd       = postInt('kapsy-cd-dvd', 0, 6);
+    $chlopne_na_prilohy = postInt('chlopne-na-prilohy', 0, 6);
+
+    if ($pevne_desky === null || $krouzkove_vazby === null || $pocet_listu === null
+        || $kapsy_cd_dvd === null || $chlopne_na_prilohy === null) {
+        $formErrors[] = 'Některý z údajů o vazbě chybí nebo je mimo povolený rozsah.';
+    } elseif ($pevne_desky === 0 && $krouzkove_vazby === 0) {
+        $formErrors[] = 'Objednejte prosím alespoň jedny pevné desky nebo jednu kroužkovou vazbu.';
+    }
+
+    // Datepicker v české lokalizaci vrací datum ve tvaru dd.mm.yyyy.
+    $termin_zhotoveni = cleanText($_POST['termin-zhotoveni'] ?? '', 10);
+
+    if (preg_match('#^(\d{1,2})[./](\d{1,2})[./](\d{4})$#', $termin_zhotoveni, $terminParts) !== 1
+        || !checkdate((int) $terminParts[2], (int) $terminParts[1], (int) $terminParts[3])) {
+        $formErrors[] = 'Zvolte prosím požadovaný termín zhotovení.';
+    }
+
+    $barva_desek = postChoice('barva-desek', ['Černá', 'Modrá', 'Bordó'], 'Nepožadována');
+    $barva_pisma = postChoice('barva-pisma', ['Zlatý tisk', 'Stříbrný tisk'], 'Nepožadována');
+
+    $listy_navic = isset($_POST['listy-navic']) ? 'ANO' : 'NE';
+
+    $poznamka = cleanText($_POST['poznamka'] ?? '', 2000);
+    if ($poznamka === '') $poznamka = 'ŽÁDNÁ';
+
+    // -----------------------------------------------------------------------
+    // Přílohy
+    // -----------------------------------------------------------------------
+    $souboryDesky = collectUploads('soubory-desky', ['pdf', 'doc', 'docx'], 'Soubor s údaji na desky', $formErrors);
+    $souboryTisk  = collectUploads('soubory-tisk', ['pdf'], 'Soubor k tisku', $formErrors);
+
+    // Podklady na desky jsou povinné jen při objednávce pevných desek -
+    // samotnou kroužkovou vazbu lze objednat bez příloh.
+    if ($pevne_desky > 0 && $souboryDesky === []) $formErrors[] = 'Přiložte prosím soubor s údaji na desky, bez něj nejsme schopni desky vyrobit.';
+
+    if (isset($_POST['vytisknout-praci']) && $souboryTisk === []) $formErrors[] = 'Přiložte prosím soubor k tisku ve formátu PDF.';
+}
+
+if ($isPost && $formErrors === []) {
 
     // Počet listů
     $pocet_listu_admin = '';
@@ -112,8 +323,10 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     $cena = '';
     $cena_admin_col = '';
     $cena_customer_col = '';
-    if (isset($_POST['price'])) {
-        $cena = htmlspecialchars(trim($_POST['price']), ENT_QUOTES, 'UTF-8');
+    $cenaValue = postInt('price', 0, 1000000);
+
+    if ($cenaValue !== null) {
+        $cena = (string) $cenaValue;
         $cena_admin_col = '
         <tr>
             <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
@@ -139,12 +352,15 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     // Tisk práce
     $typ_tisku_admin_col = '';
     $typ_tisku_customer_col = '';
+    $zpusob_tisku_admin_col = '';
+    $zpusob_tisku_customer_col = '';
     $pocet_vytisku_admin_col = '';
     $pocet_vytisku_customer_col = '';
 
     if (isset($_POST['vytisknout-praci'])) {
-        $typ_tisku = $_POST['typ-tisku'];
-        $pocet_vytisku = $_POST['pocet-vytisku'];
+        $typ_tisku = postChoice('typ-tisku', ['Černobíle', 'Barevně'], 'Černobíle');
+        $zpusob_tisku = postChoice('zpusob-tisku', ['Jednostranný tisk', 'Oboustranný tisk'], '');
+        $pocet_vytisku = postInt('pocet-vytisku', 1, 6) ?? 1;
         $typ_tisku_admin_col = '
         <tr>
             <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
@@ -162,6 +378,26 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </th>
             <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
                 ' . $typ_tisku . '
+            </td>
+        </tr>
+        ';
+        $zpusob_tisku_admin_col = '
+        <tr>
+            <th style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                Způsob tisku
+            </th>
+            <td style="width:50%;padding:8px 10px 8px 10px;border:1px solid #000000;text-align:left;">
+                ' . $zpusob_tisku . '
+            </td>
+        </tr>
+        ';
+        $zpusob_tisku_customer_col = '
+        <tr>
+            <th style="width:50%;padding:5px 15px 5px 0;text-align:left;">
+                Způsob tisku
+            </th>
+            <td style="width:50%;padding:5px 0 5px 15px;text-align:left;">
+                ' . $zpusob_tisku . '
             </td>
         </tr>
         ';
@@ -318,6 +554,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                                         </td>
                                     </tr>
                                     ' . $typ_tisku_admin_col . '
+                                    ' . $zpusob_tisku_admin_col . '
                                     ' . $pocet_vytisku_admin_col . '
                                     ' . $cena_admin_col . '
                                 </table>
@@ -492,6 +729,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                                         </td>
                                     </tr>
                                     ' . $typ_tisku_customer_col . '
+                                    ' . $zpusob_tisku_customer_col . '
                                     ' . $pocet_vytisku_customer_col . '
                                     ' . $cena_customer_col . '
                                 </table>
@@ -513,44 +751,47 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
     $customerEmail = new PHPMailer(true);
 
     try {
-        $adminEmail->setFrom($email, $name);
+        $adminEmail->setFrom(FORM_ADMIN_ADDRESS, FORM_ADMIN_NAME);
+        $adminEmail->addReplyTo($emailRaw, $nameRaw);
         $adminEmail->CharSet = 'UTF-8';
         $adminEmail->isHTML(true);
-        $adminEmail->Subject = 'Objednávka "diplomky" ' . $name;
+        $adminEmail->Subject = 'Objednávka "diplomky" ' . $nameRaw;
         $adminEmail->Body = $adminBody;
-        $adminEmail->addAddress('hned@nastartuj.cz');
+        $adminEmail->addAddress(FORM_ADMIN_ADDRESS);
 
-        $customerEmail->setFrom('hned@nastartuj.cz', 'Reklamka Quatro');
+        $customerEmail->setFrom(FORM_ADMIN_ADDRESS, 'Reklamka Quatro');
         $customerEmail->CharSet = 'UTF-8';
         $customerEmail->isHTML(true);
         $customerEmail->Subject = 'Shrnutí Vaší objednávky';
         $customerEmail->Body = $customerBody;
-        $customerEmail->addAddress($email);
+        $customerEmail->addAddress($emailRaw, $nameRaw);
 
-        foreach ($_FILES['soubory-desky']['tmp_name'] as $key => $tmp_name) {
-            if ($_FILES['soubory-desky']['error'][$key] === UPLOAD_ERR_OK) {
-                $fileName = $_FILES['soubory-desky']['name'][$key];
-                $adminEmail->addAttachment($tmp_name, 'desky--' . $fileName);
-            }
-        }
-
-        if (!empty($_FILES['soubory-tisk']['tmp_name'][0])) {
-            foreach ($_FILES['soubory-tisk']['tmp_name'] as $key => $tmp_name) {
-                $name = $_FILES['soubory-tisk']['name'][$key];
-                $path = $_FILES['soubory-tisk']['tmp_name'][$key];
-                $adminEmail->addAttachment($path, 'prace--' . $name);
-            }
-        }
+        foreach ($souboryDesky as $file) $adminEmail->addAttachment($file['tmp'], 'desky--' . $file['name']);
+        foreach ($souboryTisk as $file) $adminEmail->addAttachment($file['tmp'], 'prace--' . $file['name']);
 
         $adminEmail->send();
         $customerEmail->send();
 
+        // Token spotřebován - stejnou objednávku už nelze odeslat znovu obnovením stránky.
+        unset($_SESSION['form_token'], $_SESSION['form_token_time']);
+
         header('Location: ./order-sent.html');
         exit();
     } catch (Exception $e) {
-        echo "Vaše objednávka nemohla být odeslána. Chyba {$adminMail->ErrorInfo}, {$customerMail->ErrorInfo}";
+        // Konkrétní chyba patří do logu, ne na obrazovku zákazníka.
+        error_log('Objednavku se nepodarilo odeslat: ' . $e->getMessage());
+        $formErrors[] = 'Vaši objednávku se bohužel nepodařilo odeslat. Zkuste to prosím znovu, '
+            . 'nebo nám zavolejte na +420 596 324 040.';
     }
 }
+
+// Token pro formulář, který se za chvíli vykreslí. Drží se po dobu platnosti, aby se nerozbil druhý otevřený panel ani návrat tlačítkem zpět.
+if (empty($_SESSION['form_token']) || (time() - (int) ($_SESSION['form_token_time'] ?? 0)) > FORM_TOKEN_TTL) {
+    $_SESSION['form_token'] = bin2hex(random_bytes(32));
+    $_SESSION['form_token_time'] = time();
+}
+
+$formToken = $_SESSION['form_token'];
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -580,7 +821,23 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <path d="M58.571,34.256c1.178,0 2.344,0.04 3.505,0.109c14.467,-19.228 36.628,-32.312 63.547,-34.382c-21.881,5.724 -35.849,20.134 -43.055,39.429c20.351,9.195 34.575,29.698 34.575,53.416c-0,6.469 -1.062,12.697 -3.014,18.523c7.567,-0.656 15.469,0.695 23.257,4.289c10.225,4.716 17.972,12.644 22.614,22.038c-3.773,-4.307 -8.48,-7.902 -14,-10.453c-16.268,-7.508 -34.937,-3.728 -47.114,8.055l-0.019,-0.018c-0.24,0.228 -0.478,0.455 -0.721,0.679c-7.45,-6.126 -13.762,-13.588 -18.565,-22.015c5.423,-5.401 8.79,-12.869 8.79,-21.098c-0,-16.413 -13.386,-29.799 -29.8,-29.799c-16.413,0 -29.799,13.386 -29.799,29.799c-0,14.439 10.362,26.534 24.028,29.233c4,10.454 9.865,19.996 17.192,28.214c-3.696,0.735 -7.513,1.125 -11.421,1.125c-32.26,-0 -58.571,-26.311 -58.571,-58.572c-0,-32.26 26.311,-58.572 58.571,-58.572" style="fill:#ef7c00;" />
         </svg>
     </a>
+    <?php if ($formErrors !== []) : ?>
+        <div class="form-errors" role="alert">
+            <p>Objednávku se nepodařilo odeslat:</p>
+            <ul>
+                <?php foreach ($formErrors as $formError) : ?>
+                    <li><?php echo htmlspecialchars($formError, ENT_QUOTES, 'UTF-8'); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
     <form id="order-form" class="survey-form" name="order-form" method="POST" action="" enctype="multipart/form-data" required>
+        <input type="hidden" name="form-token" value="<?php echo htmlspecialchars($formToken, ENT_QUOTES, 'UTF-8'); ?>">
+        <!-- Past na roboty: pole je pro člověka neviditelné, vyplní ho jen robot. -->
+        <div class="hp-field" aria-hidden="true">
+            <label for="website">Toto pole nevyplňujte</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+        </div>
         <!-- page 1 -->
         <fieldset class="step-content current" data-step="1">
             <div class="step-indicator">
@@ -725,6 +982,14 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             <section>
                 <input type="checkbox" name="vytisknout-praci" id="vytisknout-praci">
                 <label for="vytisknout-praci">Chci vytisknout i samotnou práci</label>
+                <div id="zpusob-tisku-wrapper" class="hidden">
+                    <h3>Způsob tisku <span class="required-asterisk">*</span></h3>
+                    <p class="subtitle">Vyberte, zda-li tisknout práci pouze po jedné straně listu, nebo po obou stranách.</p>
+                    <select name="zpusob-tisku" id="zpusob-tisku">
+                        <option value="Jednostranný tisk">Jednostranný tisk</option>
+                        <option value="Oboustranný tisk">Oboustranný tisk</option>
+                    </select>
+                </div>
             </section>
             <div class="price-wrapper">
                 <div class="row-1">
@@ -925,9 +1190,13 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
                         <th>Poznámka</th>
                         <td data-input="poznamka"></td>
                     </tr>
-                    <tr>
+                    <tr id="soubory-desky-row">
                         <th>Soubory s údaji na desky</th>
                         <td data-input="soubory-desky"></td>
+                    </tr>
+                    <tr id="zpusob-tisku-row" style="display: none;">
+                        <th>Způsob tisku</th>
+                        <td data-input="zpusob-tisku"></td>
                     </tr>
                     <tr id="typ-tisku-row" style="display: none;">
                         <th>Typ tisku</th>
@@ -979,7 +1248,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['tel'], $_POST['pevne-desky'],
             </div>
         </fieldset>
     </form>
-    <script src="./js/script.js?v=1.0.0"></script>
+    <script src="./js/script.js?v=1.0.2"></script>
     <!-- Google tag (gtag.js) -->
     <script type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-2ETTMLM0RD"></script>
     <script type="text/plain" data-cookiecategory="analytics">

@@ -42,6 +42,8 @@ const poznamka = document.getElementById("poznamka");
 
 // Tisk práce
 const typTisku = document.getElementsByName("typ-tisku");
+const zpusobTisku = document.getElementById("zpusob-tisku");
+const zpusobTiskuWrapper = document.getElementById("zpusob-tisku-wrapper");
 const pocetVytisku = document.getElementById("pocet-vytisku");
 const souboryTisk = document.getElementById("soubory-tisk");
 
@@ -86,6 +88,14 @@ souboryTisk.onchange = function () {
         alert("Maximální velikost příloh může být 10 MB.");
     };
 };
+
+// Způsob tisku (zobrazí se pouze při tisku samotné práce)
+function toggleZpusobTisku() {
+    zpusobTiskuWrapper.classList.toggle("hidden", !vytisknoutPraci.checked);
+    document.documentElement.style.setProperty("--currentHeight", document.querySelector(".current").clientHeight + "px");
+};
+
+vytisknoutPraci.onchange = toggleZpusobTisku;
 
 btnForwardStep2.onclick = function () {
     document.querySelectorAll("input#pevne-desky, input#krouzkove-vazby, input#termin-zhotoveni, select#pocet-listu").forEach((element) => {
@@ -285,12 +295,15 @@ btnForwardStep5.onclick = function () {
     };
 
     if (souboryDesky.files.length !== 0) {
+        document.getElementById("soubory-desky-row").style.display = "table-row";
         document.querySelector('td[data-input="soubory-desky"]').innerHTML = '';
         Array.from(souboryDesky.files).forEach((file) => {
             const newElement = document.createElement("p");
             newElement.innerHTML = file.name;
             document.querySelector('td[data-input="soubory-desky"]').appendChild((newElement));
         });
+    } else {
+        document.getElementById("soubory-desky-row").style.display = "none";
     };
 
     if (vytisknoutPraci.checked && pocetVytisku.value && souboryTisk.files.length !== 0) {
@@ -308,12 +321,19 @@ btnForwardStep5.onclick = function () {
         document.getElementById("pocet-vytisku-row").style.display = "none";
     }
 
-    for (const typTiskuSelected of typTisku) {
-        if (typTiskuSelected.checked) {
-            document.getElementById("typ-tisku-row").style.display = "table-row";
-            document.querySelector('td[data-input="typ-tisku"]').innerHTML = typTiskuSelected.value;
+    if (vytisknoutPraci.checked) {
+        for (const typTiskuSelected of typTisku) {
+            if (typTiskuSelected.checked) {
+                document.getElementById("typ-tisku-row").style.display = "table-row";
+                document.querySelector('td[data-input="typ-tisku"]').innerHTML = typTiskuSelected.value;
+            };
         };
-    }
+        document.getElementById("zpusob-tisku-row").style.display = "table-row";
+        document.querySelector('td[data-input="zpusob-tisku"]').innerHTML = zpusobTisku.value;
+    } else {
+        document.getElementById("typ-tisku-row").style.display = "none";
+        document.getElementById("zpusob-tisku-row").style.display = "none";
+    };
 
     if (nameInput.value && email.value && tel.value) {
         step4.classList.remove("current");
@@ -329,6 +349,8 @@ submitOrder.onclick = (button) => {
     button.preventDefault();
     if (obchodniPodminky.checked) {
         form.submit();
+    } else {
+        alert("Bez souhlasu s obchodními podmínkami nelze objednávku odeslat.");
     };
 };
 

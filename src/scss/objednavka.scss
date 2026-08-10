@@ -515,7 +515,45 @@ body {
         section.section-soubory p {
             margin: .5em 0;
         }
-    
+
+        section.section-soubory.disabled {
+            h3, p {
+                color: rgba(0, 0, 0, 0.5);
+            }
+
+            h3 span.required-asterisk {
+                display: none;
+            }
+        }
+
+        #zpusob-tisku-wrapper {
+            margin-top: 1.5em;
+
+            &.hidden {
+                display: none;
+            }
+
+            select#zpusob-tisku {
+                width: 100%;
+                display: block;
+                cursor: pointer;
+                padding: 0.5em 1em;
+                border-top: none;
+                border-left: none;
+                border-bottom: 1px solid $lightgrey;
+                border-right: none;
+                border-radius: 0;
+                background-color: $white;
+                font-size: 1rem;
+                transition: border-bottom 200ms ease-in-out;
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 1px solid #00000066;
+                }
+            }
+        }
+
         table.order-summary {
             width: 100%;
     
@@ -661,6 +699,53 @@ body {
     @media only screen and (min-width: 100em) {
         width: 40em;
     }
+}
+
+// Past na roboty - pole musí zůstat v DOM, ale nesmí ho vidět ani odečítač
+// obrazovky, jinak ho vyplní i skutečný zákazník.
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+// Chyby ze serverové validace
+.form-errors {
+    max-width: 45em;
+    margin: 2em auto 0;
+    padding: 1em 1.25em;
+    border: 1px solid $red;
+    border-radius: 4px;
+    background-color: #fdf0f0;
+    color: $red;
+
+    p {
+        font-weight: 600;
+    }
+
+    ul {
+        margin: .5em 0 0 1.25em;
+    }
+
+    li {
+        margin-top: .25em;
+    }
+}
+
+// Datepicker
+.datepicker,
+.datepicker.dropdown-menu,
+.datepicker th,
+.datepicker td,
+.datepicker table tr th,
+.datepicker table tr td,
+.datepicker table tr td span,
+.datepicker .datepicker-switch,
+.datepicker tfoot tr th {
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 // Range input styles
