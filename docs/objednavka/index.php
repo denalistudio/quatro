@@ -224,7 +224,9 @@ if ($isPost && !$oversizedPost) {
     // -----------------------------------------------------------------------
     // Přílohy
     // -----------------------------------------------------------------------
-    $souboryDesky = collectUploads('soubory-desky', ['pdf', 'doc', 'docx'], 'Soubor s údaji na desky', $formErrors);
+    if ($pevne_desky > 0) {
+        $souboryDesky = collectUploads('soubory-desky', ['pdf', 'doc', 'docx'], 'Soubor s údaji na desky', $formErrors);
+    }
     $souboryTisk  = collectUploads('soubory-tisk', ['pdf'], 'Soubor k tisku', $formErrors);
 
     // Podklady na desky jsou povinné jen při objednávce pevných desek -
@@ -242,35 +244,35 @@ if ($isPost && $formErrors === []) {
     switch ($pocet_listu) {
         case 1:
             $pocet_listu_admin = '5 mm (AA)';
-            $pocet_listu_customer = '20 - 40 listů (5 mm (AA))';
+            $pocet_listu_customer = '20–40 listů (5 mm (AA))';
             break;
         case 2:
             $pocet_listu_admin = '10 mm (A)';
-            $pocet_listu_customer = '41 - 90 listů (10 mm (A))';
+            $pocet_listu_customer = '41–90 listů (10 mm (A))';
             break;
         case 3:
-            $pocet_listu_admin = '91 - 120';
-            $pocet_listu_customer = '13 mm (B)';
+            $pocet_listu_admin = '13 mm (B)';
+            $pocet_listu_customer = '91–120 listů (13 mm (B))';
             break;
         case 4:
-            $pocet_listu_admin = '121 - 145';
-            $pocet_listu_customer = '16 mm (C)';
+            $pocet_listu_admin = '16 mm (C)';
+            $pocet_listu_customer = '121–145 listů (16 mm (C))';
             break;
         case 5:
-            $pocet_listu_admin = '146 - 185';
-            $pocet_listu_customer = '20 mm (D)';
+            $pocet_listu_admin = '20 mm (D)';
+            $pocet_listu_customer = '146–185 listů (20 mm (D))';
             break;
         case 6:
-            $pocet_listu_admin = '186 - 230';
-            $pocet_listu_customer = '24 mm (E)';
+            $pocet_listu_admin = '24 mm (E)';
+            $pocet_listu_customer = '186–230 listů (24 mm (E))';
             break;
         case 7:
-            $pocet_listu_admin = '231 - 265';
-            $pocet_listu_customer = '28 mm (F)';
+            $pocet_listu_admin = '28 mm (F)';
+            $pocet_listu_customer = '231–265 listů (28 mm (F))';
             break;
         case 8:
-            $pocet_listu_admin = '266 - 300';
-            $pocet_listu_customer = '32 mm (G)';
+            $pocet_listu_admin = '32 mm (G)';
+            $pocet_listu_customer = '266–300 listů (32 mm (G))';
             break;
         default:
             $pocet_listu_admin = '';
@@ -1248,7 +1250,7 @@ $formToken = $_SESSION['form_token'];
             </div>
         </fieldset>
     </form>
-    <script src="./js/script.js?v=1.0.2"></script>
+    <script src="./js/script.js?v=1.0.3"></script>
     <!-- Google tag (gtag.js) -->
     <script type="text/plain" data-cookiecategory="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-2ETTMLM0RD"></script>
     <script type="text/plain" data-cookiecategory="analytics">

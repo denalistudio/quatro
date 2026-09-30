@@ -50,6 +50,32 @@ const souboryTisk = document.getElementById("soubory-tisk");
 // Form
 const form = document.getElementById("order-form");
 
+// Volby a podklady k deskám jsou dostupné jen při objednávce pevných desek.
+function toggleDeskyOptions() {
+    const needsDesky = parseInt(pevneDesky.value, 10) > 0;
+    const sections = [
+        document.getElementById("section-barva-desek"),
+        document.getElementById("section-barva-pisma"),
+        document.querySelector(".section-soubory")
+    ];
+
+    sections.forEach((section) => {
+        section.hidden = !needsDesky;
+    });
+
+    [...barvaDesek, ...barvaPisma].forEach((input) => {
+        input.disabled = !needsDesky;
+    });
+    souboryDesky.disabled = !needsDesky;
+
+    if (!needsDesky) {
+        souboryDesky.value = "";
+    }
+}
+
+pevneDesky.addEventListener("input", toggleDeskyOptions);
+toggleDeskyOptions();
+
 // Files
 souboryDesky.onchange = function () {
     if (souboryDesky.files.length > 5) {
@@ -109,15 +135,7 @@ btnForwardStep2.onclick = function () {
         alert("Musíte zvolit alespoň jedno zhotovení pevných desek nebo jednu kroužkovou vazbu.")
     };
 
-    if (pevneDesky.value == 0) {
-        document.getElementById("section-barva-desek").classList.add("disabled");
-        document.getElementById("section-barva-pisma").classList.add("disabled");
-        document.querySelector(".section-soubory").classList.add("disabled");
-    } else {
-        document.getElementById("section-barva-desek").className = "";
-        document.getElementById("section-barva-pisma").className = "";
-        document.querySelector(".section-soubory").className = "section-soubory";
-    };
+    toggleDeskyOptions();
 
     if ((pevneDesky.value + krouzkoveVazby.value) >= 1 && termin.value && pocetListu.selectedIndex !== 0) {
         step1.classList.remove("current");
